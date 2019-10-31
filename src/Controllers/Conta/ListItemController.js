@@ -7,6 +7,12 @@ module.exports = {
             listItem = await ListItem.create(novoListItem)
         
         return res.json(listItem)
+    },
+    async update(req, res){
+        let novoListItem = {id_item, quantidade, id_usuario} = req.body,
+            listItem = await ListItem.findOne(novoListItem)
+        
+        return res.json(listItem)
     }
 }
 

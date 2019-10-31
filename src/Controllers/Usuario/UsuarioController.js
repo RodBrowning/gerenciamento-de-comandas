@@ -4,8 +4,8 @@ const { isAdministrador } = require('../../Services/VerificacoesDeSistema')
 
 module.exports = {
     async store (req, res){
-        let novoUsuario = { nome, dt_nascimento, email, estabelecimentos, role } = req.body,
-            usuario = await Usuario.findOne({email})
+        let novoUsuario = { nome, dt_nascimento, estabelecimentos } = req.body,
+            usuario = await Usuario.findOne({nome})
 
         if(!usuario){
             usuario = await Usuario.create(novoUsuario)
@@ -23,14 +23,14 @@ module.exports = {
             usuarioEstaAutorizado = true;
         }
         if(usuarioEstaAutorizado){
-            response = await Usuario.deleteOne({_id: id_usuario_deletar})
+            response = await Usuario.findByIdAndDelete({_id: id_usuario_deletar})
         } else {
             response = {Error: "Usuário não autorizado"}
         }
         return res.json(response)
     },
     async update(req, res){
-        let usuarioParaAtualizar = { nome, dt_nascimento, email, estabelecimentos, roles } = req.body,
+        let usuarioParaAtualizar = { nome, dt_nascimento, estabelecimentos } = req.body,
             { id_estabelecimento, id_usuario } = req.headers,
             { id_usuario_editar } = req.params,
             response = null,
@@ -64,6 +64,7 @@ module.exports = {
             proprioPerfil = (id_usuario === id_usuario_buscar) 
         
         if( administrador || proprioPerfil ){
+            
             response = await Usuario.findOne({_id: id_usuario_buscar})
         } else {
             response = { Error: "Usuário não autorizado" }

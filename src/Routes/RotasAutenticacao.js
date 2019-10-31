@@ -1,15 +1,17 @@
 const express = require('express')
 const RotasAutenticacao = express.Router()
+const AutenticacaoController = require('../Controllers/Autenticacao/AutenticacaoController')
+const { verificarExistenciaDeToken, 
+        verificarValidadeDoTokenFornecido, 
+        verificarSeUsuarioEstaLogado } = require('../Services/VerificacoesDeAutenticacao')
 
-// Rotas de Authenticação
-    // GET
-    RotasAutenticacao.get('/login',(req, res)=>{
-        res.json("login")
-    })
+// Rotas de Autenticação
     // POST
-    RotasAutenticacao.post('/singin',(req, res)=>{
-        res.json("singin")
-})
+    RotasAutenticacao.post('/singin',AutenticacaoController.singin)
+    RotasAutenticacao.post('/login',AutenticacaoController.login)
+    // JWT middlewares
+    RotasAutenticacao.use(verificarExistenciaDeToken, verificarValidadeDoTokenFornecido,verificarSeUsuarioEstaLogado)
+    RotasAutenticacao.post('/logout',AutenticacaoController.logout)
 
 module.exports = RotasAutenticacao
 

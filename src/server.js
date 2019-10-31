@@ -14,9 +14,7 @@ mongoose.connect(dbPath,{
 const app = express()
 app.use(express.json())
 
-app.use(RotasAutenticacao)
-
-// JWT
+app.use('/auth/',RotasAutenticacao)
 app.use('/',routes)
 
 const PORT = 2000

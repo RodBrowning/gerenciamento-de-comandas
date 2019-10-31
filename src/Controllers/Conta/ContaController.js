@@ -41,14 +41,14 @@ module.exports = {
         return res.json(response)
     },
     async update(req, res){
-        let { nome_cliente } = req.query,
+        let contaParaAtualizar = { nome_cliente, dt_pagamento, valor_pago, pago, desconto, listItems } = req.body,
             { id_conta_editar } = req.params,
             { id_estabelecimento, id_usuario } = req.headers,
             funcionario = await isFuncionario(id_estabelecimento, id_usuario),
             response = null
         
         if(funcionario){
-            response = await Conta.findByIdAndUpdate({_id: id_conta_editar}, {nome_cliente}, {new:true})
+            response = await Conta.findByIdAndUpdate({_id: id_conta_editar}, contaParaAtualizar, {new:true})
         } else {
             response = { Error: "Usuário não autorizado" }
         }
