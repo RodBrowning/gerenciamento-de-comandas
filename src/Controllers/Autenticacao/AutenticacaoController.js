@@ -3,6 +3,8 @@ const Autenticacao = require('../../Models/Autenticacao')
 const Usuario = require('../../Models/Usuario')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const fs = require('fs')
+const path = require('path')
 
 module.exports = {
     async singin(req, res){
@@ -46,8 +48,9 @@ module.exports = {
             } else {
                 let passwordEstaCorreto = await bcrypt.compare(password, usuario.password)
                 if(passwordEstaCorreto){
-                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true}),
-                        token = jwt.sign({autenticacao}, "teste", {expiresIn: "30m"}, {algorithm: 'RS256'})
+                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true})
+                        privateKey = fs.readFileSync(path.resolve(__dirname,"..","..","public.pem"))
+                        token = jwt.sign({autenticacao}, privateKey, {expiresIn: "30m"}, {algorithm: 'RS256'})
                     response = {token}
                 } else {
                     response = {Error: "Password invalido"}

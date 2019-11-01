@@ -1,5 +1,7 @@
 const Autenticacao = require('../Models/Autenticacao')
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
+const path = require('path')
 
 module.exports = {
     verificarExistenciaDeToken(req, res, next){
@@ -14,7 +16,8 @@ module.exports = {
         }
     },
     verificarValidadeDoTokenFornecido(req, res, next){
-        jwt.verify(req.token, "teste", function(err, authData){
+        let privateKey = fs.readFileSync(path.resolve(__dirname,'..','public.pem'))
+        jwt.verify(req.token, privateKey, function(err, authData){
             if(err){
                 res.status(403).json({Error: "Token invalido"})
             } else {
