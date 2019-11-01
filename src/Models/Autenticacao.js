@@ -7,7 +7,7 @@ const AutenticacaoSchema = new mongoose.Schema({
     validado: Boolean,
     bloqueado: Boolean,
     logado: Boolean,
-    role: Number
+    role: {type: Number, default: 1}
 })
 
 module.exports = mongoose.model("Autenticacao", AutenticacaoSchema)

@@ -11,15 +11,11 @@ module.exports = {
         return res.json(endereco)
     },
     async update(req, res){
-        let { id_endereco_atualuzar, id_usuario } = req.headers,
+        let { id_endereco_atualuzar } = req.headers,
             enderecoAtualizar = {rua, numero, bairro, CEP, estado, uf, cidade, pais} = req.body,
             response = null
 
-        if(await isAdministrador(id_endereco_atualuzar,id_usuario)){
-            response = await Endereco.findOneAndUpdate({_id: id_endereco_atualuzar}, enderecoAtualizar)
-        } else {
-            response = {Error: "Usuario não autorizado"}
-        }
+        response = await Endereco.findOneAndUpdate({_id: id_endereco_atualuzar}, enderecoAtualizar)
         return res.json(response)
     }
 }

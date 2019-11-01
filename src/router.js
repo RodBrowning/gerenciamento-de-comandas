@@ -2,7 +2,7 @@ const express = require('express')
 const routes = express.Router()
 const { verificarExistenciaDeToken, 
         verificarValidadeDoTokenFornecido, 
-        verificarSeUsuarioEstaLogado } = require('./Services/VerificacoesDeAutenticacao')
+        verificarSeUsuarioEstaLogado } = require('./Services/MiddlewaresDeAutenticacao')
 
 
 const RotasEstabelecimento = require("./Routes/RotasEstabelecimento")
@@ -14,6 +14,7 @@ const RotasListItem = require("./Routes/RotasListItem")
 
 // JWT middlewares
 routes.use(verificarExistenciaDeToken, verificarValidadeDoTokenFornecido,verificarSeUsuarioEstaLogado)
+
 // Rotas da API
 routes.use(RotasEstabelecimento)
 routes.use(RotasUsuario)

@@ -8,24 +8,28 @@ module.exports = {
     async singin(req, res){
         let novaAutenticacao = {id_usuario, email, password, validado, bloqueado, logado} = req.body,
             saltRounds = 10,
-            response = null,
-            emailsEncontrados = await Autenticacao.find({email: novaAutenticacao.email})
-            
-        if(emailsEncontrados.length > 0){
+            response = null
+            emailFoiEncontrado = await Autenticacao.findOne({email: novaAutenticacao.email})
+        
+        if(emailFoiEncontrado){
             response = { Error: "Usuario ja existe"}
+            res.json(response)
         } else {
-            await bcrypt.genSalt(saltRounds, async function(err, salt) {
+            bcrypt.genSalt(saltRounds, function(err, salt) {
                 if(!err){ 
-                    await bcrypt.hash(novaAutenticacao.password, salt, async function(err, hashPassword) {
+                    bcrypt.hash(novaAutenticacao.password, salt, async function(err, hashPassword) {
                         if(err){
+                            response = {Error: err}
+                            res.json(response)
                         } else {
                             novaAutenticacao.password = hashPassword
-                            response = await Autenticacao.create(novaAutenticacao)                              
-                            return res.json(response)
+                            response = await Autenticacao.create(novaAutenticacao)
+                            res.json(response)
                         }
                     });
                 } else {
-                    return res.send(err)
+                    response = {Error: err}
+                    res.json(response)
                 }
             })
         }
@@ -35,23 +39,19 @@ module.exports = {
             { email } = req.query,
             response = null,
             usuario = await Autenticacao.findOne({ email })
-        
+        // falta verificar se é bloqueado e validado
         if(usuario){
-            let passwordEstaCorreto = bcrypt.compare(password, usuario.password)
-            if(passwordEstaCorreto && !usuario.logado){
-                let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true})
-                let secretKey = "sha num arquivo"
-                return jwt.sign({autenticacao}, "teste", { expiresIn: "30m" }, (err, token)=>{
-                    if(err){
-                        return err
-                    } else {                    
-                        return res.json({token})
-                    }
-                })
-            } else if(usuario.logado){
+            if(usuario.logado){
                 response = {Error: "Usuario esta logado"}
             } else {
-                response = {Error: "Password invalido"}
+                let passwordEstaCorreto = await bcrypt.compare(password, usuario.password)
+                if(passwordEstaCorreto){
+                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true}),
+                        token = jwt.sign({autenticacao}, "teste", {expiresIn: "30m"}, {algorithm: 'RS256'})
+                    response = {token}
+                } else {
+                    response = {Error: "Password invalido"}
+                }
             }
         } else {
             response = {Error: "Usuario não encontrado"}

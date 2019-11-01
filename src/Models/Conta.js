@@ -16,18 +16,16 @@ const ContaSchema = new mongoose.Schema({
 })
 
 ContaSchema.post('findOneAndDelete', async contaRemovida => {
-    let itemsDaConta = contaRemovida.items,
+    let itemsDaConta = contaRemovida.listItems,
         ids_itemsDaConta = []
     
     if(itemsDaConta.length > 0 ){
         itemsDaConta.map(item => {
             ids_itemsDaConta.push(item.item)
         })
+        await ListItem.deleteMany({_id: ids_itemsDaConta})
     }
-
-    await ListItem.deleteMany({_id: ids_itemsDaConta})
-    
-    
+    return
 })
 
 module.exports = mongoose.model('Conta', ContaSchema)

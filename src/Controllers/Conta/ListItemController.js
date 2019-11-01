@@ -11,7 +11,7 @@ module.exports = {
     async update(req, res){
         let novoListItem = {id_item, quantidade, id_usuario} = req.body,
             listItem = await ListItem.findOne(novoListItem)
-        
+        // somar quantidade se listitem existir
         return res.json(listItem)
     }
 }

@@ -31,8 +31,7 @@ module.exports = {
         }
         if(logado){
             next()
-        } else {
-            // Redirecionar para tela de login
+        } else { 
             res.status(403).json({Error: "Usuario não está logado"})
         }
     }

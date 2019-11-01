@@ -13,13 +13,12 @@ module.exports = {
         return res.json(usuario)
     },
     async destroy(req, res){
-        let { id_estabelecimento, id_usuario } = req.headers,
+        let { id_usuario } = req.headers,
             { id_usuario_deletar } = req.params,
             usuarioEstaAutorizado = false,
-            response = null,
-            temPermissaoDeAdministrador = await isAdministrador(id_estabelecimento, id_usuario)
+            response = null
         
-        if(temPermissaoDeAdministrador && (id_usuario !== id_usuario_deletar)){
+        if(id_usuario !== id_usuario_deletar){
             usuarioEstaAutorizado = true;
         }
         if(usuarioEstaAutorizado){
@@ -31,40 +30,24 @@ module.exports = {
     },
     async update(req, res){
         let usuarioParaAtualizar = { nome, dt_nascimento, estabelecimentos } = req.body,
-            { id_estabelecimento, id_usuario } = req.headers,
             { id_usuario_editar } = req.params,
-            response = null,
-            administrador = await isAdministrador(id_estabelecimento, id_usuario)
+            response = null
 
-        if(administrador){
-            response = await Usuario.findByIdAndUpdate({_id: id_usuario_editar}, usuarioParaAtualizar, {new:true})
-        } else {
-            response = { Error: "Usuário não autorizado" }
-        }
-        
+        response = await Usuario.findByIdAndUpdate({_id: id_usuario_editar}, usuarioParaAtualizar, {new:true})
         return res.json(response)
     },
     async show(req, res){
-        let { id_estabelecimento, id_usuario } = req.headers,
-            response = null,
-            administrador = await isAdministrador(id_estabelecimento, id_usuario)
-
-        if(administrador){
-            response  = await Usuario.find({})
-        } else {
-            response = { Error: "Usuário não autorizado"}
-        }
+        let response = null
+        response  = await Usuario.find({})
         return res.json(response)
     },
     async index(req, res){
-        let { id_estabelecimento, id_usuario } = req.headers,
+        let { id_usuario } = req.headers,
             { id_usuario_buscar } = req.params,
-            response = null,
-            administrador = await isAdministrador(id_estabelecimento, id_usuario),
+            response = null
             proprioPerfil = (id_usuario === id_usuario_buscar) 
         
-        if( administrador || proprioPerfil ){
-            
+        if( proprioPerfil ){
             response = await Usuario.findOne({_id: id_usuario_buscar})
         } else {
             response = { Error: "Usuário não autorizado" }
