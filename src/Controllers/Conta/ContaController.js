@@ -24,7 +24,7 @@ module.exports = {
     },
     async destroy(req, res){
         let response = null
-        response = await Conta.findOneAndDelete({_id: req.query.id_conta})
+        response = await Conta.findOneAndDelete({_id: req.params.id_conta_remover})
         return res.json(response)
     },
     async update(req, res){
@@ -36,7 +36,14 @@ module.exports = {
         return res.json(response)
     },
     async show(req, res){
-        let response = await Conta.find({})
+        let response = null
+        response =  await Conta.find({})
+        return res.json(response)
+    },
+    async index(req, res){
+        let response = null,
+            {id_conta} = req.params
+        response = await Conta.findOne({_id: id_conta})
         return res.json(response)
     }
 }

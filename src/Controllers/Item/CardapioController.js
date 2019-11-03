@@ -1,3 +1,4 @@
+const Estabelecimento = require('../../Models/Estabelecimento')
 const Cardapio = require("../../Models/Cardapio")
 
 module.exports = {
@@ -10,10 +11,66 @@ module.exports = {
     },
     async update(req, res){
         let cardapioAtualizar = { nome_cardapio, listItems, estabelecimentos } = req.body,
-            { id_cardapio } = req.query,
+            { id_cardapio_editar } = req.params,
             response = null
+        
+        response = await Cardapio.findByIdAndUpdate({_id:id_cardapio_editar}, cardapioAtualizar, {new:true})
+        return res.json(response)
+    },
+    async destroy(req, res){
+        let { id_estabelecimento } = req.headers,
+            { id_cardapio_remover } = req.params,
+            response = null,
+            estabelecimento = null,
+            cardapio = null,
+            cardapioAtivo = false,
+            algumEstabelecimentoDependeDesseCardapio = false
+            
+        estabelecimento = await Estabelecimento.findById({_id: id_estabelecimento})
+        cardapioAtivo = estabelecimento.cardapio.equals(id_cardapio_remover)
 
-        response = await Cardapio.findOneAndUpdate({_id:id_cardapio}, cardapioAtualizar, {new:true})
+        cardapio = await Cardapio.findById({_id: id_cardapio_remover})
+        cardapioPertenceAoEstabelecimento = cardapio.estabelecimentos.includes(id_estabelecimento) ? true : false
+        algumEstabelecimentoDependeDesseCardapio = cardapio.estabelecimentos.length > 1 ? true : false
+
+        if(cardapioAtivo){
+            response = {Error: "Não é possivel remover um cardapio ativo"}
+        } else if(algumEstabelecimentoDependeDesseCardapio){
+                let indexDoEstabelecimento = cardapio.estabelecimentos.indexOf(id_estabelecimento),
+                    novaListaDeEstabelecimentos =  null
+
+                cardapio.estabelecimentos.splice(indexDoEstabelecimento,1)
+                novaListaDeEstabelecimentos =  cardapio.estabelecimentos
+                response  = await Cardapio.findByIdAndUpdate({_id: id_cardapio_remover}, {estabelecimentos:novaListaDeEstabelecimentos},{new:true})
+        } else {
+            response = await Cardapio.findByIdAndDelete({_id: id_cardapio_remover})
+        }
+    
+
+        return res.json(response)
+    },
+    async index(req, res){
+        let response = null,
+            {id_cardapio} = req.params
+        
+        response  = await Cardapio.findById({_id: id_cardapio})
+        .populate({
+            path:"items",
+            model: "Item"
+        })
+
+        return res.json(response)
+    },
+    async show(req, res){
+        let response = null,
+            {id_estabelecimento} =req.headers
+        
+        response = await Cardapio.find({estabelecimentos: id_estabelecimento})
+        .populate({
+            path:"items",
+            model:"Item"
+        })
         return res.json(response)
     }
+
 }

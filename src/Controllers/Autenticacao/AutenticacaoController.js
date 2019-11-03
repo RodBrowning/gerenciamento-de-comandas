@@ -1,6 +1,13 @@
 // index, show, store, update, destroy.  
 const Autenticacao = require('../../Models/Autenticacao')
+
+const EnderecoEstabelecimentoController = require('../Estabelecimento/EnderecoEstabelecimentoController')
+
+const Endereco = require('../../Models/Endereco')
+const Estabelecimento = require('../../Models/Estabelecimento')
 const Usuario = require('../../Models/Usuario')
+const Cardapio = require('../../Models/Cardapio')
+
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
@@ -8,33 +15,58 @@ const path = require('path')
 
 module.exports = {
     async singin(req, res){
-        let novaAutenticacao = {id_usuario, email, password, validado, bloqueado, logado} = req.body,
+        let novaAutenticacao = {id_usuario, email, password, endereco, estabelecimento, usuario} = req.body,
             saltRounds = 10,
-            response = null
-            emailFoiEncontrado = await Autenticacao.findOne({email: novaAutenticacao.email})
+            response = null,
+            novoEndereco = {},
+            novoEstabelecimento = null,
+            novoUsuario = null,
+            novoCardapio = null
+            
         
-        if(emailFoiEncontrado){
-            response = { Error: "Usuario ja existe"}
-            res.json(response)
-        } else {
-            bcrypt.genSalt(saltRounds, function(err, salt) {
-                if(!err){ 
-                    bcrypt.hash(novaAutenticacao.password, salt, async function(err, hashPassword) {
-                        if(err){
-                            response = {Error: err}
-                            res.json(response)
-                        } else {
-                            novaAutenticacao.password = hashPassword
-                            response = await Autenticacao.create(novaAutenticacao)
-                            res.json(response)
-                        }
-                    });
-                } else {
-                    response = {Error: err}
-                    res.json(response)
-                }
-            })
-        }
+        
+        bcrypt.genSalt(saltRounds, function(err, salt) {
+            if(!err){ 
+                bcrypt.hash(novaAutenticacao.password, salt, async function(err, hashPassword) {
+                    if(err){
+                        response = {Error: err}
+                        res.json(response)
+                    } else {
+                        novaAutenticacao.password = hashPassword
+                    }
+                });
+            } else {
+                response = {Error: err}
+                res.json(response)
+            }
+        })
+
+        // criar endereco
+        novoEndereco = novaAutenticacao.endereco
+        novoEndereco = await Endereco.create(novoEndereco)
+        novaAutenticacao.estabelecimento.endereco = novoEndereco._id
+        // criar estabelecimento
+        novoEstabelecimento = novaAutenticacao.estabelecimento
+        novoEstabelecimento = await Estabelecimento.create(novoEstabelecimento)
+        // criar usuario
+        novaAutenticacao.usuario.estabelecimentos = novoEstabelecimento._id
+        novoUsuario = novaAutenticacao.usuario
+        novoUsuario = await Usuario.create(novoUsuario)
+
+        // criar cardapio padrao
+        novoCardapio = await Cardapio.create({estabelecimentos: [novoEstabelecimento._id]})
+        
+        // atualizar estabelecimento com usuario e cardapio
+        novoEstabelecimento = await Estabelecimento.findByIdAndUpdate({_id: novoEstabelecimento._id}, {$set:{usuarios: novoUsuario._id, cardapio: novoCardapio._id}},{new:true})
+
+        // criar autenticacao
+        novaAutenticacao.id_usuario = novoUsuario._id
+        novaAutenticacao = await Autenticacao.create(novaAutenticacao)
+
+        novoUsuario = await Usuario.findByIdAndUpdate({_id: novoUsuario._id},{$set:{autenticacao: novaAutenticacao._id}})
+        response = novaAutenticacao
+        res.json(response)
+        
     },
     async login(req, res){
         let { password } = req.headers,
@@ -43,14 +75,14 @@ module.exports = {
             usuario = await Autenticacao.findOne({ email })
         // falta verificar se é bloqueado e validado
         if(usuario){
-            if(usuario.logado){
-                response = {Error: "Usuario esta logado"}
+            if(usuario.logado || usuario.bloqueado || !usuario.validado){
+                response = {Error: "Ocorreu um erro, entre em contato com seu administrador"}
             } else {
                 let passwordEstaCorreto = await bcrypt.compare(password, usuario.password)
                 if(passwordEstaCorreto){
                     let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true})
                         privateKey = fs.readFileSync(path.resolve(__dirname,"..","..","public.pem"))
-                        token = jwt.sign({autenticacao}, privateKey, {expiresIn: "30m"}, {algorithm: 'RS256'})
+                        token = jwt.sign({autenticacao}, privateKey, {expiresIn: "1 days"}, {algorithm: 'RS256'})
                     response = {token}
                 } else {
                     response = {Error: "Password invalido"}

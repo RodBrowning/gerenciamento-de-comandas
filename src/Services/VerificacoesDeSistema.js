@@ -1,5 +1,6 @@
 const Estabelecimento = require('../Models/Estabelecimento')
-const bcrypt = require('bcrypt');
+const Cardapio = require('../Models/Cardapio')
+const Conta = require('../Models/Cardapio')
 const ADMINISTRADOR = 1
 
 module.exports = {
@@ -30,6 +31,32 @@ module.exports = {
             })
         }
         return funcionarioDoEstabelecimento
+    },
+    async verificarEstabelecimentoNoModel(Model, id_estabelecimento, id_model){
+        let EstabelecimentoPertenceAoModel = false,
+            model = null,
+            encontrou = false
+        
+        model = await Model.findById({_id: id_model})
+        encontrou = model.estabelecimentos.includes(id_estabelecimento)
+        if(encontrou){
+            EstabelecimentoPertenceAoModel = true
+        }
+
+        return EstabelecimentoPertenceAoModel
+    },
+    async verificarContaNoEstabelecimento(id_estabelecimento, id_conta){
+        let ContaPertenceAoEstabelecimento = false,
+            estabelecimento = null,
+            encontrou = false
+        
+        estabelecimento = await Estabelecimento.findById({_id: id_estabelecimento})
+        encontrou = estabelecimento.contas.includes(id_conta)
+        if(encontrou){
+            ContaPertenceAoEstabelecimento = true
+        }
+
+        return ContaPertenceAoEstabelecimento
     }
 }
 
