@@ -38,12 +38,36 @@ module.exports = {
     async show(req, res){
         let response = null
         response =  await Conta.find({})
+        .populate({
+            path: "listItems", 
+            model: "ListItem",
+            populate: {
+                path: "id_item",
+                model: "Item"
+            },
+            populate: {
+                path: "id_lancamentoListItem",
+                model: "LancamentoListItem"
+            }
+        })
         return res.json(response)
     },
     async index(req, res){
         let response = null,
             {id_conta} = req.params
         response = await Conta.findOne({_id: id_conta})
+        .populate({
+            path: "listItems", 
+            model: "ListItem",
+            populate: {
+                path: "id_item",
+                model: "Item"
+            },
+            populate: {
+                path: "id_lancamentoListItem",
+                model: "LancamentoListItem"
+            }
+        })
         return res.json(response)
     }
 }

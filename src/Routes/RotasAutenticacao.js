@@ -5,7 +5,7 @@ const {verificarSeUsuarioEestabelecimentoExistem} = require('../Services/Middlew
 
 // Rotas de Autenticação
     // POST
-    RotasAutenticacao.post('/singin',verificarSeUsuarioEestabelecimentoExistem,AutenticacaoController.singin)
+    RotasAutenticacao.post('/singin', verificarSeUsuarioEestabelecimentoExistem, AutenticacaoController.singin)
     RotasAutenticacao.post('/login',AutenticacaoController.login)
     RotasAutenticacao.post('/logout',AutenticacaoController.logout)
 

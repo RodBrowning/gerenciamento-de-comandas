@@ -73,7 +73,7 @@ module.exports = {
             { email } = req.query,
             response = null,
             usuario = await Autenticacao.findOne({ email })
-        // falta verificar se é bloqueado e validado
+        
         if(usuario){
             if(usuario.logado || usuario.bloqueado || !usuario.validado){
                 response = {Error: "Ocorreu um erro, entre em contato com seu administrador"}

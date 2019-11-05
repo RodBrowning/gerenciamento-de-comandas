@@ -24,6 +24,7 @@ ContaSchema.post('findOneAndDelete', async contaRemovida => {
             ids_itemsDaConta.push(item.item)
         })
         await ListItem.deleteMany({_id: ids_itemsDaConta})
+        // deletar lancamentoListItem
     }
     return
 })

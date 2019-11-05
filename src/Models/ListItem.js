@@ -5,11 +5,11 @@ const ListItemSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     },
-    quantidade: Number,
-    id_usuario: {
+    id_lancamentoListItem: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
-    }
+        ref: 'LancamentoListItem'
+    }],
+    dataCriacao: {type: Date, default: new Date().now()}
 })
 
 module.exports = mongoose.model("ListItem", ListItemSchema)

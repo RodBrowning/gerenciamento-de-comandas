@@ -1,6 +1,6 @@
 const express = require('express')
 const RotasCardapio = express.Router()
-const { middlewareIsAdministrador, middlewareIsFuncionario, middlewareIsDesteEstabelecimento } = require('../Services/Middlewares')
+const { isAdministradorMiddleware, isFuncionarioMiddleware, isDesteEstabelecimentoMiddleware } = require('../Services/Middlewares')
 const Cardapio = require('../Models/Cardapio')
 
 RotasCardapio.use((req, res, next)=>{
@@ -8,16 +8,20 @@ RotasCardapio.use((req, res, next)=>{
     next()
 })
 
+const bundledMiddlewaresAdministrador = [isAdministradorMiddleware, isDesteEstabelecimentoMiddleware]
+const bundledMiddlewaresFuncionario = [isFuncionarioMiddleware, isDesteEstabelecimentoMiddleware]
+
+
 // Rotas de Cardapio
 const CardapioController = require('../Controllers/Item/CardapioController')
     // POSTS
-    RotasCardapio.post('/novoCardapio', middlewareIsAdministrador, CardapioController.store)
+    RotasCardapio.post('/novoCardapio', isAdministradorMiddleware, CardapioController.store)
     // UPDATE
-    RotasCardapio.put('/editarCardapio/:id_cardapio_editar', middlewareIsAdministrador, middlewareIsDesteEstabelecimento, CardapioController.update)
+    RotasCardapio.put('/editarCardapio/:id_cardapio_editar', bundledMiddlewaresAdministrador, CardapioController.update)
     // Delete
-    RotasCardapio.delete('/removerCardapio/:id_cardapio_remover', middlewareIsAdministrador, middlewareIsDesteEstabelecimento, CardapioController.destroy)
+    RotasCardapio.delete('/removerCardapio/:id_cardapio_remover', bundledMiddlewaresAdministrador, CardapioController.destroy)
     // GET
-    RotasCardapio.get('/buscarCardapios', middlewareIsAdministrador, CardapioController.show)
-    RotasCardapio.get('/buscarCardapio/:id_cardapio', middlewareIsFuncionario, middlewareIsDesteEstabelecimento, CardapioController.index)
+    RotasCardapio.get('/buscarCardapios', isAdministradorMiddleware, CardapioController.show)
+    RotasCardapio.get('/buscarCardapio/:id_cardapio', bundledMiddlewaresFuncionario, CardapioController.index)
 
 module.exports = RotasCardapio

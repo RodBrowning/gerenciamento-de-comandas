@@ -4,7 +4,7 @@ const Estabelecimento = require('../Models/Estabelecimento')
 
 
 module.exports = {
-    async middlewareIsAdministrador(req, res, next){
+    async isAdministradorMiddleware(req, res, next){
         let administrador = await isAdministrador(req.headers.id_estabelecimento, req.headers.id_usuario)
         if(administrador){
             next()
@@ -12,7 +12,7 @@ module.exports = {
             return res.json({Error:"Usuario não autorizado"})
         }
     },
-    async middlewareIsFuncionario(req, res, next){
+    async isFuncionarioMiddleware(req, res, next){
         let funcionario = await isFuncionario(req.headers.id_estabelecimento, req.headers.id_usuario)
         if(funcionario){
             next()
@@ -20,7 +20,7 @@ module.exports = {
             return res.json({Error:"Usuario não autorizado"})
         }
     },
-    async middlewareIsDesteEstabelecimento(req, res, next){
+    async isDesteEstabelecimentoMiddleware(req, res, next){
         let {id_estabelecimento} = req.headers,
             id_model = req.params[Object.keys(req.params)[0]],
             pertenceAoEstabelecimento = await verificarEstabelecimentoNoModel(req.model, id_estabelecimento, id_model)
@@ -28,10 +28,10 @@ module.exports = {
         if(pertenceAoEstabelecimento){
             next()
         } else {
-            return res.json({Error: "Cardapio não pertence a este estabelecimento"})
+            return res.json({Error: "O item não pertence a este estabelecimento"})
         }
     },
-    async middlewareContaDesteEstabelecimento(req, res, next){
+    async isContaDesteEstabelecimentoMiddleware(req, res, next){
         let {id_estabelecimento} = req.headers,
             id_cardapio = req.params[Object.keys(req.params)[0]],
             pertenceAoEstabelecimento = await verificarContaNoEstabelecimento(id_estabelecimento, id_cardapio)
