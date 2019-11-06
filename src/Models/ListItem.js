@@ -9,7 +9,7 @@ const ListItemSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'LancamentoListItem'
     }],
-    dataCriacao: {type: Date, default: new Date().now()}
+    dataCriacao: {type: Date, default: Date.now()}
 })
 
 module.exports = mongoose.model("ListItem", ListItemSchema)

@@ -67,7 +67,8 @@ module.exports = {
         return res.json(response)
     },
     async index(req, res){
-        let response = null
+        let response = null,
+            { id_estabelecimento } = req.headers
         response = await Estabelecimento.findOne({_id: id_estabelecimento})
         .populate('endereco')
         .populate({

@@ -15,7 +15,7 @@ const path = require('path')
 
 module.exports = {
     async singin(req, res){
-        let novaAutenticacao = {id_usuario, email, password, endereco, estabelecimento, usuario} = req.body,
+        let novaAutenticacao = { email, password, estabelecimento, endereco, usuarios} = req.body,
             saltRounds = 10,
             response = null,
             novoEndereco = {},
@@ -49,8 +49,8 @@ module.exports = {
         novoEstabelecimento = novaAutenticacao.estabelecimento
         novoEstabelecimento = await Estabelecimento.create(novoEstabelecimento)
         // criar usuario
-        novaAutenticacao.usuario.estabelecimentos = novoEstabelecimento._id
-        novoUsuario = novaAutenticacao.usuario
+        novaAutenticacao.usuarios.estabelecimentos = novoEstabelecimento._id
+        novoUsuario = novaAutenticacao.usuarios
         novoUsuario = await Usuario.create(novoUsuario)
 
         // criar cardapio padrao

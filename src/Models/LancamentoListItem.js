@@ -6,7 +6,7 @@ const LancamentoListItemSchema = new mongoose.Schema({
         ref: 'Usuario'
     },
     quantidade: Number,
-    dataCriacao: {type: Date, default: new Date().now()}
+    dataCriacao: {type: Date, default: new Date()}
 })
 
 module.exports = mongoose.model("LancamentoListItem", LancamentoListItemSchema)

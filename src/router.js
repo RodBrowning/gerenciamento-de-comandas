@@ -13,7 +13,7 @@ const RotasConta = require("./Routes/RotasConta")
 const RotasListItem = require("./Routes/RotasListItem")
 
 // JWT middlewares
-routes.use(verificarExistenciaDeToken, verificarValidadeDoTokenFornecido,verificarSeUsuarioEstaLogado)
+//routes.use(verificarExistenciaDeToken, verificarValidadeDoTokenFornecido,verificarSeUsuarioEstaLogado)
 
 // Rotas da API
 routes.use(RotasEstabelecimento)
