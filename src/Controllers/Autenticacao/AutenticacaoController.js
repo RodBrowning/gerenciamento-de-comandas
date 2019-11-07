@@ -1,8 +1,6 @@
 // index, show, store, update, destroy.  
 const Autenticacao = require('../../Models/Autenticacao')
 
-const EnderecoEstabelecimentoController = require('../Estabelecimento/EnderecoEstabelecimentoController')
-
 const Endereco = require('../../Models/Endereco')
 const Estabelecimento = require('../../Models/Estabelecimento')
 const Usuario = require('../../Models/Usuario')
@@ -17,29 +15,16 @@ module.exports = {
     async singin(req, res){
         let novaAutenticacao = { email, password, estabelecimento, endereco, usuarios} = req.body,
             saltRounds = 10,
-            response = null,
+            response = {},
             novoEndereco = {},
             novoEstabelecimento = null,
             novoUsuario = null,
             novoCardapio = null
             
         
-        
-        bcrypt.genSalt(saltRounds, function(err, salt) {
-            if(!err){ 
-                bcrypt.hash(novaAutenticacao.password, salt, async function(err, hashPassword) {
-                    if(err){
-                        response = {Error: err}
-                        res.json(response)
-                    } else {
-                        novaAutenticacao.password = hashPassword
-                    }
-                });
-            } else {
-                response = {Error: err}
-                res.json(response)
-            }
-        })
+        let hashPassword = bcrypt.hashSync(novaAutenticacao.password, saltRounds)
+        novaAutenticacao.password = hashPassword
+       
 
         // criar endereco
         novoEndereco = novaAutenticacao.endereco
@@ -61,12 +46,62 @@ module.exports = {
 
         // criar autenticacao
         novaAutenticacao.id_usuario = novoUsuario._id
+        
+        //////////////////
+        //retirar
+        if(process.env.NODE_ENV === 'test'){
+            novaAutenticacao.validado = true
+        }
+        /////////////////
+
         novaAutenticacao = await Autenticacao.create(novaAutenticacao)
 
-        novoUsuario = await Usuario.findByIdAndUpdate({_id: novoUsuario._id},{$set:{autenticacao: novaAutenticacao._id}})
-        response = novaAutenticacao
+        let emailToken = jwt.sign({user: novoUsuario._id},novaAutenticacao.email,{expiresIn: "1d"})
+
+        let url = `http://localhost:2000/validacaoDeUsuario/${novaAutenticacao.email}/${emailToken}`,
+        mailOptions = {
+            from: 'rodrigo.lojaonline@gmail.com',
+            to: novaAutenticacao.email,
+            subject: 'Confirm Email',
+            html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`
+        },
+        { Transporter } = require('./CredenciaisDeEmail')
+        Transporter.sendMail(mailOptions,function(error, info){
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+                
+            }
+        });
+
+        novaAutenticacao = await Autenticacao.findByIdAndUpdate({_id: novaAutenticacao._id},{$set:{emailToken}})
+        
+        response.autenticacao = novaAutenticacao
+        response.token = emailToken
         res.json(response)
         
+    },
+    async validarUsuario(req, res){
+        let response= null,
+            { email, emailToken } = req.params,
+            tokenEncontrado = false,
+            autenticacaoEncontrada = null
+
+        autenticacaoEncontrada = await Autenticacao.findOne({email})
+        
+        if(autenticacaoEncontrada){
+            tokenEncontrado = jwt.verify(emailToken, email)
+            if(tokenEncontrado){
+                let usuarioValidado = await Autenticacao.findByIdAndUpdate({_id:autenticacaoEncontrada._id},{$set:{validado: true}}, {new:true})
+                response = usuarioValidado    
+            } else {
+                response = { Error: "token invalido"}
+            }
+        } else {
+            response = { Error: "token não encontrado"}
+        }
+        res.json(response) 
     },
     async login(req, res){
         let { password } = req.headers,

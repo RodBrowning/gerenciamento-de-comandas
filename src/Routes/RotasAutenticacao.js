@@ -8,6 +8,8 @@ const {verificarSeUsuarioEestabelecimentoExistem} = require('../Services/Middlew
     RotasAutenticacao.post('/singin', verificarSeUsuarioEestabelecimentoExistem, AutenticacaoController.singin)
     RotasAutenticacao.post('/login',AutenticacaoController.login)
     RotasAutenticacao.post('/logout',AutenticacaoController.logout)
+    
+    RotasAutenticacao.get('/validacaoDeUsuario/:email/:emailToken', AutenticacaoController.validarUsuario)
 
 module.exports = RotasAutenticacao
 
