@@ -3,11 +3,11 @@ const RotasUsuario = express.Router()
 const { isAdministradorMiddleware, isFuncionarioMiddleware, isDesteEstabelecimentoMiddleware } = require('../Services/Middlewares')
 const Usuario = require('../Models/Usuario')
 
-RotasUsuario.use((req, res, next)=>{
+const atribuirModeloMiddleware = (req, res, next)=>{
     req.model = Usuario
     next()
-})
-const bundledMiddlewaresAdministrador = [isAdministradorMiddleware, isDesteEstabelecimentoMiddleware]
+}
+const bundledMiddlewaresAdministrador = [isAdministradorMiddleware, atribuirModeloMiddleware, isDesteEstabelecimentoMiddleware]
 
 // Rotas de usuario
 const UsuarioController = require('../Controllers/Usuario/UsuarioController')

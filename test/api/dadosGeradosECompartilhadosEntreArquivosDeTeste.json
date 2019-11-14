@@ -1,0 +1,102 @@
+{
+	"novoRegistro": {
+		"email": "d90121@urhen.com",
+		"password": "12345",
+		"estabelecimento": {
+			"nome": "FestFestFesta",
+			"telefone": [
+				45745665
+			]
+		},
+		"endereco": {
+			"rua": "Paulino",
+			"numero": 45,
+			"bairro": "Silvina",
+			"CEP": "09791310",
+			"estado": "sao paulo",
+			"uf": "SP",
+			"cidade": "sao bernardo",
+			"pais": "brasil"
+		},
+		"usuarios": {
+			"nome": "Piris Piris da Silva",
+			"dt_nascimento": "02/12/85"
+		}
+	},
+	"registroCriado": {
+		"validado": true,
+		"bloqueado": false,
+		"logado": false,
+		"role": 1,
+		"_id": "5dccff88118ca81a90c38053",
+		"email": "d90121@urhen.com",
+		"password": "$2b$10$ANNXtNREqMw9jRhV3yHbxe09LebfcHHJzjzSUpZcCDvdhsiJhnwai",
+		"id_usuario": "5dccff88118ca81a90c38051",
+		"__v": 0,
+		"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRjY2ZmODgxMThjYTgxYTkwYzM4MDUxIiwiaWF0IjoxNTczNzE1ODQ4LCJleHAiOjE1NzM4MDIyNDh9.8iNO0pdUfdF7eMjXE3WLjw52sDV5xssWD4t_8EgOc24",
+		"id_estabelecimento": "5dccff88118ca81a90c38050",
+		"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MSwiX2lkIjoiNWRjY2ZmODgxMThjYTgxYTkwYzM4MDUzIiwiZW1haWwiOiJkOTAxMjFAdXJoZW4uY29tIiwiaWRfdXN1YXJpbyI6eyJlc3RhYmVsZWNpbWVudG9zIjpbIjVkY2NmZjg4MTE4Y2E4MWE5MGMzODA1MCJdLCJfaWQiOiI1ZGNjZmY4ODExOGNhODFhOTBjMzgwNTEiLCJub21lIjoiUGlyaXMgUGlyaXMgZGEgU2lsdmEiLCJkdF9uYXNjaW1lbnRvIjoiMTk4NS0wMi0xMlQwMzowMDowMC4wMDBaIiwiX192IjowLCJhdXRlbnRpY2FjYW8iOiI1ZGNjZmY4ODExOGNhODFhOTBjMzgwNTMifSwiX192IjowfSwiaWF0IjoxNTczNzE1ODQ4LCJleHAiOjE1NzM4MDIyNDh9.TuB4aSYdLKxDQowyJ_xUXD638uaJqfRkJkk4mbor7PU"
+	},
+	"usuarioCriado": {
+		"usuario": {
+			"estabelecimentos": [
+				"5dccff88118ca81a90c38050"
+			],
+			"_id": "5dccff89118ca81a90c38054",
+			"nome": "Rodrigo",
+			"dt_nascimento": "1985-02-12T03:00:00.000Z",
+			"__v": 0,
+			"autenticacao": "5dccff89118ca81a90c38055"
+		},
+		"autenticacao": {
+			"validado": false,
+			"bloqueado": false,
+			"logado": true,
+			"role": 2,
+			"_id": "5dccff89118ca81a90c38055",
+			"id_usuario": "5dccff89118ca81a90c38054",
+			"email": "rodrigo@teste.com",
+			"password": "$2b$10$rcz8LKt2Junkzn8mk/fZeugk2xr0ZrHY.WkK6RU41FKrspn8I5uBW",
+			"__v": 0,
+			"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRjY2ZmODkxMThjYTgxYTkwYzM4MDU0IiwiaWF0IjoxNTczNzE1ODQ5LCJleHAiOjE1NzM4MDIyNDl9.cBOby5h72kqsakBYZOLXwPMrWxdvz50XLynK23nrNmo",
+			"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MiwiX2lkIjoiNWRjY2ZmODkxMThjYTgxYTkwYzM4MDU1IiwiaWRfdXN1YXJpbyI6eyJlc3RhYmVsZWNpbWVudG9zIjpbIjVkY2NmZjg4MTE4Y2E4MWE5MGMzODA1MCJdLCJfaWQiOiI1ZGNjZmY4OTExOGNhODFhOTBjMzgwNTQiLCJub21lIjoiUm9kcmlnbyIsImR0X25hc2NpbWVudG8iOiIxOTg1LTAyLTEyVDAzOjAwOjAwLjAwMFoiLCJfX3YiOjAsImF1dGVudGljYWNhbyI6IjVkY2NmZjg5MTE4Y2E4MWE5MGMzODA1NSJ9LCJlbWFpbCI6InJvZHJpZ29AdGVzdGUuY29tIiwiX192IjowfSwiaWF0IjoxNTczNzE1ODQ5LCJleHAiOjE1NzM4MDIyNDl9.86rkUOm7D4TtZjlZkL6v1QSCld4m9JNDTiGopN4rsv8"
+		},
+		"estabelecimento": {
+			"telefone": [
+				45745665
+			],
+			"contas": [],
+			"usuarios": [
+				"5dccff88118ca81a90c38051",
+				"5dccff89118ca81a90c38054"
+			],
+			"_id": "5dccff88118ca81a90c38050",
+			"nome": "FestFestFesta",
+			"endereco": "5dccff88118ca81a90c3804f",
+			"__v": 0,
+			"cardapio": "5dccff88118ca81a90c38052"
+		}
+	},
+	"usuariosCriados": {
+		"0": {
+			"estabelecimentos": [
+				"5dccff88118ca81a90c38050"
+			],
+			"_id": "5dccff88118ca81a90c38051",
+			"nome": "Piris Piris da Silva",
+			"dt_nascimento": "1985-02-12T03:00:00.000Z",
+			"__v": 0,
+			"autenticacao": "5dccff88118ca81a90c38053"
+		},
+		"1": {
+			"estabelecimentos": [
+				"5dccff88118ca81a90c38050"
+			],
+			"_id": "5dccff89118ca81a90c38054",
+			"nome": "Rodrigo",
+			"dt_nascimento": "1985-02-12T03:00:00.000Z",
+			"__v": 0,
+			"autenticacao": "5dccff89118ca81a90c38055"
+		}
+	}
+}

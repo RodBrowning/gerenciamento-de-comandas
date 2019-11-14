@@ -1,16 +1,46 @@
 // index, show, store, update, destroy.  
 const Usuario = require('../../Models/Usuario')
-const { isAdministrador } = require('../../Services/VerificacoesDeSistema')
+const Autenticacao = require('../../Models/Autenticacao')
+const Estabelecimento = require('../../Models/Estabelecimento')
+const bcrypt = require('bcrypt')
+const { enviarEmailDeConfirmacao } = require('../../Services/EmailDeConfirmacao')
 
 module.exports = {
     async store (req, res){
-        let novoUsuario = { nome, dt_nascimento, estabelecimentos } = req.body,
-            usuario = await Usuario.findOne({nome})
+        let response = null,
+            saltRounds = 10,
+            { email } = req.body
+            novoUsuario = { nome, dt_nascimento, estabelecimentos } = req.body,
+            usuario = await Autenticacao.findOne({email})
 
         if(!usuario){
+            let hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
             usuario = await Usuario.create(novoUsuario)
+
+            novaAutenticacao = { 
+                id_usuario: usuario._id,
+                email: req.body.email,
+                password: hashPassword,
+                role: req.body.role
+            }
+            autenticacao = await Autenticacao.create(novaAutenticacao)
+            estabelecimento = await Estabelecimento.findByIdAndUpdate({_id: req.headers.id_estabelecimento}, {$push: {usuarios: usuario._id}}, {new:true})
+            usuario = await Usuario.findByIdAndUpdate({_id: usuario._id},{$set:{autenticacao: autenticacao._id}},{new:true})
+
+            let emailToken = enviarEmailDeConfirmacao(usuario._id, autenticacao.email)
+            autenticacao = Object.assign({},autenticacao._doc,{emailToken})
+            
+            if(process.env.NODE_ENV == 'test'){
+                response = {usuario,autenticacao,estabelecimento}
+                
+            } else {
+                response = usuario
+            }
+        } else {
+            response = { Error: "Usuario já existe"}
         }
-        return res.json(usuario)
+        
+        return res.json(response)
     },
     async destroy(req, res){
         let { id_usuario } = req.headers,
@@ -37,9 +67,13 @@ module.exports = {
         return res.json(response)
     },
     async show(req, res){
-        let response = null
-        response  = await Usuario.find({})
-        return res.json(response)
+        let response = null,
+            estabelecimento = null,
+            statusCode = 200
+            
+        estabelecimento = await Estabelecimento.findOne({_id: req.headers.id_estabelecimento})
+        response  = await Usuario.find({_id: estabelecimento.usuarios})
+        return res.status(statusCode).json(response)
     },
     async index(req, res){
         let { id_usuario } = req.headers,

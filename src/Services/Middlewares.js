@@ -1,15 +1,18 @@
 const { isAdministrador, isFuncionario, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento } = require('./VerificacoesDeSistema')
-const Cardapio = require('../Models/Cardapio')
-const Estabelecimento = require('../Models/Estabelecimento')
+// const Cardapio = require('../Models/Cardapio')
+// const Estabelecimento = require('../Models/Estabelecimento')
 
 
 module.exports = {
     async isAdministradorMiddleware(req, res, next){
-        let administrador = await isAdministrador(req.headers.id_estabelecimento, req.headers.id_usuario)
+        let response = null,
+            statusCode = 500,
+            administrador = await isAdministrador(req.headers.id_estabelecimento, req.headers.id_usuario)
         if(administrador){
             next()
         } else {
-            return res.json({Error:"Usuario não autorizado"})
+            response = {Error: "Usuario não autorizado"}
+            return res.status(statusCode).json(response)
         }
     },
     async isFuncionarioMiddleware(req, res, next){
@@ -33,8 +36,8 @@ module.exports = {
     },
     async isContaDesteEstabelecimentoMiddleware(req, res, next){
         let {id_estabelecimento} = req.headers,
-            id_cardapio = req.params[Object.keys(req.params)[0]],
-            pertenceAoEstabelecimento = await verificarContaNoEstabelecimento(id_estabelecimento, id_cardapio)
+            id_conta = req.params[Object.keys(req.params)[0]],
+            pertenceAoEstabelecimento = await verificarContaNoEstabelecimento(id_estabelecimento, id_conta)
             
         if(pertenceAoEstabelecimento){
             next()

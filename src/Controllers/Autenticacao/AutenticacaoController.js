@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const fs = require('fs')
 const path = require('path')
+const { enviarEmailDeConfirmacao } = require('../../Services/EmailDeConfirmacao')
 
 module.exports = {
     async singin(req, res){
@@ -47,38 +48,18 @@ module.exports = {
         // criar autenticacao
         novaAutenticacao.id_usuario = novoUsuario._id
         
-        //////////////////
-        //retirar
-        if(process.env.NODE_ENV === 'test'){
-            novaAutenticacao.validado = true
-        }
-        /////////////////
 
         novaAutenticacao = await Autenticacao.create(novaAutenticacao)
 
-        let emailToken = jwt.sign({user: novoUsuario._id},novaAutenticacao.email,{expiresIn: "1d"})
+        let emailToken = enviarEmailDeConfirmacao(novoUsuario._id, novaAutenticacao.email)
 
-        let url = `http://localhost:2000/validacaoDeUsuario/${novaAutenticacao.email}/${emailToken}`,
-        mailOptions = {
-            from: 'rodrigo.lojaonline@gmail.com',
-            to: novaAutenticacao.email,
-            subject: 'Confirm Email',
-            html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`
-        },
-        { Transporter } = require('./CredenciaisDeEmail')
-        Transporter.sendMail(mailOptions,function(error, info){
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-                
-            }
-        });
-
-        novaAutenticacao = await Autenticacao.findByIdAndUpdate({_id: novaAutenticacao._id},{$set:{emailToken}})
+        novaAutenticacao = await Autenticacao.findByIdAndUpdate({_id: novaAutenticacao._id},{$set:{emailToken}},{new:true})
+        novoUsuario = await Usuario.findByIdAndUpdate({_id: novoUsuario._id}, {$set: {autenticacao: novaAutenticacao._id}},{new:true})
+        response = novoUsuario
+        if(process.env.NODE_ENV === 'test'){
+            response  = Object.assign({},novaAutenticacao._doc,{emailToken: emailToken, id_estabelecimento: novoEstabelecimento._id})
+        }
         
-        response.autenticacao = novaAutenticacao
-        response.token = emailToken
         res.json(response)
         
     },
@@ -86,58 +67,78 @@ module.exports = {
         let response= null,
             { email, emailToken } = req.params,
             tokenEncontrado = false,
+            statusCode = 200,
             autenticacaoEncontrada = null
 
         autenticacaoEncontrada = await Autenticacao.findOne({email})
         
         if(autenticacaoEncontrada){
-            tokenEncontrado = jwt.verify(emailToken, email)
+            tokenEncontrado = jwt.verify(emailToken, email,(err, token)=>{
+                if(err){
+                    return false
+                } else {
+                    return true
+                }
+            })
             if(tokenEncontrado){
                 let usuarioValidado = await Autenticacao.findByIdAndUpdate({_id:autenticacaoEncontrada._id},{$set:{validado: true}}, {new:true})
                 response = usuarioValidado    
+                statusCode = 200
             } else {
-                response = { Error: "token invalido"}
+                statusCode = 403
+                response = {Error: 'Token invalido'}
             }
         } else {
-            response = { Error: "token não encontrado"}
+            statusCode = 500
+            response = {Error: 'Email não encontrado'}
         }
-        res.json(response) 
+        return res.status(statusCode).json(response) 
     },
     async login(req, res){
         let { password } = req.headers,
             { email } = req.query,
             response = null,
+            statusCode = 200,
             usuario = await Autenticacao.findOne({ email })
         
         if(usuario){
             if(usuario.logado || usuario.bloqueado || !usuario.validado){
                 response = {Error: "Ocorreu um erro, entre em contato com seu administrador"}
+                statusCode = 403
             } else {
                 let passwordEstaCorreto = await bcrypt.compare(password, usuario.password)
                 if(passwordEstaCorreto){
-                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true})
+                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true}).select("-password").populate("id_usuario")
                         privateKey = fs.readFileSync(path.resolve(__dirname,"..","..","public.pem"))
                         token = jwt.sign({autenticacao}, privateKey, {expiresIn: "1 days"}, {algorithm: 'RS256'})
-                    response = {token}
+                    if(process.env.NODE_ENV === 'test'){
+                        response = {token, autenticacao}
+                    } else {
+                        response  = {Msg: "Usuario logado com sucesso"}
+                    }
                 } else {
                     response = {Error: "Password invalido"}
+                    statusCode = 403
                 }
             }
         } else {
             response = {Error: "Usuario não encontrado"}
+            statusCode = 500
         }
-        return res.json(response)
+        return res.status(statusCode).json(response)
     },
     async logout(req,res){
         let { id_usuario } = req.headers,
             response = null,
-            user  = await Usuario.findOne({_id: id_usuario})
-
-        if(user){
-            response = await Autenticacao.findByIdAndUpdate({_id: user.autenticacao},{$set: {logado: false}}, {new:true})
+            statusCode = 200,
+            usuario  = await Usuario.findOne({_id: id_usuario})
+        
+        if(usuario){
+            response = await Autenticacao.findByIdAndUpdate({_id: usuario.autenticacao},{$set: {logado: false}}, {new:true})
         } else {
             response = { Error: "Usuario não encontrado"}
+            statusCode = 500
         }
-        return res.json(response)
+        return res.status(statusCode).json(response)
     }
 }

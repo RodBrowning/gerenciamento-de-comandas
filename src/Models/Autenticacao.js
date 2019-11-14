@@ -1,7 +1,10 @@
 const mongoose = require("mongoose")
 
 const AutenticacaoSchema = new mongoose.Schema({
-	id_usuario: String,
+	id_usuario: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Usuario'
+    },
     email: String,
     password: String,
     validado: {type: Boolean, default: false},

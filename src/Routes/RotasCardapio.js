@@ -3,13 +3,17 @@ const RotasCardapio = express.Router()
 const { isAdministradorMiddleware, isFuncionarioMiddleware, isDesteEstabelecimentoMiddleware } = require('../Services/Middlewares')
 const Cardapio = require('../Models/Cardapio')
 
-RotasCardapio.use((req, res, next)=>{
+// RotasCardapio.use((req, res, next)=>{
+//     req.model = Cardapio
+//     next()
+// })
+const atribuirModeloMiddleware = (req, res, next)=>{
     req.model = Cardapio
     next()
-})
-
-const bundledMiddlewaresAdministrador = [isAdministradorMiddleware, isDesteEstabelecimentoMiddleware]
-const bundledMiddlewaresFuncionario = [isFuncionarioMiddleware, isDesteEstabelecimentoMiddleware]
+}
+const bundledMiddlewares = [atribuirModeloMiddleware, isDesteEstabelecimentoMiddleware]
+const bundledMiddlewaresAdministrador =  [isAdministradorMiddleware, ...bundledMiddlewares ]
+const bundledMiddlewaresFuncionario = [ isFuncionarioMiddleware, ...bundledMiddlewares ]
 
 
 // Rotas de Cardapio
