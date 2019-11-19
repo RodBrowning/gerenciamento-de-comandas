@@ -1,4 +1,4 @@
-const { isAdministrador, isFuncionario, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento } = require('./VerificacoesDeSistema')
+const { isAdministrador, isFuncionario, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoCardapioAtivo } = require('./VerificacoesDeSistema')
 // const Cardapio = require('../Models/Cardapio')
 // const Estabelecimento = require('../Models/Estabelecimento')
 
@@ -8,30 +8,36 @@ module.exports = {
         let response = null,
             statusCode = 500,
             administrador = await isAdministrador(req.headers.id_estabelecimento, req.headers.id_usuario)
+            .catch(err=>(false))
         if(administrador){
             next()
         } else {
-            response = {Error: "Usuario não autorizado"}
+            response = {Error: "Usuário não autorizado"}
             return res.status(statusCode).json(response)
         }
     },
     async isFuncionarioMiddleware(req, res, next){
-        let funcionario = await isFuncionario(req.headers.id_estabelecimento, req.headers.id_usuario)
+        let response = null,
+            statusCode = 500,
+            funcionario = await isFuncionario(req.headers.id_estabelecimento, req.headers.id_usuario)
+            .catch(err=>(false))
+
         if(funcionario){
             next()
         } else {
-            return res.json({Error:"Usuario não autorizado"})
+            response = {Error:"Usuário não autorizado"}
+            return res.status(statusCode).json(response)
         }
     },
     async isDesteEstabelecimentoMiddleware(req, res, next){
         let {id_estabelecimento} = req.headers,
             id_model = req.params[Object.keys(req.params)[0]],
             pertenceAoEstabelecimento = await verificarEstabelecimentoNoModel(req.model, id_estabelecimento, id_model)
-
+        
         if(pertenceAoEstabelecimento){
             next()
         } else {
-            return res.json({Error: "O item não pertence a este estabelecimento"})
+            return res.status(500).json({Error: "O item não pertence a este estabelecimento"})
         }
     },
     async isContaDesteEstabelecimentoMiddleware(req, res, next){
@@ -43,6 +49,22 @@ module.exports = {
             next()
         } else {
             return res.json({Error: "Conta não pertence a este estabelecimento"})
+        }
+    },
+    async isItemNoCardapioAtivo(req, res, next){
+        let { id_estabelecimento } = req.headers,
+            id_item = req.params[Object.keys(req.params)[0]],
+            response = null,
+            statusCode = null,
+            itemEncontrado = false
+            itemEncontrado = await verificarItemNoCardapioAtivo(id_estabelecimento, id_item)
+                        
+        if(itemEncontrado){
+            next()
+        } else {
+            response = { Error: "Item não encontrado no cardápio"}
+            statusCode = 400
+            res.status(statusCode).json(response)
         }
     }
 }

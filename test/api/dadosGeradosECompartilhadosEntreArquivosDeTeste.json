@@ -2,6 +2,9 @@
 	"novoRegistro": {
 		"email": "d90121@urhen.com",
 		"password": "12345",
+		"telefones": [
+			1525635
+		],
 		"estabelecimento": {
 			"nome": "FestFestFesta",
 			"telefone": [
@@ -20,7 +23,10 @@
 		},
 		"usuarios": {
 			"nome": "Piris Piris da Silva",
-			"dt_nascimento": "02/12/85"
+			"dt_nascimento": "02/12/85",
+			"telefones": [
+				66666666
+			]
 		}
 	},
 	"registroCriado": {
@@ -28,38 +34,41 @@
 		"bloqueado": false,
 		"logado": false,
 		"role": 1,
-		"_id": "5dccff88118ca81a90c38053",
+		"_id": "5dd0fba661c8d405bcb8ddc3",
 		"email": "d90121@urhen.com",
-		"password": "$2b$10$ANNXtNREqMw9jRhV3yHbxe09LebfcHHJzjzSUpZcCDvdhsiJhnwai",
-		"id_usuario": "5dccff88118ca81a90c38051",
+		"password": "$2b$10$JhyhnKGKwy3EQNy/N1KISOUHvQ3sWqjBXaqVkb5fJpwXY7U.XVvum",
+		"id_usuario": "5dd0fba661c8d405bcb8ddc1",
 		"__v": 0,
-		"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRjY2ZmODgxMThjYTgxYTkwYzM4MDUxIiwiaWF0IjoxNTczNzE1ODQ4LCJleHAiOjE1NzM4MDIyNDh9.8iNO0pdUfdF7eMjXE3WLjw52sDV5xssWD4t_8EgOc24",
-		"id_estabelecimento": "5dccff88118ca81a90c38050",
-		"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MSwiX2lkIjoiNWRjY2ZmODgxMThjYTgxYTkwYzM4MDUzIiwiZW1haWwiOiJkOTAxMjFAdXJoZW4uY29tIiwiaWRfdXN1YXJpbyI6eyJlc3RhYmVsZWNpbWVudG9zIjpbIjVkY2NmZjg4MTE4Y2E4MWE5MGMzODA1MCJdLCJfaWQiOiI1ZGNjZmY4ODExOGNhODFhOTBjMzgwNTEiLCJub21lIjoiUGlyaXMgUGlyaXMgZGEgU2lsdmEiLCJkdF9uYXNjaW1lbnRvIjoiMTk4NS0wMi0xMlQwMzowMDowMC4wMDBaIiwiX192IjowLCJhdXRlbnRpY2FjYW8iOiI1ZGNjZmY4ODExOGNhODFhOTBjMzgwNTMifSwiX192IjowfSwiaWF0IjoxNTczNzE1ODQ4LCJleHAiOjE1NzM4MDIyNDh9.TuB4aSYdLKxDQowyJ_xUXD638uaJqfRkJkk4mbor7PU"
+		"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRkMGZiYTY2MWM4ZDQwNWJjYjhkZGMxIiwiaWF0IjoxNTczOTc2OTk4LCJleHAiOjE1NzQwNjMzOTh9.wl8uV7JTGrOqbeh6sTXMUsUTJyv1BSI1OiFcUx1aCyI",
+		"id_estabelecimento": "5dd0fba661c8d405bcb8ddc0",
+		"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MSwiX2lkIjoiNWRkMGZiYTY2MWM4ZDQwNWJjYjhkZGMzIiwiZW1haWwiOiJkOTAxMjFAdXJoZW4uY29tIiwiaWRfdXN1YXJpbyI6eyJ0ZWxlZm9uZXMiOls2NjY2NjY2Nl0sImVzdGFiZWxlY2ltZW50b3MiOlsiNWRkMGZiYTY2MWM4ZDQwNWJjYjhkZGMwIl0sIl9pZCI6IjVkZDBmYmE2NjFjOGQ0MDViY2I4ZGRjMSIsIm5vbWUiOiJQaXJpcyBQaXJpcyBkYSBTaWx2YSIsImR0X25hc2NpbWVudG8iOiIxOTg1LTAyLTEyVDAzOjAwOjAwLjAwMFoiLCJfX3YiOjAsImF1dGVudGljYWNhbyI6IjVkZDBmYmE2NjFjOGQ0MDViY2I4ZGRjMyJ9LCJfX3YiOjB9LCJpYXQiOjE1NzM5NzY5OTgsImV4cCI6MTU3NDA2MzM5OH0.RlAc-u6WBqxqyJUG0mwO_M1gnCxsZgR6UypwDJHbkQ4"
 	},
 	"usuarioCriado": {
 		"usuario": {
-			"estabelecimentos": [
-				"5dccff88118ca81a90c38050"
+			"telefones": [
+				1525635
 			],
-			"_id": "5dccff89118ca81a90c38054",
+			"estabelecimentos": [
+				"5dd0fba661c8d405bcb8ddc0"
+			],
+			"_id": "5dd0fba661c8d405bcb8ddc4",
 			"nome": "Rodrigo",
 			"dt_nascimento": "1985-02-12T03:00:00.000Z",
 			"__v": 0,
-			"autenticacao": "5dccff89118ca81a90c38055"
+			"autenticacao": "5dd0fba661c8d405bcb8ddc5"
 		},
 		"autenticacao": {
 			"validado": false,
 			"bloqueado": false,
 			"logado": true,
 			"role": 2,
-			"_id": "5dccff89118ca81a90c38055",
-			"id_usuario": "5dccff89118ca81a90c38054",
+			"_id": "5dd0fba661c8d405bcb8ddc5",
+			"id_usuario": "5dd0fba661c8d405bcb8ddc4",
 			"email": "rodrigo@teste.com",
-			"password": "$2b$10$rcz8LKt2Junkzn8mk/fZeugk2xr0ZrHY.WkK6RU41FKrspn8I5uBW",
+			"password": "$2b$10$fB9sGgGm4nCh4odZzhxhzeDxtMKVBlQpTGLJfzemH4ttJuKSJy966",
 			"__v": 0,
-			"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRjY2ZmODkxMThjYTgxYTkwYzM4MDU0IiwiaWF0IjoxNTczNzE1ODQ5LCJleHAiOjE1NzM4MDIyNDl9.cBOby5h72kqsakBYZOLXwPMrWxdvz50XLynK23nrNmo",
-			"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MiwiX2lkIjoiNWRjY2ZmODkxMThjYTgxYTkwYzM4MDU1IiwiaWRfdXN1YXJpbyI6eyJlc3RhYmVsZWNpbWVudG9zIjpbIjVkY2NmZjg4MTE4Y2E4MWE5MGMzODA1MCJdLCJfaWQiOiI1ZGNjZmY4OTExOGNhODFhOTBjMzgwNTQiLCJub21lIjoiUm9kcmlnbyIsImR0X25hc2NpbWVudG8iOiIxOTg1LTAyLTEyVDAzOjAwOjAwLjAwMFoiLCJfX3YiOjAsImF1dGVudGljYWNhbyI6IjVkY2NmZjg5MTE4Y2E4MWE5MGMzODA1NSJ9LCJlbWFpbCI6InJvZHJpZ29AdGVzdGUuY29tIiwiX192IjowfSwiaWF0IjoxNTczNzE1ODQ5LCJleHAiOjE1NzM4MDIyNDl9.86rkUOm7D4TtZjlZkL6v1QSCld4m9JNDTiGopN4rsv8"
+			"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRkMGZiYTY2MWM4ZDQwNWJjYjhkZGM0IiwiaWF0IjoxNTczOTc2OTk4LCJleHAiOjE1NzQwNjMzOTh9.U-EnMbY5cHs7OrVwsv1t3W4ffQFXaUiZ1cIk7y2nSRU",
+			"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MiwiX2lkIjoiNWRkMGZiYTY2MWM4ZDQwNWJjYjhkZGM1IiwiaWRfdXN1YXJpbyI6eyJ0ZWxlZm9uZXMiOlsxNTI1NjM1XSwiZXN0YWJlbGVjaW1lbnRvcyI6WyI1ZGQwZmJhNjYxYzhkNDA1YmNiOGRkYzAiXSwiX2lkIjoiNWRkMGZiYTY2MWM4ZDQwNWJjYjhkZGM0Iiwibm9tZSI6IlJvZHJpZ28iLCJkdF9uYXNjaW1lbnRvIjoiMTk4NS0wMi0xMlQwMzowMDowMC4wMDBaIiwiX192IjowLCJhdXRlbnRpY2FjYW8iOiI1ZGQwZmJhNjYxYzhkNDA1YmNiOGRkYzUifSwiZW1haWwiOiJyb2RyaWdvQHRlc3RlLmNvbSIsIl9fdiI6MH0sImlhdCI6MTU3Mzk3Njk5OSwiZXhwIjoxNTc0MDYzMzk5fQ.-uIF8RUhR_b3-HBgz1LoLLCfUrirNhhxdr5uiV0xT78"
 		},
 		"estabelecimento": {
 			"telefone": [
@@ -67,36 +76,80 @@
 			],
 			"contas": [],
 			"usuarios": [
-				"5dccff88118ca81a90c38051",
-				"5dccff89118ca81a90c38054"
+				"5dd0fba661c8d405bcb8ddc1",
+				"5dd0fba661c8d405bcb8ddc4"
 			],
-			"_id": "5dccff88118ca81a90c38050",
+			"_id": "5dd0fba661c8d405bcb8ddc0",
 			"nome": "FestFestFesta",
-			"endereco": "5dccff88118ca81a90c3804f",
+			"endereco": "5dd0fba661c8d405bcb8ddbf",
 			"__v": 0,
-			"cardapio": "5dccff88118ca81a90c38052"
+			"cardapio": "5dd0fba661c8d405bcb8ddc2"
 		}
 	},
 	"usuariosCriados": {
 		"0": {
-			"estabelecimentos": [
-				"5dccff88118ca81a90c38050"
+			"telefones": [
+				66666666
 			],
-			"_id": "5dccff88118ca81a90c38051",
+			"estabelecimentos": [
+				"5dd0fba661c8d405bcb8ddc0"
+			],
+			"_id": "5dd0fba661c8d405bcb8ddc1",
 			"nome": "Piris Piris da Silva",
 			"dt_nascimento": "1985-02-12T03:00:00.000Z",
 			"__v": 0,
-			"autenticacao": "5dccff88118ca81a90c38053"
+			"autenticacao": {
+				"validado": true,
+				"bloqueado": false,
+				"logado": true,
+				"role": 1,
+				"email": "d90121@urhen.com"
+			}
 		},
 		"1": {
-			"estabelecimentos": [
-				"5dccff88118ca81a90c38050"
+			"telefones": [
+				1525635
 			],
-			"_id": "5dccff89118ca81a90c38054",
+			"estabelecimentos": [
+				"5dd0fba661c8d405bcb8ddc0"
+			],
+			"_id": "5dd0fba661c8d405bcb8ddc4",
 			"nome": "Rodrigo",
 			"dt_nascimento": "1985-02-12T03:00:00.000Z",
 			"__v": 0,
-			"autenticacao": "5dccff89118ca81a90c38055"
+			"autenticacao": {
+				"validado": true,
+				"bloqueado": false,
+				"logado": true,
+				"role": 2,
+				"email": "rodrigo@teste.com"
+			}
 		}
-	}
+	},
+	"items": [
+		{
+			"_id": "5dd0fba761c8d405bcb8ddc9",
+			"nome_item": "Itaipava lata 350ml",
+			"preco": 2.5,
+			"__v": 0
+		},
+		{
+			"_id": "5dd0fba761c8d405bcb8ddca",
+			"nome_item": "Porção de batata",
+			"preco": 5,
+			"__v": 0
+		},
+		{
+			"_id": "5dd0fba761c8d405bcb8ddcb",
+			"nome_item": "Itaipava litrão",
+			"preco": 10,
+			"__v": 0
+		},
+		{
+			"_id": "5dd0fba761c8d405bcb8ddcc",
+			"nome_item": "Dose de vodka pequena",
+			"preco": 3,
+			"__v": 0
+		}
+	]
 }

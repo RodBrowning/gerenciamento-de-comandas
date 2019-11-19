@@ -4,9 +4,11 @@ const Autenticacao = require('./Autenticacao')
 const UsuarioSchema = new mongoose.Schema({
     nome: String,
     dt_nascimento: Date,
+    telefones: { type: [Number], default: null },
     estabelecimentos: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Estabelecimento'
+        ref: 'Estabelecimento',
+        required: true
     }],
     autenticacao: {
         type: mongoose.Schema.Types.ObjectId,

@@ -34,7 +34,7 @@ describe('Rotas de bloqueio de usuario',()=>{
             )
             .catch(err=>done(err))
         })
-        it('Usuario deve ser impedido de logar por estar BLOQUEADO', (done)=>{
+        it('Usuario deve ser IMPEDIDO de logar por estar BLOQUEADO', (done)=>{
             request(app)
             .post('/auth/login')
             .query({'email':  registroCriado.email})
@@ -66,7 +66,7 @@ describe('Rotas de bloqueio de usuario',()=>{
             })
             .catch(err=>done(err))
         })
-        it('Usuario deve logar normalmente após ser DESBLOQUEADO', (done)=>{
+        it('Usuario deve LOGAR normalmente após ser DESBLOQUEADO', (done)=>{
             request(app)
             .post('/auth/login')
             .query({'email':  usuarioCriado.autenticacao.email})
@@ -83,7 +83,7 @@ describe('Rotas de bloqueio de usuario',()=>{
                 done(err)
             })
         })
-        it('Deve impedir que um usuario não administrador faça bloqueio de usuarios',(done)=>{
+        it('Deve impedir que um usuario NÃO administrador faça bloqueio de usuarios',(done)=>{
             request(app)
             .post(`/auth/bloquearusuario/${registroCriado.id_usuario}`)
             .set('id_usuario', usuarioCriado.usuario._id)
@@ -92,10 +92,24 @@ describe('Rotas de bloqueio de usuario',()=>{
             .then((res)=>{
                     expect(res.statusCode).to.equal(500)
                     expect(res.body).to.have.property('Error')
-                    expect(res.body.Error).to.equal('Usuario não autorizado')
+                    expect(res.body.Error).to.equal('Usuário não autorizado')
                     done()
                 }
             )
+            .catch(err=>done(err))
+        })
+        it('Deve retornar ERRO caso o estabelecimento NÃO exista',(done)=>{
+            request(app)
+            .post(`/auth/bloquearusuario/${usuarioCriado.usuario._id}`)
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', 'estabelecimentoInexistente')
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.body).to.have.own.property("Error")
+                expect(res.body.Error).to.equal("Usuário não autorizado")
+                expect(res.statusCode).to.equal(500)
+                done()
+            })
             .catch(err=>done(err))
         })
     })

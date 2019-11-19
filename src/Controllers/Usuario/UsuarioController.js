@@ -10,7 +10,7 @@ module.exports = {
         let response = null,
             saltRounds = 10,
             { email } = req.body
-            novoUsuario = { nome, dt_nascimento, estabelecimentos } = req.body,
+            novoUsuario = { nome, dt_nascimento, telefones, estabelecimentos } = req.body,
             usuario = await Autenticacao.findOne({email})
 
         if(!usuario){
@@ -46,7 +46,8 @@ module.exports = {
         let { id_usuario } = req.headers,
             { id_usuario_deletar } = req.params,
             usuarioEstaAutorizado = false,
-            response = null
+            response = null,
+            statusCode = 200
         
         if(id_usuario !== id_usuario_deletar){
             usuarioEstaAutorizado = true;
@@ -54,38 +55,56 @@ module.exports = {
         if(usuarioEstaAutorizado){
             response = await Usuario.findByIdAndDelete({_id: id_usuario_deletar})
         } else {
-            response = {Error: "Usuário não autorizado"}
+            response = {Error: "Operação não autorizada"}
+            statusCode = 500
         }
-        return res.json(response)
+        return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let usuarioParaAtualizar = { nome, dt_nascimento, estabelecimentos } = req.body,
+        let usuarioParaAtualizar = { nome, dt_nascimento, telefones, estabelecimentos } = req.body,
+            dadosDeAutenticacaoParaAtualizar = { email, password } = req.body,
             { id_usuario_editar } = req.params,
-            response = null
+            response = null,
+            saltRounds = 10
 
-        response = await Usuario.findByIdAndUpdate({_id: id_usuario_editar}, usuarioParaAtualizar, {new:true})
+        let hashPassword = bcrypt.hashSync(dadosDeAutenticacaoParaAtualizar.password, saltRounds)
+        dadosDeAutenticacaoParaAtualizar.password = hashPassword
+        
+        usuarioAtualizado = await Usuario.findByIdAndUpdate({_id: id_usuario_editar}, usuarioParaAtualizar, {new:true})
+        autenticacaoAtualizada = await Autenticacao.findOneAndUpdate({_id: usuarioAtualizado.autenticacao}, dadosDeAutenticacaoParaAtualizar,{new:true})
+        if(process.env.NODE_ENV === 'test'){
+            response = {usuarioAtualizado,autenticacaoAtualizada}
+        } else {
+            response = usuarioAtualizado
+        }
         return res.json(response)
     },
     async show(req, res){
         let response = null,
             estabelecimento = null,
             statusCode = 200
-            
+
         estabelecimento = await Estabelecimento.findOne({_id: req.headers.id_estabelecimento})
         response  = await Usuario.find({_id: estabelecimento.usuarios})
+        .populate({path:'autenticacao', model: 'Autenticacao', select: {password: 0, _id: 0, __v: 0, id_usuario: 0}})
+        
         return res.status(statusCode).json(response)
     },
     async index(req, res){
         let { id_usuario } = req.headers,
             { id_usuario_buscar } = req.params,
-            response = null
+            response = null,
+            statusCode = 200,
             proprioPerfil = (id_usuario === id_usuario_buscar) 
         
         if( proprioPerfil ){
             response = await Usuario.findOne({_id: id_usuario_buscar})
+            .populate({path:'autenticacao', model: 'Autenticacao', select: {password: 0, _id: 0, __v: 0, id_usuario: 0}})
+            
         } else {
             response = { Error: "Usuário não autorizado" }
+            statusCode = 500
         }
-        return res.json(response)
+        return res.status(statusCode).json(response)
     }
 }

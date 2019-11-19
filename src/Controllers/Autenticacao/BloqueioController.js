@@ -12,7 +12,7 @@ module.exports = {
             response = { Error: "Não é permitido auto bloqueio" }
             statusCode = 500
         } else if(usuario_para_bloquear){
-            response  = await Autenticacao.findByIdAndUpdate({_id: usuario_para_bloquear.autenticacao}, {bloqueado: true, logado: false}, {new:true})
+            response  = await Autenticacao.findByIdAndUpdate({_id: usuario_para_bloquear.autenticacao}, {$set: {bloqueado: true, logado: false}}, {new:true})
         } else {
             response = { Error: "Usuario informado não foi encontrado" }
             statusCode = 500

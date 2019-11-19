@@ -10,8 +10,8 @@ rotasDeNivelDeAcesso.use((req, res, next)=>{
 })
 const bundledMiddlewaresAdministrador = [isAdministradorMiddleware, isDesteEstabelecimentoMiddleware]
 
-// POST
-rotasDeNivelDeAcesso.post('/alterarAcessoDoUsuario/:id_usuario_alterar',bundledMiddlewaresAdministrador, NivelDeAcessoController.alterarNivelDeAcesso)
+    // POST
+    rotasDeNivelDeAcesso.post('/alterarAcessoDoUsuario/:id_usuario_alterar',bundledMiddlewaresAdministrador, NivelDeAcessoController.alterarNivelDeAcesso)
 
 
 module.exports = rotasDeNivelDeAcesso

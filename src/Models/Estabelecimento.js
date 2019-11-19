@@ -69,39 +69,4 @@ async function removerReferenciaNoModel(Model, id_documento, id_estabelecimentoR
     return documento
 }
 
-
 module.exports = mongoose.model("Estabelecimento",EstabelecimentoSchema)
-
-
-
-
-
-
-async function removerReferenciaNoUsuario(id_usuario, id_estabelecimentoRemovido){
-    let usuario = await Usuario.findOne({_id: id_usuario}),
-        estabelecimentosDoUsuario = usuario.estabelecimentos
-
-    if(estabelecimentosDoUsuario.length == 1){
-        usuario = await Usuario.findOneAndDelete({_id: usuario._id})
-    } else {
-        let novaListaDeEstabelecimentos = estabelecimentosDoUsuario.filter(id_estabelecimento =>{
-            return !id_estabelecimento.equals(id_estabelecimentoRemovido)
-        })
-        usuario = await Usuario.findByIdAndUpdate({_id: usuario._id},{$set:{estabelecimentos: novaListaDeEstabelecimentos}},{new: true})
-    }
-    return usuario
-}
-async function removerReferenciaNoCardapio(id_cardapio, id_estabelecimentoRemovido){
-    let cardapio  = await Cardapio.findOne({_id: id_cardapio}),
-        estabelecimentosDoCardapio = cardapio.estabelecimentos
-
-    if(estabelecimentosDoCardapio.length == 1){
-        cardapio = await Cardapio.findOneAndDelete({_id: id_cardapio})
-    } else {
-        let novaListaDeEstabelecimentos = estabelecimentosDoCardapio.filter(id_estabelecimento =>{
-            return !id_estabelecimento.equals(id_estabelecimentoRemovido)
-        })
-        cardapio = await Cardapio.findByIdAndUpdate({_id: id_cardapio}, {$set: {estabelecimentos: novaListaDeEstabelecimentos}},{new:true})
-    }
-    return cardapio
-}

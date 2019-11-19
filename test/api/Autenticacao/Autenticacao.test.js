@@ -16,6 +16,7 @@ before((done)=>{
         novoRegistro: {
             email: "d90121@urhen.com",
             password: "12345",
+            telefones: [1525635],
             estabelecimento: {
                 nome: "FestFestFesta",
                 telefone: [
@@ -34,7 +35,8 @@ before((done)=>{
             },
             usuarios: {
                 nome: "Piris Piris da Silva",
-                dt_nascimento: "02/12/85"
+                dt_nascimento: "02/12/85",
+                telefones: [66666666],
             }
         },
         registroCriado: null
@@ -51,7 +53,7 @@ describe('Rotas de autenticação', ()=>{
         fs.writeFileSync(path.resolve(__dirname,'..','dadosGeradosECompartilhadosEntreArquivosDeTeste.json'), JSON.stringify(dadosCompartilhados, null, '\t'))
     })
     describe('Processo de registro',()=>{
-        it('Criar novo registro com sucesso', (done)=>{
+        it('Criar novo registro com SUCESSO', (done)=>{
             request(app)
             .post('/auth/singin')
             .set('Content-Type','application/json')
@@ -64,7 +66,7 @@ describe('Rotas de autenticação', ()=>{
             })
             .catch(err=>{done(err)})
         })
-        it('Não criar novo registro por erro de mesmo estabelecimento',(done)=>{
+        it('NÃO criar novo registro por ERRO de mesmo estabelecimento',(done)=>{
             let estabelecimentoDuplicado = JSON.parse(JSON.stringify(dadosCompartilhados.novoRegistro))
             estabelecimentoDuplicado.email = 'email@diferente.com'
             
@@ -81,7 +83,7 @@ describe('Rotas de autenticação', ()=>{
             })
             .catch(err=>done(err))
         })
-        it('Não criar novo registro por erro de mesmo usuario',(done)=>{
+        it('NÃO criar novo registro por ERRO de mesmo usuario',(done)=>{
             let estabelecimentoDuplicado = JSON.parse(JSON.stringify(dadosCompartilhados.novoRegistro))
 
             estabelecimentoDuplicado.estabelecimento.nome = 'FestFestParty'
@@ -99,25 +101,25 @@ describe('Rotas de autenticação', ()=>{
             })
             .catch(err=>done(err))
         })
-        it('O email do usuario criado confere com o enviado',(done)=>{
+        it('Email do usuario criado confere com o enviado',(done)=>{
             expect(dadosCompartilhados.registroCriado.email).to.equal(dadosCompartilhados.novoRegistro.email)
             done()
         })
-        it('O usuario deve iniciar invalidado',(done)=>{
+        it('Usuario deve iniciar INVALIDADO',(done)=>{
             expect(dadosCompartilhados.registroCriado.validado).to.be.false
             done()
         })
-        it('O usuario deve iniciar desbloqueado',(done)=>{
+        it('Usuario deve iniciar DESBLOUEADO',(done)=>{
             expect(dadosCompartilhados.registroCriado.bloqueado).to.be.false
             done()
         })
-        it('O usuario deve iniciar com acesso de administrador',(done)=>{
+        it('Usuario deve iniciar com acesso de ADMINISTRADOR',(done)=>{
             expect(dadosCompartilhados.registroCriado.role).to.equal(1)
             done()
         })
     })
     describe('Processo de validacao de usuario',()=>{
-        it('Usuario deve ser impedido de logar por não ter sido VALIDADO', (done)=>{
+        it('Usuario deve ser IMPEDIDO de logar por não ter sido VALIDADO', (done)=>{
             request(app)
             .post('/auth/login')
             .query({'email': dadosCompartilhados.registroCriado.email})
@@ -135,7 +137,7 @@ describe('Rotas de autenticação', ()=>{
                 done(err)
             })
         })
-        it('Usuario deve ser validado com sucesso',(done)=>{
+        it('Usuario DEVE ser validado com sucesso',(done)=>{
             let url = `/auth/validacaoDeUsuario/${dadosCompartilhados.registroCriado.email}/${dadosCompartilhados.registroCriado.emailToken}`
             request(app)
             .get(url)
@@ -174,13 +176,13 @@ describe('Rotas de autenticação', ()=>{
             })
             .catch(err=>done(err))
         })
-        it('Usuario deve ter sido validado',(done)=>{
+        it('Usuario deve ter sido validado com SUCESSO',(done)=>{
             expect(dadosCompartilhados.registroCriado.validado).to.be.true
             done()
         })
     })
     describe('Processo de login e logout',()=>{
-        it('Usuario deve ser impedido de logar por USUARIO NÃO ENCONTRADO', (done)=>{
+        it('Usuario deve ser IMPEDIDO de logar por USUARIO NÃO ENCONTRADO', (done)=>{
             request(app)
             .post('/auth/login')
             .query({'email': "email@errado.com"})
@@ -198,7 +200,7 @@ describe('Rotas de autenticação', ()=>{
                 done(err)
             })
         })
-        it('Usuario deve ser impedido de logar por SENHA INVALIDA', (done)=>{
+        it('Usuario deve ser IMPEDIDO de logar por SENHA INVALIDA', (done)=>{
             request(app)
             .post('/auth/login')
             .query({'email': dadosCompartilhados.registroCriado.email})
@@ -230,7 +232,7 @@ describe('Rotas de autenticação', ()=>{
                 done(err)
             })
         })
-        it('Usuario deve ser impedido de logar por já estar LOGADO', (done)=>{
+        it('Usuario deve ser IMPEDIDO de logar por já estar LOGADO', (done)=>{
             request(app)
             .post('/auth/login')
             .query({'email': dadosCompartilhados.registroCriado.email})

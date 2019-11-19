@@ -33,6 +33,7 @@ describe('Rotas de usuario',()=>{
             let novoUsuario = {
                 "nome": "Rodrigo", 
                 "dt_nascimento": "02/12/85", 
+                "telefones": [1525635],
                 "estabelecimentos":
                 [
                     `${registroCriado.id_estabelecimento}`
@@ -69,7 +70,7 @@ describe('Rotas de usuario',()=>{
             })
             .catch(err=> done(err))
         })
-        it('Usuario criado deve ser validado com sucesso',(done)=>{
+        it('Usuario criado deve ser VALIDADO com sucesso',(done)=>{
             let {email, emailToken} = usuarioCriado.autenticacao
             let url = `/auth/validacaoDeUsuario/${email}/${emailToken}`
             request(app)
@@ -102,7 +103,7 @@ describe('Rotas de usuario',()=>{
         })
     })
     describe('Processo de listagem de usuarios',()=>{
-        it('Deve retornar apenas dados do proprio usuario',(done)=>{
+        it('Deve retornar apenas dados do PRÓPRIO usuario',(done)=>{
             let autenticacao = usuarioCriado.autenticacao
             let estabelecimento = usuarioCriado.estabelecimento
             request(app)
@@ -118,7 +119,39 @@ describe('Rotas de usuario',()=>{
             })
             .catch(err=>done(err))
         })
-        it('Deve retornar a lista de todos os usuarios',(done)=>{
+        it('Deve IMPEDIR que um usuario pesquise outro usuario',(done)=>{
+            let autenticacao = usuarioCriado.autenticacao
+            let estabelecimento = usuarioCriado.estabelecimento
+            request(app)
+            .get('/buscarUsuario/usuarioInexistente')
+            .set('id_usuario', autenticacao.id_usuario)
+            .set('id_estabelecimento', estabelecimento._id)
+            .set('autorizacao', autenticacao.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.body).to.have.own.property("Error")
+                expect(res.body.Error).to.equal("Usuário não autorizado")
+                expect(res.statusCode).to.equal(500)
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve IMPEDIR um usuario que NÃO existe de faça consultas de usuario',(done)=>{
+            let autenticacao = usuarioCriado.autenticacao
+            let estabelecimento = usuarioCriado.estabelecimento
+            request(app)
+            .get(`/buscarUsuario/${autenticacao.id_usuario}`)
+            .set('id_usuario', 'usuarioInexistente')
+            .set('id_estabelecimento', estabelecimento._id)
+            .set('autorizacao', autenticacao.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.body).to.have.own.property("Error")
+                expect(res.body.Error).to.equal("Usuário não autorizado")
+                expect(res.statusCode).to.equal(500)
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve retornar a lista de TODOS os usuarios',(done)=>{
             request(app)
             .get('/buscarUsuarios')
             .set('id_usuario', registroCriado.id_usuario)
@@ -134,9 +167,23 @@ describe('Rotas de usuario',()=>{
             })
             .catch(err=>done(err))
         })
+        it('Deve IMPEDIR um usuario que NÃO existe de faça consultas de todos os usuarios',(done)=>{
+            request(app)
+            .get('/buscarUsuarios')
+            .set('id_usuario', 'usuarioInexistente')
+            .set('id_estabelecimento',registroCriado.id_estabelecimento)
+            .set('autorizacao',registroCriado.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.body).to.have.own.property("Error")
+                expect(res.body.Error).to.equal("Usuário não autorizado")
+                expect(res.statusCode).to.equal(500)
+                done()
+            })
+            .catch(err=>done(err))
+        })
     })
     describe('Processo de alteracao de nivel de acesso',()=>{
-        it('Deve alterar o nivel de acesso do usuario para administrador',(done)=>{
+        it('Deve alterar o nivel de acesso do usuario para ADMINISTRADOR',(done)=>{
             request(app)
             .post(`/auth/alterarAcessoDoUsuario/${usuarioCriado.usuario._id}`)
             .set('Content-type','Application/json')
@@ -153,7 +200,7 @@ describe('Rotas de usuario',()=>{
             })
             .catch(err=>done(err))
         })
-        it('Deve alterar o nivel de acesso do usuario para funcionario',(done)=>{
+        it('Deve alterar o nivel de acesso do usuario para FUNCIONARIO',(done)=>{
             request(app)
             .post(`/auth/alterarAcessoDoUsuario/${usuarioCriado.usuario._id}`)
             .set('Content-type','Application/json')
@@ -170,7 +217,7 @@ describe('Rotas de usuario',()=>{
             })
             .catch(err=>done(err))
         })
-        it('Deve impedir que um usuario não administrador altere niveis de acesso',(done)=>{
+        it('Deve IMPEDIR que um usuario NÃO administrador altere niveis de acesso',(done)=>{
             request(app)
             .post(`/auth/alterarAcessoDoUsuario/${registroCriado.id_usuario}`)
             .set('Content-type','Application/json')
@@ -180,8 +227,175 @@ describe('Rotas de usuario',()=>{
             .send({"role":2})
             .then((res)=>{
                 expect(res.body).to.have.own.property("Error")
-                expect(res.body.Error).to.equal("Usuario não autorizado")
+                expect(res.body.Error).to.equal("Usuário não autorizado")
                 expect(res.statusCode).to.equal(500)
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve IMPEDIR um usuario que NÃO existe de alterar niveis de acesso',(done)=>{
+            request(app)
+            .post('/auth/alterarAcessoDoUsuario/usuarioInexistente')
+            .set('Content-type','Application/json')
+            .set('id_usuario', usuarioCriado.usuario._id)
+            .set('id_estabelecimento', usuarioCriado.estabelecimento._id)
+            .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)
+            .send({"role":2})
+            .then((res)=>{
+                expect(res.body).to.have.own.property("Error")
+                expect(res.body.Error).to.equal("Usuário não autorizado")
+                expect(res.statusCode).to.equal(500)
+                done()
+            })
+            .catch(err=>done(err))
+        })
+    })
+    describe('Processo de atualizar e excluir funcionario',()=>{
+        before((done)=>{
+            // Criar usuario
+            let novoUsuario = {
+                "nome": "samanta", 
+                "dt_nascimento": "95/04/25", 
+                "estabelecimentos":
+                [
+                    `${registroCriado.id_estabelecimento}`
+                ],
+                "email": "samanta@teste.com",
+                "password": "samanta",
+                "role": 2
+            }
+            request(app)
+            .post('/novoUsuario')
+            .set('Content-Type','application/json')
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', registroCriado.id_estabelecimento)
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .send(novoUsuario)
+            .then((res)=>{
+                dadosCompartilhados.segundoUsuarioCriado = res.body
+                done()
+            })
+            .catch(err=> done(err))
+        })
+        it('Deve ATUALIZAR o usuario recém criado com sucesso',(done)=>{
+            let atualizacoes = {
+                "nome": "Carla",
+                "email": "carla@test.com.br",
+                "password": "123"
+            }
+            request(app)
+            .put(`/editarUsuario/${dadosCompartilhados.segundoUsuarioCriado.usuario._id}`)
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', registroCriado.id_estabelecimento)
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .send(atualizacoes)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(200)
+                expect(res.body.usuarioAtualizado).to.have.own.property('_id')
+                expect(res.body.usuarioAtualizado).to.have.own.property('nome')
+                expect(res.body.autenticacaoAtualizada).to.have.own.property('email')
+                expect(res.body.usuarioAtualizado._id).to.equal(dadosCompartilhados.segundoUsuarioCriado.usuario._id)
+                expect(res.body.usuarioAtualizado.nome).to.equal(atualizacoes.nome)
+                expect(res.body.autenticacaoAtualizada.email).to.equal(atualizacoes.email)
+                dadosCompartilhados.segundoUsuarioCriado = res.body
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Usuario NÃO deve ser atualizado por um usuario NÃO administrador',(done)=>{
+            let atualizacoes = {
+                "nome": "Renata",
+                "email": "renata@test.com.br"
+            }
+            request(app)
+            .put(`/editarUsuario/${dadosCompartilhados.segundoUsuarioCriado.usuarioAtualizado._id}`)
+            .set('id_usuario', usuarioCriado.usuario._id)
+            .set('id_estabelecimento', usuarioCriado.estabelecimento._id)
+            .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)
+            .send(atualizacoes)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(500)
+                expect(res.body).to.have.own.property('Error')
+                expect(res.body.Error).to.equal('Usuário não autorizado')
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Usuario NÃO deve ser EXCLUIDO por um usuario não administrador',(done)=>{
+            request(app)
+            .delete(`/removerUsuario/${dadosCompartilhados.segundoUsuarioCriado.usuarioAtualizado._id}`)
+            .set('id_usuario', usuarioCriado.usuario._id)
+            .set('id_estabelecimento', usuarioCriado.estabelecimento._id)
+            .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(500)
+                expect(res.body).to.have.own.property('Error')
+                expect(res.body.Error).to.equal('Usuário não autorizado')
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve retornar um ERRO ao ATUALIZAR um usuario que NÃO existe',(done)=>{
+            let atualizacoes = {
+                "nome": "Carla",
+                "email": "carla@test.com.br",
+                "password": "123"
+            }
+            request(app)
+            .put('/editarUsuario/id_inexistente')
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', registroCriado.id_estabelecimento)
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .send(atualizacoes)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(500)
+                expect(res.body).to.have.own.property('Error')
+                expect(res.body.Error).to.equal('O item não pertence a este estabelecimento')
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve REMOVER um usuario com sucesso',(done)=>{
+            request(app)
+            .delete(`/removerUsuario/${dadosCompartilhados.segundoUsuarioCriado.usuarioAtualizado._id}`)
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', registroCriado.id_estabelecimento)
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(200)
+                expect(res.body).to.have.own.property('_id')
+                expect(res.body).to.have.own.property('nome')
+                expect(res.body._id).to.equal(dadosCompartilhados.segundoUsuarioCriado.usuarioAtualizado._id)
+                expect(res.body.nome).to.equal(dadosCompartilhados.segundoUsuarioCriado.usuarioAtualizado.nome)
+                delete dadosCompartilhados.segundoUsuarioCriado
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve retornar um ERRO ao se auto REMOVER',(done)=>{
+            request(app)
+            .delete(`/removerUsuario/${registroCriado.id_usuario}`)
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', registroCriado.id_estabelecimento)
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(500)
+                expect(res.body).to.have.own.property('Error')
+                expect(res.body.Error).to.equal('Operação não autorizada')
+                done()
+            })
+            .catch(err=>done(err))
+        })
+        it('Deve retornar um ERRO ao REMOVER um usuario que NÃO existe',(done)=>{
+            request(app)
+            .delete(`/removerUsuario/usuarioInexistente`)
+            .set('id_usuario', registroCriado.id_usuario)
+            .set('id_estabelecimento', registroCriado.id_estabelecimento)
+            .set('autorizacao', registroCriado.tokenDeAutenticacao)
+            .then((res)=>{
+                expect(res.statusCode).to.equal(500)
+                expect(res.body).to.have.own.property('Error')
+                expect(res.body.Error).to.equal('O item não pertence a este estabelecimento')
                 done()
             })
             .catch(err=>done(err))

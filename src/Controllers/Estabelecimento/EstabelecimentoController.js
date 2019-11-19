@@ -18,11 +18,7 @@ module.exports = {
             estabelecimentoParaAtualizar = { nome, telefone, endereco, contas, usuarios, cardapio } = req.body,
             response = null
                 
-        if(await isAdministrador(id_estabelecimento,id_usuario)){
-            response = await Estabelecimento.findOneAndUpdate({_id: id_estabelecimento}, estabelecimentoParaAtualizar, {new:true})
-        } else {
-            response = {Error: "Usuario não autorizado"}
-        }
+        response = await Estabelecimento.findOneAndUpdate({_id: id_estabelecimento}, estabelecimentoParaAtualizar, {new:true})
         return res.json(response)
     },
     async destroy(req, res){
@@ -37,38 +33,35 @@ module.exports = {
             response  = null
             
         // buscar os estabelecimentos do usuario corrente
-        if(estabelecimentos){
-            response = await Estabelecimento.find({_id: estabelecimentos})
-            .populate('endereco')
-            .populate({
-                path: "contas",
-                model: "Conta",
+        response = await Estabelecimento.find({_id: estabelecimentos})
+        .populate('endereco')
+        .populate({
+            path: "contas",
+            model: "Conta",
+            populate: {
+                path: "listItems", 
+                model: "ListItem",
                 populate: {
-                    path: "listItems", 
-                    model: "ListItem",
-                    populate: {
-                        path: "id_item",
-                        model: "Item"
-                    },
-                    populate: {
-                        path: "id_lancamentoListItem",
-                        model: "LancamentoListItem"
-                    }
+                    path: "id_item",
+                    model: "Item"
+                },
+                populate: {
+                    path: "id_lancamentoListItem",
+                    model: "LancamentoListItem"
                 }
-            })
-            .populate({
-                path:"cardapio", 
-                model: "Cardapio",
-                populate: {path: "items", model: "Item"}
-            })
-        } else {
-            response = { Error: "Usuario não encontrado"}
-        }
+            }
+        })
+        .populate({
+            path:"cardapio", 
+            model: "Cardapio",
+            populate: {path: "items", model: "Item"}
+        })
         return res.json(response)
     },
     async index(req, res){
         let response = null,
             { id_estabelecimento } = req.headers
+            
         response = await Estabelecimento.findOne({_id: id_estabelecimento})
         .populate('endereco')
         .populate({

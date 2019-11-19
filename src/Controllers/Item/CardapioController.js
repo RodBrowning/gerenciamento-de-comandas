@@ -58,7 +58,6 @@ module.exports = {
             path:"items",
             model: "Item"
         })
-
         return res.json(response)
     },
     async show(req, res){
@@ -72,5 +71,4 @@ module.exports = {
         })
         return res.json(response)
     }
-
 }
