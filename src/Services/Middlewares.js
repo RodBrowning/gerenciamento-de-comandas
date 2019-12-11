@@ -1,4 +1,4 @@
-const { isAdministrador, isFuncionario, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoCardapioAtivo } = require('./VerificacoesDeSistema')
+const { isAdministrador, isFuncionario, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoCardapio } = require('./VerificacoesDeSistema')
 // const Cardapio = require('../Models/Cardapio')
 // const Estabelecimento = require('../Models/Estabelecimento')
 
@@ -51,13 +51,14 @@ module.exports = {
             return res.json({Error: "Conta não pertence a este estabelecimento"})
         }
     },
-    async isItemNoCardapioAtivo(req, res, next){
-        let { id_estabelecimento } = req.headers,
-            id_item = req.params[Object.keys(req.params)[0]],
+    async isItemNoCardapio(req, res, next){
+        let id_item = req.params[Object.keys(req.params)[0]],
+            {id_cardapio} = req.params,
             response = null,
             statusCode = null,
             itemEncontrado = false
-            itemEncontrado = await verificarItemNoCardapioAtivo(id_estabelecimento, id_item)
+        
+        itemEncontrado = await verificarItemNoCardapio(id_cardapio, id_item)
                         
         if(itemEncontrado){
             next()

@@ -7,7 +7,7 @@ const Cardapio = require('./Cardapio')
 
 const EstabelecimentoSchema = new mongoose.Schema({
     nome: String,
-    telefone: [Number],
+    telefone: {type: [Number], default: []},
     endereco: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Endereco'

@@ -5,7 +5,7 @@ module.exports = {
         let emailToken = jwt.sign({user: id_usuario},email,{expiresIn: "1d"}),
             url = `http://localhost:2000/validacaoDeUsuario/${email}/${emailToken}`,
             mailOptions = {
-                from: 'rodrigo.lojaonline@gmail.com',
+                from: 'rodrigo.lojaonline111@gmaill.com',
                 to: email,
                 subject: 'Confirm Email',
                 html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`

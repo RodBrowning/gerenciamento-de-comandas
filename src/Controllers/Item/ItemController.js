@@ -27,12 +27,11 @@ module.exports = {
     },
     async destroy(req, res){
         let response = null,
-            { id_item_remover } = req.params,
-            { id_estabelecimento } = req.headers,
+            { id_item_remover, id_cardapio } = req.params,
             statusCode = 200
+            cardapios = null
         
-        response = await Item.deleteOne({_id: id_item_remover})
-        estabelecimento = await Estabelecimento.findOne({_id:id_estabelecimento})
+        response = await Cardapio.findByIdAndUpdate({_id: id_cardapio}, {$pull: {items: id_item_remover}}, {new:true})
         return res.status(statusCode).json(response)
     },
     async update(req, res){

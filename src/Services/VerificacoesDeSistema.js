@@ -1,5 +1,5 @@
 const Estabelecimento = require('../Models/Estabelecimento')
-// const Cardapio = require('../Models/Cardapio')
+const Cardapio = require('../Models/Cardapio')
 // const Conta = require('../Models/Cardapio')
 const ADMINISTRADOR = 1
 
@@ -60,14 +60,13 @@ module.exports = {
 
         return ContaPertenceAoEstabelecimento
     },
-    async verificarItemNoCardapioAtivo(id_estabelecimento, id_item){
+    async verificarItemNoCardapio(id_cardapio, id_item){
         let itemEncontrado = false,
-            estabelecimento = null
+            cardapio = null
 
-        estabelecimento = await Estabelecimento.findOne({_id:id_estabelecimento})
-        .populate({path: 'cardapio', model: 'Cardapio', populate: {path: 'items', model: 'Item'}})
+        cardapio = await Cardapio.findOne({_id:id_cardapio})
         
-        estabelecimento.cardapio.items.find(item=>{
+        cardapio.items.find(item=>{
             if(item._id.equals(id_item)){
                 itemEncontrado = true
             }

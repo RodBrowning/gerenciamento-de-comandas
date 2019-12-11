@@ -2,11 +2,12 @@ const mongoose = require('mongoose')
 const ListItem = require('./ListItem')
 const ContaSchema = new mongoose.Schema({
     nome_cliente: String,
-    dt_criacao: Date,
-    dt_pagamento: Date || null,
-    valor_pago: Number || null,
-    pago: Boolean,
-    desconto: Boolean,
+    dt_criacao: {type: Date, default: new Date()},
+    dt_pagamento: {type: Date, default: null},
+    total_conta: {type: Number, default: 0},
+    valor_pago: {type: Number, default: 0},
+    pago: {type: Boolean, default: false},
+    desconto: {type: Boolean, default: false},
     listItems: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -15,15 +16,12 @@ const ContaSchema = new mongoose.Schema({
     ]
 })
 
-ContaSchema.post('findOneAndDelete', async contaRemovida => {
-    let itemsDaConta = contaRemovida.listItems,
-        ids_itemsDaConta = []
-    
+ContaSchema.post('findOneAndDelete', contaRemovida => {
+    let itemsDaConta = contaRemovida.listItems
     if(itemsDaConta.length > 0 ){
-        itemsDaConta.map(item => {
-            ids_itemsDaConta.push(item.item)
+        itemsDaConta.map(async item => {
+            await ListItem.findOneAndDelete({_id: item.item})
         })
-        await ListItem.deleteMany({_id: ids_itemsDaConta})
         // deletar lancamentoListItem
     }
     return

@@ -4,10 +4,23 @@ const Cardapio = require("../../Models/Cardapio")
 module.exports = {
     async store(req, res){
         let novoCardapio = { nome_cardapio, listItems, estabelecimentos } = req.body,
-            response = null
-
-        response = await Cardapio.create(novoCardapio)
-        return res.json(response)
+            { id_estabelecimento } = req.headers,
+            response = null,
+            statusCode = 200,
+            cardapios = null,
+            cardapioEncontrado = false
+        
+        cardapios = await Cardapio.find({estabelecimentos: id_estabelecimento})
+        cardapioEncontrado = cardapios.find(cardapio => cardapio.nome_cardapio === novoCardapio.nome_cardapio)
+        
+        if(cardapioEncontrado){
+            response = { Error: "O cardápio já existe" }
+            statusCode = 400
+        } else {
+            response = await Cardapio.create(novoCardapio)
+        }
+        
+        return res.status(statusCode).json(response)
     },
     async update(req, res){
         let cardapioAtualizar = { nome_cardapio, listItems, estabelecimentos } = req.body,
@@ -21,6 +34,7 @@ module.exports = {
         let { id_estabelecimento } = req.headers,
             { id_cardapio_remover } = req.params,
             response = null,
+            statusCode = 200,
             estabelecimento = null,
             cardapio = null,
             cardapioAtivo = false,
@@ -35,6 +49,7 @@ module.exports = {
 
         if(cardapioAtivo){
             response = {Error: "Não é possivel remover um cardapio ativo"}
+            statusCode = 400
         } else if(algumEstabelecimentoDependeDesseCardapio){
                 let indexDoEstabelecimento = cardapio.estabelecimentos.indexOf(id_estabelecimento),
                     novaListaDeEstabelecimentos =  null
@@ -47,7 +62,7 @@ module.exports = {
         }
     
 
-        return res.json(response)
+        return res.status(statusCode).json(response)
     },
     async index(req, res){
         let response = null,
@@ -69,6 +84,7 @@ module.exports = {
             path:"items",
             model:"Item"
         })
+        
         return res.json(response)
     }
 }
