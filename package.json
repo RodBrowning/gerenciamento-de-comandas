@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "nodemon src/server.js",
-    "test": "SET \"NODE_ENV=test\" && mocha test/api/Autenticacao/Autenticacao.test.js test/api/Usuario/Usuario.test.js test/api/Autenticacao/Bloqueio.test.js test/api/Itens/Itens.test.js test/api/Itens/Cardapio.test.js test/api/Contas/Conta.test.js --recursive --exit --colors --timeout=6000"
+    "test": "SET \"NODE_ENV=test\" && mocha test/api/index.test.js --recursive --exit --colors --timeout=6000"
   },
   "author": "",
   "license": "ISC",

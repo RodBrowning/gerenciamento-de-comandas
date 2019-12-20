@@ -47,8 +47,7 @@ module.exports = {
 
         // criar autenticacao
         novaAutenticacao.id_usuario = novoUsuario._id
-        
-
+        novaAutenticacao.dono = true
         novaAutenticacao = await Autenticacao.create(novaAutenticacao)
 
         let emailToken = enviarEmailDeConfirmacao(novoUsuario._id, novaAutenticacao.email)

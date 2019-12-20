@@ -13,6 +13,7 @@ module.exports = {
             pago,
             desconto
         } = req.body,
+            {id_estabelecimento} = req.headers,
             response = null,
             statusCode = 200
         let conta = await Conta.findOne({nome_cliente})
@@ -22,7 +23,7 @@ module.exports = {
             statusCode = 400
         } else {
             response = await Conta.create(novaConta)
-            estabelecimentoAtualizado = await Estabelecimento.findByIdAndUpdate({_id:req.headers.id_estabelecimento}, {$push:{contas: response._id}},{new:true})
+            estabelecimentoAtualizado = await Estabelecimento.findByIdAndUpdate({_id:id_estabelecimento}, {$push:{contas: response._id}},{new:true})
         }
         return res.status(statusCode).json(response)
     },
@@ -37,25 +38,40 @@ module.exports = {
     async update(req, res){
         let contaParaAtualizar = { nome_cliente, dt_pagamento, valor_pago, pago, desconto, listItems } = req.body,
             { id_conta_editar } = req.params,
-            response = null
+            conta = null,
+            response = null,
+            statusCode = 200
         
-        response = await Conta.findByIdAndUpdate({_id: id_conta_editar}, contaParaAtualizar, {new:true})
-        return res.json(response)
+        conta = await Conta.findOne({_id: id_conta_editar})
+        if (conta.pago === true) {
+            statusCode = 400
+            response = { Error: 'Está conta já foi fechada' }
+        } else {
+            conta.total_conta <= (contaParaAtualizar.valor_pago + conta.valor_pago) ? contaParaAtualizar.pago = true : contaParaAtualizar.pago = false
+            contaParaAtualizar.desconto === true ? contaParaAtualizar.pago = true : false
+            
+            response = await Conta.findByIdAndUpdate({_id: id_conta_editar}, contaParaAtualizar, {new:true})
+        }
+        return res.status(statusCode).json(response)
     },
     async show(req, res){
-        let response = null
-        response =  await Conta.find({})
+        let {id_estabelecimento} = req.headers,
+            response = null,
+            estabelecimento = null
+        
+        estabelecimento = await Estabelecimento.findOne({_id: id_estabelecimento})
+        response =  await Conta.find({_id: estabelecimento.contas})
         .populate({
             path: "listItems", 
             model: "ListItem",
-            populate: {
+            populate: [{
                 path: "id_item",
                 model: "Item"
             },
-            populate: {
-                path: "id_lancamentoListItem",
+            {
+                path: "ids_lancamentoListItem",
                 model: "LancamentoListItem"
-            }
+            }]
         })
         return res.json(response)
     },
@@ -72,20 +88,11 @@ module.exports = {
                 model: "Item"
             },
             {
-                path: "id_lancamentoListItem",
+                path: "ids_lancamentoListItem",
                 model: "LancamentoListItem"
             }]
         })
-        
-        // response.listItems.map(listItem=>{
-        //     let quantidadeTotal = Object.values(listItem.id_lancamentoListItem).reduce((t, {quantidade}) => t + quantidade, 0)
-        //     listItem.quantidadeTotal = quantidadeTotal
-        //     let subTotal = listItem.quantidadeTotal * listItem.id_item.preco
-        //     listItem.subTotal = subTotal
-        //     return listItem
-        // })
-        
-        
+
         return res.status(statusCode).json(response)
     }
 }

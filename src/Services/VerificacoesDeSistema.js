@@ -1,5 +1,6 @@
 const Estabelecimento = require('../Models/Estabelecimento')
 const Cardapio = require('../Models/Cardapio')
+const Usuario = require('../Models/Usuario')
 // const Conta = require('../Models/Cardapio')
 const ADMINISTRADOR = 1
 
@@ -27,6 +28,10 @@ module.exports = {
             }
         })
         return funcionarioDoEstabelecimento
+    },
+    async isDono(id_usuario){
+        let usuario = await Usuario.findById({_id: id_usuario}).populate("autenticacao")
+        return usuario.autenticacao.dono
     },
     async verificarEstabelecimentoNoModel(Model, id_estabelecimento, id_model){
         let EstabelecimentoPertenceAoModel = false,

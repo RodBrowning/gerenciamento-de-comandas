@@ -13,6 +13,7 @@ app.use(express.json())
 // JWT middlewares
 const bundledMiddlewares = [verificarExistenciaDeToken, verificarValidadeDoTokenFornecido,verificarSeUsuarioEstaLogado]
 
+
 app.use('/auth/',RotasAutenticacao)
 app.use('/auth/', bundledMiddlewares,RotasDeBloqueioDeUsuario)
 app.use('/auth/', bundledMiddlewares,RotasDeNivelDeAcesso)

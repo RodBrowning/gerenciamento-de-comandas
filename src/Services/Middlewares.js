@@ -1,4 +1,4 @@
-const { isAdministrador, isFuncionario, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoCardapio } = require('./VerificacoesDeSistema')
+const { isAdministrador, isFuncionario, isDono, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoCardapio } = require('./VerificacoesDeSistema')
 // const Cardapio = require('../Models/Cardapio')
 // const Estabelecimento = require('../Models/Estabelecimento')
 
@@ -23,6 +23,19 @@ module.exports = {
             .catch(err=>(false))
 
         if(funcionario){
+            next()
+        } else {
+            response = {Error:"Usuário não autorizado"}
+            return res.status(statusCode).json(response)
+        }
+    },
+    async isDonoMiddleware(req, res, next){
+        let response = null,
+            statusCode = 500,
+            dono = await isDono(req.headers.id_usuario)
+            .catch(err=>(false))
+            
+        if(dono){
             next()
         } else {
             response = {Error:"Usuário não autorizado"}

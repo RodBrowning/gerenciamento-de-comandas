@@ -11,14 +11,15 @@ module.exports = {
                 html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`
             },
             { Transporter } = require('./CredenciaisDeEmail')
-        
-        Transporter.sendMail(mailOptions,function(error, info){
-            if (error) {
-                console.log(error)
-            } else {
-                console.log('Email sent: ' + info.response)                
-            }
-        })
+        if(process.env.NODE_ENV !== 'test'){
+            Transporter.sendMail(mailOptions,function(error, info){
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('Email sent: ' + info.response)                
+                }
+            })
+        }
         return emailToken
     }
 }

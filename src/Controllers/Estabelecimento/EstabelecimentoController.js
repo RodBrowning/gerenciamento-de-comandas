@@ -46,7 +46,7 @@ module.exports = {
                     model: "Item"
                 },
                 populate: {
-                    path: "id_lancamentoListItem",
+                    path: "ids_lancamentoListItem",
                     model: "LancamentoListItem"
                 }
             }
@@ -75,7 +75,7 @@ module.exports = {
                     model: "Item"
                 },
                 populate: {
-                    path: "id_lancamentoListItem",
+                    path: "ids_lancamentoListItem",
                     model: "LancamentoListItem"
                 }
             }

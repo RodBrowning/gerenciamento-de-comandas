@@ -8,43 +8,48 @@ const { enviarEmailDeConfirmacao } = require('../../Services/EmailDeConfirmacao'
 module.exports = {
     async store (req, res){
         let response = null,
+            statusCode = 200,
             saltRounds = 10,
-            { email } = req.body
+            { email, role } = req.body,
             novoUsuario = { nome, dt_nascimento, telefones, estabelecimentos } = req.body,
-            usuario = await Autenticacao.findOne({email})
+            usuarioEncontrado = await Autenticacao.findOne({email})
+            
 
-        if(!usuario){
+        if(usuarioEncontrado){
+            response = { Error: "Usuario já existe"}
+            statusCode = 400
+        } else {
             let hashPassword = bcrypt.hashSync(req.body.password, saltRounds)
-            usuario = await Usuario.create(novoUsuario)
+            let usuarioCriado = await Usuario.create(novoUsuario)
 
-            novaAutenticacao = { 
-                id_usuario: usuario._id,
-                email: req.body.email,
+            let novaAutenticacaoBody = { 
+                id_usuario: usuarioCriado._id,
+                email,
                 password: hashPassword,
-                role: req.body.role
+                role
             }
-            autenticacao = await Autenticacao.create(novaAutenticacao)
-            estabelecimento = await Estabelecimento.findByIdAndUpdate({_id: req.headers.id_estabelecimento}, {$push: {usuarios: usuario._id}}, {new:true})
-            usuario = await Usuario.findByIdAndUpdate({_id: usuario._id},{$set:{autenticacao: autenticacao._id}},{new:true})
+            let novaAutenticacao = await Autenticacao.create(novaAutenticacaoBody)
+            
+            let estabelecimento = await Estabelecimento.findByIdAndUpdate({_id: req.headers.id_estabelecimento}, {$push: {usuarios: usuarioCriado._id}}, {new:true})
+            let usuario = await Usuario.findByIdAndUpdate({_id: usuarioCriado._id},{$set:{autenticacao: novaAutenticacao._id}},{new:true})
+            
+            let emailToken = enviarEmailDeConfirmacao(usuarioCriado._id, novaAutenticacao.email)
 
-            let emailToken = enviarEmailDeConfirmacao(usuario._id, autenticacao.email)
-            autenticacao = Object.assign({},autenticacao._doc,{emailToken})
+            let autenticacao = Object.assign({},novaAutenticacao._doc,{emailToken})
             
             if(process.env.NODE_ENV == 'test'){
                 response = {usuario,autenticacao,estabelecimento}
-                
             } else {
                 response = usuario
             }
-        } else {
-            response = { Error: "Usuario já existe"}
         }
         
-        return res.json(response)
+        return res.status(statusCode).json(response)
     },
     async destroy(req, res){
         let { id_usuario } = req.headers,
             { id_usuario_deletar } = req.params,
+            usuario = null,
             usuarioEstaAutorizado = false,
             response = null,
             statusCode = 200
@@ -53,6 +58,8 @@ module.exports = {
             usuarioEstaAutorizado = true;
         }
         if(usuarioEstaAutorizado){
+            usuario = await Usuario.findById({_id: id_usuario_deletar})
+            await Estabelecimento.findOneAndUpdate({_id: usuario.estabelecimentos}, {$pull: {usuarios: id_usuario_deletar}})
             response = await Usuario.findByIdAndDelete({_id: id_usuario_deletar})
         } else {
             response = {Error: "Operação não autorizada"}

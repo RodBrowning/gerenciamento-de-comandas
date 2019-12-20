@@ -24,11 +24,11 @@ module.exports = {
     item = await Item.findById({ _id: id_item }, { preco: 1 });
     novoListItem = {
       id_item,
-      id_lancamentoListItem: [lancamentoListItem._id],
+      ids_lancamentoListItem: [lancamentoListItem._id],
       quantidadeTotal: quantidade,
       subTotal: quantidade * item.preco
     };
-    
+
     response = await ListItem.create(novoListItem);
     
     conta = await Conta.findByIdAndUpdate(
@@ -66,11 +66,11 @@ module.exports = {
     });
     updatedListItem = await ListItem.findOneAndUpdate(
       { _id: id_listItem_editar },
-      { $addToSet: { id_lancamentoListItem: lancamentoListItem._id } },
+      { $addToSet: { ids_lancamentoListItem: lancamentoListItem._id } },
       { new: true }
     );
     [totalItemsLancados] = await LancamentoListItem.aggregate([
-      { $match: { _id: { $in: updatedListItem.id_lancamentoListItem } } },
+      { $match: { _id: { $in: updatedListItem.ids_lancamentoListItem } } },
       {
         $group: {
           _id: updatedListItem._id,
@@ -103,11 +103,25 @@ module.exports = {
     return res.status(statusCode).json(response);
   },
   async destroy(req, res) {
-    let response = null,
-      { id_listitem_remover } = req.params;
+    let { id_listitem_remover } = req.params,
+        response = null,
+        conta = null,
+        statusCode = 200
 
-    response = await ListItem.findByIdAndDelete({ _id: id_listitem_remover });
+    response = await ListItem.findOneAndDelete({ _id: id_listitem_remover });
+    await LancamentoListItem.deleteMany({_id: response.ids_lancamentoListItem})
 
-    return res.json(response);
+    conta = await Conta.findOneAndUpdate({ listItems: id_listitem_remover }, {$pull: {listItems: id_listitem_remover}}, {new:true});
+    [totalConta] = await ListItem.aggregate([
+      { $match: { _id: { $in: conta.listItems } } },
+      { $group: { _id: conta._id, total_conta: { $sum: "$subTotal" } } }
+    ]);
+    await Conta.findByIdAndUpdate(
+      { _id: conta._id },
+      { $set: { total_conta: totalConta.total_conta } },
+      { new: true }
+    )
+    
+    return res.status(statusCode).json(response);
   }
 };

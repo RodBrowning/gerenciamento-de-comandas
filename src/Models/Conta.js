@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const ListItem = require('./ListItem')
+
 const ContaSchema = new mongoose.Schema({
     nome_cliente: String,
     dt_criacao: {type: Date, default: new Date()},
