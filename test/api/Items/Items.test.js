@@ -22,23 +22,43 @@ module.exports = function Items(){
                 let items = [
                     {
                         nome_item: "Itaipava lata 350ml",
-                        preco: 2.50
+                        preco: 2.50,
+                        tipo: "bebida",
+                        com_preparo: false,
+                        departamento: "bar",
+                        ex_dicas: 'ex. "Copos limpos"'
                     },
                     {
                         nome_item: "Itaipava litrão",
-                        preco: 10
+                        preco: 10,
+                        tipo: "bebida",
+                        com_preparo: false,
+                        departamento: "bar",
+                        ex_dicas: 'ex. "Traz a camisinha"'
                     },
                     {
                         nome_item: "Porção de batata",
-                        preco: 5
+                        preco: 5,
+                        tipo: "alimento",
+                        com_preparo: false,
+                        departamento: "cozinha",
+                        ex_dicas: 'ex. "Bem fritas"'
                     },
                     {
                         nome_item: "Dose de vodka",
-                        preco: 6
+                        preco: 6,
+                        tipo: "bebida",
+                        com_preparo: false,
+                        departamento: "bar",
+                        ex_dicas: 'ex. "Com gelo"'
                     },
                     {
                         nome_item: "Dose de vodka pequena",
-                        preco: 3
+                        preco: 3,
+                        tipo: "bebida",
+                        com_preparo: false,
+                        departamento: "bar",
+                        ex_dicas: 'ex. "Com uma banda de limão separado"'
                     }
                 ]
                 let novosItemsPromises = []
@@ -57,6 +77,10 @@ module.exports = function Items(){
                             expect(res.statusCode).to.equal(200)
                             expect(res.body).to.have.own.property('nome_item')
                             expect(res.body).to.have.own.property('preco')
+                            expect(res.body).to.have.own.property('tipo')
+                            expect(res.body).to.have.own.property('com_preparo')
+                            expect(res.body).to.have.own.property('departamento')
+                            expect(res.body).to.have.own.property('ex_dicas')
                             expect(res.body.nome_item).to.equal(item.nome_item)
                             expect(res.body.preco).to.equal(item.preco)
                             return resolve()
@@ -105,7 +129,10 @@ module.exports = function Items(){
                 let item =
                     {
                         nome_item: "Skol lata 350ml",
-                        preco: 3
+                        preco: 3,
+                        tipo: "bebida",
+                        com_preparo: false,
+                        departamento: "bar"
                     }
                 request(app)
                 .post('/novoItem')
@@ -127,7 +154,11 @@ module.exports = function Items(){
                 let item =
                     {
                         nome_item: "Itaipava lata 350ml",
-                        preco: 2.50
+                        preco: 2.50,
+                        tipo: "bebida",
+                        com_preparo: false,
+                        departamento: "bar",
+                        ex_dicas: 'ex. "Copos limpos"'
                     }
                     request(app)
                     .post('/novoItem')
