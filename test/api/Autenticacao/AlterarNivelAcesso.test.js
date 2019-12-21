@@ -85,7 +85,7 @@ module.exports = function AlterarNivelAcesso(){
                 })
                 .catch(err=>done(err))
             })
-            it('Deve retornar erro se usuario não for proprietário',(done)=>{
+            it('Deve retornar erro ao assinar plano para usuario não for proprietário',(done)=>{
                 let dadosDaAssinatura = {
                     pacote: 'premium', 
                     pacoteAtivo: 'premium',
@@ -99,14 +99,34 @@ module.exports = function AlterarNivelAcesso(){
                 .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)
                 .send(dadosDaAssinatura)
                 .then((res)=>{
-                        expect(res.body).to.have.own.property("Error")
-                        expect(res.body.Error).to.equal("Usuário não autorizado")
-                        expect(res.statusCode).to.equal(500)
-                        done()
-                    }
-                )
+                    expect(res.body).to.have.own.property("Error")
+                    expect(res.body.Error).to.equal("Usuário não autorizado")
+                    expect(res.statusCode).to.equal(500)
+                    done()
+                })
                 .catch(err=>done(err))
             })
+            it('Deve retornar a lista de TODOS os usuarios',(done)=>{
+                request(app)
+                .get('/buscarUsuarios')
+                .set('id_usuario', registroCriado.id_usuario)
+                .set('id_estabelecimento',registroCriado.id_estabelecimento)
+                .set('autorizacao',registroCriado.tokenDeAutenticacao)
+                .then((res)=>{
+                    dadosCompartilhados.usuariosCriados = {...res.body}
+                    expect(res.statusCode).to.equal(200)
+                    expect(res.body).to.be.an('array')
+                    expect(res.body).to.have.lengthOf(3)
+                    done()
+                    
+                })
+                .catch(err=>done(err))
+            })
+            
+           
         })
     })
 }
+
+/// usuarios que não pagaram mas dentro de 30 dias
+/// usuarios que não pagaram mas mais de 30 dias

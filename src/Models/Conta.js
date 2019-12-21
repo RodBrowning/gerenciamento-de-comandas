@@ -19,11 +19,12 @@ const ContaSchema = new mongoose.Schema({
 
 ContaSchema.post('findOneAndDelete', contaRemovida => {
     let itemsDaConta = contaRemovida.listItems
+    console.log("itemsDaConta 1",itemsDaConta);
+    
     if(itemsDaConta.length > 0 ){
-        itemsDaConta.map(async item => {
-            await ListItem.findOneAndDelete({_id: item.item})
+        itemsDaConta.map(async id_listItem => {
+            await ListItem.findOneAndDelete({_id: id_listItem})
         })
-        // deletar lancamentoListItem
     }
     return
 })

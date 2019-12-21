@@ -96,7 +96,6 @@ module.exports = function Usuario(){
                 })
                 .catch(err=>err)
             })
-          
             it('Um usuario criado deve ser VALIDADO com sucesso',(done)=>{
                 usuarioCriado = dadosCompartilhados.usuarioCriado
                 let {email, emailToken} = usuarioCriado.autenticacao

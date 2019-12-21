@@ -1,12 +1,13 @@
 // index, show, store, update, destroy.
 const ListItem = require("../../Models/ListItem");
 const Item = require("../../Models/Item");
-const LancamentoListItem = require("../../Models/lancamentoListItem");
+const LancamentoListItem = require("../../Models/LancamentoListItem");
 const Conta = require("../../Models/Conta");
+const Usuario = require("../../Models/Usuario");
 
 module.exports = {
   async store(req, res) {
-    let { quantidade, id_item } = req.body,
+    let { quantidade, id_item, status, observacao_do_cliente } = req.body,
       { id_usuario } = req.headers,
       { id_conta } = req.params,
       lancamentoListItem = null,
@@ -19,8 +20,13 @@ module.exports = {
 
     lancamentoListItem = await LancamentoListItem.create({
       quantidade,
-      id_usuario
+      id_usuario,
+      status,
+      observacao_do_cliente
     });
+
+    await Usuario.findByIdAndUpdate({_id: id_usuario},{$push:{ids_lancamento_list_item: lancamentoListItem._id}})
+
     item = await Item.findById({ _id: id_item }, { preco: 1 });
     novoListItem = {
       id_item,
@@ -49,7 +55,7 @@ module.exports = {
     return res.status(statusCode).json(response);
   },
   async update(req, res) {
-    let { quantidade, id_item } = req.body,
+    let { quantidade, id_item, status, observacao_do_cliente } = req.body,
       { id_usuario } = req.headers,
       { id_listItem_editar, id_conta_editar } = req.params,
       item = null,
@@ -62,8 +68,12 @@ module.exports = {
 
     lancamentoListItem = await LancamentoListItem.create({
       quantidade,
-      id_usuario
+      id_usuario,
+      status,
+      observacao_do_cliente
     });
+    await Usuario.findByIdAndUpdate({_id: id_usuario},{$push:{ids_lancamento_list_item: lancamentoListItem._id}})
+
     updatedListItem = await ListItem.findOneAndUpdate(
       { _id: id_listItem_editar },
       { $addToSet: { ids_lancamentoListItem: lancamentoListItem._id } },
@@ -104,13 +114,13 @@ module.exports = {
   },
   async destroy(req, res) {
     let { id_listitem_remover } = req.params,
+        { id_usuario } = req.headers,
         response = null,
         conta = null,
         statusCode = 200
 
     response = await ListItem.findOneAndDelete({ _id: id_listitem_remover });
-    await LancamentoListItem.deleteMany({_id: response.ids_lancamentoListItem})
-
+    
     conta = await Conta.findOneAndUpdate({ listItems: id_listitem_remover }, {$pull: {listItems: id_listitem_remover}}, {new:true});
     [totalConta] = await ListItem.aggregate([
       { $match: { _id: { $in: conta.listItems } } },

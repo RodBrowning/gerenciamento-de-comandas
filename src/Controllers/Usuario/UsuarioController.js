@@ -68,7 +68,7 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let usuarioParaAtualizar = { nome, dt_nascimento, telefones, estabelecimentos } = req.body,
+        let usuarioParaAtualizar = { nome, dt_nascimento, telefones, estabelecimentos, departamento } = req.body,
             dadosDeAutenticacaoParaAtualizar = { email, password } = req.body,
             { id_usuario_editar } = req.params,
             response = null,

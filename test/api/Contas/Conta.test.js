@@ -140,7 +140,8 @@ module.exports = function Conta(){
             it('Deve incluir 6 unidades em um ListItem',(done)=>{
                 let novoListItem = {
                         id_item: dadosCompartilhados.cardapio.items[0]._id,
-                        quantidade: 6
+                        quantidade: 6,
+					    observacao_do_cliente: "Traga um copo limpo"
                     }
                 request(app)
                 .put(`/editarListItem/${dadosCompartilhados.contas[1].listItems[0]}/${dadosCompartilhados.contas[1]._id}`)
@@ -194,7 +195,7 @@ module.exports = function Conta(){
                     .set('autorizacao', registroCriado.tokenDeAutenticacao)
                     .then((res)=>{
                         let body = res.body
-                        // console.log("res.body",res.body);
+                        console.log("res.removerListItem",res.body);
                         
                         done()
                     })

@@ -98,17 +98,17 @@ module.exports = {
             { email } = req.query,
             response = null,
             statusCode = 200,
-            usuario = await Autenticacao.findOne({ email })
+            autenticacaoDoUsuario = await Autenticacao.findOne({ email }).populate("id_usuario")
         
-        if(usuario){
-            if(usuario.logado || usuario.bloqueado || !usuario.validado){
+        if(autenticacaoDoUsuario){
+            if(autenticacaoDoUsuario.logado || autenticacaoDoUsuario.bloqueado || !autenticacaoDoUsuario.validado){
                 response = {Error: "Ocorreu um erro, entre em contato com seu administrador"}
                 statusCode = 403
             } else {
-                let passwordEstaCorreto = await bcrypt.compare(password, usuario.password)
+                let passwordEstaCorreto = await bcrypt.compare(password, autenticacaoDoUsuario.password)
                 if(passwordEstaCorreto){
-                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: usuario._id},{$set: { logado: true}},{new:true}).select("-password").populate("id_usuario")
-                        privateKey = fs.readFileSync(path.resolve(__dirname,"..","..","public.pem"))
+                    let autenticacao = await Autenticacao.findByIdAndUpdate({_id: autenticacaoDoUsuario._id},{$set: { logado: true}},{new:true}).select("-password").populate("id_usuario"),
+                        privateKey = fs.readFileSync(path.resolve(__dirname,"..","..","public.pem")),
                         token = jwt.sign({autenticacao}, privateKey, {expiresIn: "1 days"}, {algorithm: 'RS256'})
                     if(process.env.NODE_ENV === 'test'){
                         response = {token, autenticacao}

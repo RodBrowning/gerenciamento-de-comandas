@@ -45,7 +45,7 @@ module.exports = {
         idsAutenticacao = [...new Set(idsAutenticacao)]
         await Autenticacao.updateMany({_id: idsAutenticacao}, dadosDaAssinatura)
         
-        response = await Autenticacao.findOneById({_id: usuario_alterar.autenticacao._id}).populate('autenticacao')
+        response = await Autenticacao.findById({_id: usuario_alterar.autenticacao._id})
         
         return res.status(statusCode).json(response)
     }
