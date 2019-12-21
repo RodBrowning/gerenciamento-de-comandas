@@ -3,6 +3,7 @@ const ListItem = require('./ListItem')
 
 const ContaSchema = new mongoose.Schema({
     nome_cliente: String,
+    numero_comanda: {type: Number, default: null},
     dt_criacao: {type: Date, default: new Date()},
     dt_pagamento: {type: Date, default: null},
     total_conta: {type: Number, default: 0},
@@ -14,13 +15,24 @@ const ContaSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'ListItem'
         }
-    ]
+    ],
+    id_usuario_checkin: 
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            default: null
+        },
+    id_usuario_checkout: 
+        [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            default: null
+        }],
+    observacao_do_cliente: {type: [String], default: null}
 })
 
 ContaSchema.post('findOneAndDelete', contaRemovida => {
     let itemsDaConta = contaRemovida.listItems
-    console.log("itemsDaConta 1",itemsDaConta);
-    
     if(itemsDaConta.length > 0 ){
         itemsDaConta.map(async id_listItem => {
             await ListItem.findOneAndDelete({_id: id_listItem})

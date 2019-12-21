@@ -6,17 +6,15 @@ module.exports = {
     async store(req, res){
         let novaConta = {
             nome_cliente,
+            numero_comanda,
             dt_criacao,
-            dt_pagamento,
             listItems,
-            valor_pago,
-            pago,
-            desconto
+            id_usuario_checkin
         } = req.body,
             {id_estabelecimento} = req.headers,
             response = null,
             statusCode = 200
-        let conta = await Conta.findOne({nome_cliente})
+        let conta = await Conta.findOne({nome_cliente, numero_comanda})
         
         if(conta){
             response  = { Error: "Conta já existe" }
@@ -36,7 +34,19 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let contaParaAtualizar = { nome_cliente, dt_pagamento, valor_pago, pago, desconto, listItems } = req.body,
+        let contaParaAtualizar = { 
+                nome_cliente,
+                numero_comanda,
+                dt_criacao,
+                dt_pagamento,
+                valor_pago,
+                pago,
+                desconto,
+                listItems,
+                id_usuario_checkin,
+                id_usuario_checkout,
+                observacao_do_cliente
+            } = req.body,
             { id_conta_editar } = req.params,
             conta = null,
             response = null,

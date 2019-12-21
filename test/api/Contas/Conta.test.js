@@ -22,19 +22,24 @@ module.exports = function Conta(){
                 dadosCompartilhados.contas = []
                 let novasContas = [
                     {
-                        nome_cliente: "Rodrigo Moura da Silva"
+                        nome_cliente: "Rodrigo Moura da Silva",
+                        id_usuario_checkin: registroCriado.id_usuario
                     },
                     {
-                        nome_cliente: "Piria Moura da Silva"
+                        nome_cliente: "Piria Moura da Silva",
+                        id_usuario_checkin: registroCriado.id_usuario
                     },
                     {
-                        nome_cliente: "Rafael Moura da Silva"
+                        nome_cliente: "Rafael Moura da Silva",
+                        id_usuario_checkin: registroCriado.id_usuario
                     },
                     {
-                        nome_cliente: "Nina Moura da Silva"
+                        nome_cliente: "Nina Moura da Silva",
+                        id_usuario_checkin: registroCriado.id_usuario
                     },
                     {
-                        nome_cliente: "Frafra Moura da Silva"
+                        nome_cliente: "Frafra Moura da Silva",
+                        id_usuario_checkin: registroCriado.id_usuario
                     },
                 ]
                 let novasContasPromises = []
@@ -52,13 +57,17 @@ module.exports = function Conta(){
                             let body = res.body
                             dadosCompartilhados.contas.push(body)
                             expect(res.statusCode).to.equal(200)
+                            expect(body).to.have.own.property("numero_comanda")
                             expect(body).to.have.own.property("dt_criacao")
+                            expect(body).to.have.own.property("observacao_do_cliente")
+                            expect(body).to.have.own.property("id_usuario_checkin")
                             expect(body).to.have.own.property("pago")
                             expect(body).to.have.own.property("desconto")
                             expect(body).to.have.own.property("listItems")
                             expect(body).to.have.own.property("_id")
                             expect(body).to.have.own.property("nome_cliente")
                             expect(body.nome_cliente).to.equal(novaConta.nome_cliente)
+                            expect(body.id_usuario_checkin).to.equal(novaConta.id_usuario_checkin)
                             return resolve()
                         })
                         .catch(err=>reject(done(err)))
@@ -74,7 +83,8 @@ module.exports = function Conta(){
             })
             it('Deve retornar erro ao criar uma conta que já existe',(done)=>{
                 let novaConta = {
-                    nome_cliente: "Rodrigo Moura da Silva"
+                    nome_cliente: "Rodrigo Moura da Silva",
+                    id_usuario_checkin: registroCriado.id_usuario
                 }
                 request(app)
                 .post('/novaConta')
@@ -298,6 +308,7 @@ module.exports = function Conta(){
                 let dadosDePagamento = {
                     dt_pagamento: Date(),
                     valor_pago: dadosCompartilhados.contas[0].total_conta,
+                    id_usuario_checkout: registroCriado.id_usuario
                 }
                 request(app)
                     .put(`/editarConta/${id_conta_editar}`)
@@ -331,7 +342,8 @@ module.exports = function Conta(){
                 let dadosDePagamento = {
                     dt_pagamento: Date(),
                     valor_pago: dadosCompartilhados.contas[1].total_conta - 10,
-                    desconto: true
+                    desconto: true,
+                    id_usuario_checkout: registroCriado.id_usuario
                 }
                 request(app)
                     .put(`/editarConta/${id_conta_editar}`)
@@ -365,7 +377,8 @@ module.exports = function Conta(){
                 let dadosDePagamento = {
                     dt_pagamento: Date(),
                     valor_pago: 3,
-                    pago: false
+                    pago: false,
+                    id_usuario_checkout: registroCriado.id_usuario
                 }
                 request(app)
                     .put(`/editarConta/${id_conta_editar}`)
