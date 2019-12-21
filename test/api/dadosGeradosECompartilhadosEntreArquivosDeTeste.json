@@ -33,7 +33,7 @@
 		"pacote": "pro",
 		"pacoteAtivo": "pro",
 		"assinaturaAtiva": true,
-		"dt_ultimo_pagamento": "2019-12-21T03:22:13.716Z",
+		"dt_ultimo_pagamento": "2019-12-21T03:36:57.347Z",
 		"numero_desativacoes": 0,
 		"dt_ultima_desativacao": null,
 		"dias_tolerancia_premium": 30,
@@ -42,15 +42,15 @@
 		"bloqueado": false,
 		"logado": false,
 		"role": 1,
-		"dt_criacao": "2019-12-21T03:22:08.985Z",
-		"_id": "5dfd8fe238a30a3280869f44",
+		"dt_criacao": "2019-12-21T03:36:52.649Z",
+		"_id": "5dfd935556c804383ced4cd1",
 		"email": "d90121@urhen.com",
-		"password": "$2b$10$R/GGN5ctOZ.zxrqAqWeATeP2opJc8jP6L0IB4xBfvODa7ZQ1WWRB6",
-		"id_usuario": "5dfd8fe238a30a3280869f42",
+		"password": "$2b$10$XrC/UGEKRKDudOcOjLlNKeINwcBjfqkD4trQckfIHSR562lslmcD6",
+		"id_usuario": "5dfd935556c804383ced4ccf",
 		"__v": 0,
-		"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRmZDhmZTIzOGEzMGEzMjgwODY5ZjQyIiwiaWF0IjoxNTc2ODk4NTMwLCJleHAiOjE1NzY5ODQ5MzB9.SEVCCKqt9KeAzEMPHXyTDoQCgPKDB_Dp0LQnGtyTWc0",
-		"id_estabelecimento": "5dfd8fe238a30a3280869f41",
-		"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsicGFjb3RlIjoiZnJlZSIsInBhY290ZUF0aXZvIjoiZnJlZSIsImFzc2luYXR1cmFBdGl2YSI6ZmFsc2UsImR0X3VsdGltb19wYWdhbWVudG8iOm51bGwsIm51bWVyb19kZXNhdGl2YWNvZXMiOjAsImR0X3VsdGltYV9kZXNhdGl2YWNhbyI6bnVsbCwiZGlhc190b2xlcmFuY2lhX3ByZW1pdW0iOjMwLCJkb25vIjp0cnVlLCJ2YWxpZGFkbyI6dHJ1ZSwiYmxvcXVlYWRvIjpmYWxzZSwibG9nYWRvIjp0cnVlLCJyb2xlIjoxLCJkdF9jcmlhY2FvIjoiMjAxOS0xMi0yMVQwMzoyMjowOC45ODVaIiwiX2lkIjoiNWRmZDhmZTIzOGEzMGEzMjgwODY5ZjQ0IiwiZW1haWwiOiJkOTAxMjFAdXJoZW4uY29tIiwiaWRfdXN1YXJpbyI6eyJ0ZWxlZm9uZXMiOls2NjY2NjY2Nl0sImRlcGFydGFtZW50byI6WyJwcmFjYSJdLCJpZHNfbGFuY2FtZW50b19saXN0X2l0ZW0iOltdLCJlc3RhYmVsZWNpbWVudG9zIjpbIjVkZmQ4ZmUyMzhhMzBhMzI4MDg2OWY0MSJdLCJfaWQiOiI1ZGZkOGZlMjM4YTMwYTMyODA4NjlmNDIiLCJub21lIjoiUGlyaXMgUGlyaXMgZGEgU2lsdmEiLCJkdF9uYXNjaW1lbnRvIjoiMTk4NS0wMi0xMlQwMzowMDowMC4wMDBaIiwiX192IjowLCJhdXRlbnRpY2FjYW8iOiI1ZGZkOGZlMjM4YTMwYTMyODA4NjlmNDQifSwiX192IjowfSwiaWF0IjoxNTc2ODk4NTMwLCJleHAiOjE1NzY5ODQ5MzB9.rhgqSFZr8KlZKhSHJ1crL6L16lp2iXhHl63A-ACbPTQ"
+		"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRmZDkzNTU1NmM4MDQzODNjZWQ0Y2NmIiwiaWF0IjoxNTc2ODk5NDEzLCJleHAiOjE1NzY5ODU4MTN9.Slm8Hu0CD7Eo6IINO5pDBPR89KTXxl2Vdq30tUdke4c",
+		"id_estabelecimento": "5dfd935556c804383ced4cce",
+		"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsicGFjb3RlIjoiZnJlZSIsInBhY290ZUF0aXZvIjoiZnJlZSIsImFzc2luYXR1cmFBdGl2YSI6ZmFsc2UsImR0X3VsdGltb19wYWdhbWVudG8iOm51bGwsIm51bWVyb19kZXNhdGl2YWNvZXMiOjAsImR0X3VsdGltYV9kZXNhdGl2YWNhbyI6bnVsbCwiZGlhc190b2xlcmFuY2lhX3ByZW1pdW0iOjMwLCJkb25vIjp0cnVlLCJ2YWxpZGFkbyI6dHJ1ZSwiYmxvcXVlYWRvIjpmYWxzZSwibG9nYWRvIjp0cnVlLCJyb2xlIjoxLCJkdF9jcmlhY2FvIjoiMjAxOS0xMi0yMVQwMzozNjo1Mi42NDlaIiwiX2lkIjoiNWRmZDkzNTU1NmM4MDQzODNjZWQ0Y2QxIiwiZW1haWwiOiJkOTAxMjFAdXJoZW4uY29tIiwiaWRfdXN1YXJpbyI6eyJ0ZWxlZm9uZXMiOls2NjY2NjY2Nl0sImRlcGFydGFtZW50byI6WyJwcmFjYSJdLCJpZHNfbGFuY2FtZW50b19saXN0X2l0ZW0iOltdLCJlc3RhYmVsZWNpbWVudG9zIjpbIjVkZmQ5MzU1NTZjODA0MzgzY2VkNGNjZSJdLCJfaWQiOiI1ZGZkOTM1NTU2YzgwNDM4M2NlZDRjY2YiLCJub21lIjoiUGlyaXMgUGlyaXMgZGEgU2lsdmEiLCJkdF9uYXNjaW1lbnRvIjoiMTk4NS0wMi0xMlQwMzowMDowMC4wMDBaIiwiX192IjowLCJhdXRlbnRpY2FjYW8iOiI1ZGZkOTM1NTU2YzgwNDM4M2NlZDRjZDEifSwiX192IjowfSwiaWF0IjoxNTc2ODk5NDE0LCJleHAiOjE1NzY5ODU4MTR9.0yKBxDs0UPQppMz7gjh0ZrZm-Tf2ETbKZKVts5JE_KA"
 	},
 	"usuarioCriado": {
 		"usuario": {
@@ -62,13 +62,13 @@
 			],
 			"ids_lancamento_list_item": [],
 			"estabelecimentos": [
-				"5dfd8fe238a30a3280869f41"
+				"5dfd935556c804383ced4cce"
 			],
-			"_id": "5dfd8fe238a30a3280869f45",
+			"_id": "5dfd935656c804383ced4cd2",
 			"nome": "Rodrigo",
 			"dt_nascimento": "1985-02-12T03:00:00.000Z",
 			"__v": 0,
-			"autenticacao": "5dfd8fe338a30a3280869f47"
+			"autenticacao": "5dfd935656c804383ced4cd4"
 		},
 		"autenticacao": {
 			"pacote": "free",
@@ -83,14 +83,14 @@
 			"bloqueado": false,
 			"logado": true,
 			"role": 2,
-			"dt_criacao": "2019-12-21T03:22:08.985Z",
-			"_id": "5dfd8fe338a30a3280869f47",
-			"id_usuario": "5dfd8fe238a30a3280869f45",
+			"dt_criacao": "2019-12-21T03:36:52.649Z",
+			"_id": "5dfd935656c804383ced4cd4",
+			"id_usuario": "5dfd935656c804383ced4cd2",
 			"email": "rodrigo@teste.com",
-			"password": "$2b$10$2oz/wBauiBhCG2d4DZFUqOW/QArnpHlNaG11Wu6eW8PZRuHWOl0Xy",
+			"password": "$2b$10$rohOIG5iVIe6UMPOm0B8Aez3BC.HXgUOpg6wwgoPCwgFL.R55grJa",
 			"__v": 0,
-			"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRmZDhmZTIzOGEzMGEzMjgwODY5ZjQ1IiwiaWF0IjoxNTc2ODk4NTMxLCJleHAiOjE1NzY5ODQ5MzF9.EiDrXLWjkkiUkiXaGnEupJ9BNvjiSrFir2QKlsw9vK0",
-			"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsicGFjb3RlIjoiZnJlZSIsInBhY290ZUF0aXZvIjoiZnJlZSIsImFzc2luYXR1cmFBdGl2YSI6ZmFsc2UsImR0X3VsdGltb19wYWdhbWVudG8iOm51bGwsIm51bWVyb19kZXNhdGl2YWNvZXMiOjAsImR0X3VsdGltYV9kZXNhdGl2YWNhbyI6bnVsbCwiZGlhc190b2xlcmFuY2lhX3ByZW1pdW0iOjMwLCJkb25vIjpmYWxzZSwidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MiwiZHRfY3JpYWNhbyI6IjIwMTktMTItMjFUMDM6MjI6MDguOTg1WiIsIl9pZCI6IjVkZmQ4ZmUzMzhhMzBhMzI4MDg2OWY0NyIsImlkX3VzdWFyaW8iOnsidGVsZWZvbmVzIjpbMTUyNTYzNV0sImRlcGFydGFtZW50byI6WyJwcmFjYSJdLCJpZHNfbGFuY2FtZW50b19saXN0X2l0ZW0iOltdLCJlc3RhYmVsZWNpbWVudG9zIjpbIjVkZmQ4ZmUyMzhhMzBhMzI4MDg2OWY0MSJdLCJfaWQiOiI1ZGZkOGZlMjM4YTMwYTMyODA4NjlmNDUiLCJub21lIjoiUm9kcmlnbyIsImR0X25hc2NpbWVudG8iOiIxOTg1LTAyLTEyVDAzOjAwOjAwLjAwMFoiLCJfX3YiOjAsImF1dGVudGljYWNhbyI6IjVkZmQ4ZmUzMzhhMzBhMzI4MDg2OWY0NyJ9LCJlbWFpbCI6InJvZHJpZ29AdGVzdGUuY29tIiwiX192IjowfSwiaWF0IjoxNTc2ODk4NTMxLCJleHAiOjE1NzY5ODQ5MzF9.ueEQZzlh7Jic7zquAHCDJBLM9QWslqOZ_XnWlcjbilk"
+			"emailToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWRmZDkzNTY1NmM4MDQzODNjZWQ0Y2QyIiwiaWF0IjoxNTc2ODk5NDE0LCJleHAiOjE1NzY5ODU4MTR9.XOMhwyqW6_ie-qjWzYeQ8vU1V-ia7_HC5rZQPIdjuPs",
+			"tokenDeAutenticacao": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRlbnRpY2FjYW8iOnsicGFjb3RlIjoiZnJlZSIsInBhY290ZUF0aXZvIjoiZnJlZSIsImFzc2luYXR1cmFBdGl2YSI6ZmFsc2UsImR0X3VsdGltb19wYWdhbWVudG8iOm51bGwsIm51bWVyb19kZXNhdGl2YWNvZXMiOjAsImR0X3VsdGltYV9kZXNhdGl2YWNhbyI6bnVsbCwiZGlhc190b2xlcmFuY2lhX3ByZW1pdW0iOjMwLCJkb25vIjpmYWxzZSwidmFsaWRhZG8iOnRydWUsImJsb3F1ZWFkbyI6ZmFsc2UsImxvZ2FkbyI6dHJ1ZSwicm9sZSI6MiwiZHRfY3JpYWNhbyI6IjIwMTktMTItMjFUMDM6MzY6NTIuNjQ5WiIsIl9pZCI6IjVkZmQ5MzU2NTZjODA0MzgzY2VkNGNkNCIsImlkX3VzdWFyaW8iOnsidGVsZWZvbmVzIjpbMTUyNTYzNV0sImRlcGFydGFtZW50byI6WyJwcmFjYSJdLCJpZHNfbGFuY2FtZW50b19saXN0X2l0ZW0iOltdLCJlc3RhYmVsZWNpbWVudG9zIjpbIjVkZmQ5MzU1NTZjODA0MzgzY2VkNGNjZSJdLCJfaWQiOiI1ZGZkOTM1NjU2YzgwNDM4M2NlZDRjZDIiLCJub21lIjoiUm9kcmlnbyIsImR0X25hc2NpbWVudG8iOiIxOTg1LTAyLTEyVDAzOjAwOjAwLjAwMFoiLCJfX3YiOjAsImF1dGVudGljYWNhbyI6IjVkZmQ5MzU2NTZjODA0MzgzY2VkNGNkNCJ9LCJlbWFpbCI6InJvZHJpZ29AdGVzdGUuY29tIiwiX192IjowfSwiaWF0IjoxNTc2ODk5NDE0LCJleHAiOjE1NzY5ODU4MTR9.MSbmyuv_nXf-VGZanWGZIUGwd9lht34E9jhv5mtR7DQ"
 		},
 		"estabelecimento": {
 			"telefone": [
@@ -98,14 +98,14 @@
 			],
 			"contas": [],
 			"usuarios": [
-				"5dfd8fe238a30a3280869f42",
-				"5dfd8fe238a30a3280869f45"
+				"5dfd935556c804383ced4ccf",
+				"5dfd935656c804383ced4cd2"
 			],
-			"_id": "5dfd8fe238a30a3280869f41",
+			"_id": "5dfd935556c804383ced4cce",
 			"nome": "FestFestFesta",
-			"endereco": "5dfd8fe238a30a3280869f40",
+			"endereco": "5dfd935556c804383ced4ccd",
 			"__v": 0,
-			"cardapio": "5dfd8fe238a30a3280869f43"
+			"cardapio": "5dfd935556c804383ced4cd0"
 		}
 	},
 	"usuariosCriados": {
@@ -117,15 +117,15 @@
 				"praca"
 			],
 			"ids_lancamento_list_item": [
-				"5dfd8fe538a30a3280869f57",
-				"5dfd8fe538a30a3280869f58",
-				"5dfd8fe538a30a3280869f59",
-				"5dfd8fe538a30a3280869f5e"
+				"5dfd935856c804383ced4ce3",
+				"5dfd935856c804383ced4ce4",
+				"5dfd935856c804383ced4ce6",
+				"5dfd935856c804383ced4ceb"
 			],
 			"estabelecimentos": [
-				"5dfd8fe238a30a3280869f41"
+				"5dfd935556c804383ced4cce"
 			],
-			"_id": "5dfd8fe238a30a3280869f42",
+			"_id": "5dfd935556c804383ced4ccf",
 			"nome": "Piris Piris da Silva",
 			"dt_nascimento": "1985-02-12T03:00:00.000Z",
 			"__v": 0,
@@ -133,7 +133,7 @@
 				"pacote": "pro",
 				"pacoteAtivo": "pro",
 				"assinaturaAtiva": true,
-				"dt_ultimo_pagamento": "2019-12-21T03:22:13.716Z",
+				"dt_ultimo_pagamento": "2019-12-21T03:36:57.347Z",
 				"numero_desativacoes": 0,
 				"dt_ultima_desativacao": null,
 				"dias_tolerancia_premium": 30,
@@ -142,7 +142,7 @@
 				"bloqueado": false,
 				"logado": true,
 				"role": 1,
-				"dt_criacao": "2019-12-21T03:22:08.985Z",
+				"dt_criacao": "2019-12-21T03:36:52.649Z",
 				"email": "d90121@urhen.com"
 			}
 		},
@@ -155,9 +155,9 @@
 			],
 			"ids_lancamento_list_item": [],
 			"estabelecimentos": [
-				"5dfd8fe238a30a3280869f41"
+				"5dfd935556c804383ced4cce"
 			],
-			"_id": "5dfd8fe238a30a3280869f45",
+			"_id": "5dfd935656c804383ced4cd2",
 			"nome": "Rodrigo",
 			"dt_nascimento": "1985-02-12T03:00:00.000Z",
 			"__v": 0,
@@ -165,7 +165,7 @@
 				"pacote": "pro",
 				"pacoteAtivo": "pro",
 				"assinaturaAtiva": true,
-				"dt_ultimo_pagamento": "2019-12-21T03:22:13.716Z",
+				"dt_ultimo_pagamento": "2019-12-21T03:36:57.347Z",
 				"numero_desativacoes": 0,
 				"dt_ultima_desativacao": null,
 				"dias_tolerancia_premium": 30,
@@ -174,7 +174,7 @@
 				"bloqueado": false,
 				"logado": true,
 				"role": 2,
-				"dt_criacao": "2019-12-21T03:22:08.985Z",
+				"dt_criacao": "2019-12-21T03:36:52.649Z",
 				"email": "rodrigo@teste.com"
 			}
 		},
@@ -187,9 +187,9 @@
 			],
 			"ids_lancamento_list_item": [],
 			"estabelecimentos": [
-				"5dfd8fe238a30a3280869f41"
+				"5dfd935556c804383ced4cce"
 			],
-			"_id": "5dfd8fe338a30a3280869f46",
+			"_id": "5dfd935656c804383ced4cd3",
 			"nome": "Amanda",
 			"dt_nascimento": "1998-12-09T02:00:00.000Z",
 			"__v": 0,
@@ -197,7 +197,7 @@
 				"pacote": "pro",
 				"pacoteAtivo": "pro",
 				"assinaturaAtiva": true,
-				"dt_ultimo_pagamento": "2019-12-21T03:22:13.716Z",
+				"dt_ultimo_pagamento": "2019-12-21T03:36:57.347Z",
 				"numero_desativacoes": 0,
 				"dt_ultima_desativacao": null,
 				"dias_tolerancia_premium": 30,
@@ -206,32 +206,48 @@
 				"bloqueado": false,
 				"logado": false,
 				"role": 2,
-				"dt_criacao": "2019-12-21T03:22:08.985Z",
+				"dt_criacao": "2019-12-21T03:36:52.649Z",
 				"email": "amanda@teste.com"
 			}
 		}
 	},
 	"items": [
 		{
-			"_id": "5dfd8fe438a30a3280869f4c",
-			"nome_item": "Itaipava lata 350ml",
-			"preco": 2.5,
-			"__v": 0
-		},
-		{
-			"_id": "5dfd8fe438a30a3280869f4d",
-			"nome_item": "Itaipava litrão",
-			"preco": 10,
-			"__v": 0
-		},
-		{
-			"_id": "5dfd8fe438a30a3280869f4e",
+			"tipo": "produto",
+			"com_preparo": false,
+			"departamento": "praca",
+			"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+			"_id": "5dfd935756c804383ced4cdb",
 			"nome_item": "Dose de vodka",
 			"preco": 6,
 			"__v": 0
 		},
 		{
-			"_id": "5dfd8fe438a30a3280869f4f",
+			"tipo": "produto",
+			"com_preparo": false,
+			"departamento": "praca",
+			"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+			"_id": "5dfd935756c804383ced4cd9",
+			"nome_item": "Itaipava litrão",
+			"preco": 10,
+			"__v": 0
+		},
+		{
+			"tipo": "produto",
+			"com_preparo": false,
+			"departamento": "praca",
+			"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+			"_id": "5dfd935756c804383ced4cda",
+			"nome_item": "Porção de batata",
+			"preco": 5,
+			"__v": 0
+		},
+		{
+			"tipo": "produto",
+			"com_preparo": false,
+			"departamento": "praca",
+			"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+			"_id": "5dfd935756c804383ced4cdc",
 			"nome_item": "Dose de vodka pequena",
 			"preco": 3,
 			"__v": 0
@@ -241,51 +257,67 @@
 		"nome_cardapio": "Cardapio",
 		"items": [
 			{
-				"_id": "5dfd8fe438a30a3280869f4c",
-				"nome_item": "Itaipava lata 350ml",
-				"preco": 2.5,
-				"__v": 0
-			},
-			{
-				"_id": "5dfd8fe438a30a3280869f4d",
-				"nome_item": "Itaipava litrão",
-				"preco": 10,
-				"__v": 0
-			},
-			{
-				"_id": "5dfd8fe438a30a3280869f4e",
+				"tipo": "produto",
+				"com_preparo": false,
+				"departamento": "praca",
+				"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+				"_id": "5dfd935756c804383ced4cdb",
 				"nome_item": "Dose de vodka",
 				"preco": 6,
 				"__v": 0
 			},
 			{
-				"_id": "5dfd8fe438a30a3280869f4f",
+				"tipo": "produto",
+				"com_preparo": false,
+				"departamento": "praca",
+				"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+				"_id": "5dfd935756c804383ced4cd9",
+				"nome_item": "Itaipava litrão",
+				"preco": 10,
+				"__v": 0
+			},
+			{
+				"tipo": "produto",
+				"com_preparo": false,
+				"departamento": "praca",
+				"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+				"_id": "5dfd935756c804383ced4cda",
+				"nome_item": "Porção de batata",
+				"preco": 5,
+				"__v": 0
+			},
+			{
+				"tipo": "produto",
+				"com_preparo": false,
+				"departamento": "praca",
+				"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+				"_id": "5dfd935756c804383ced4cdc",
 				"nome_item": "Dose de vodka pequena",
 				"preco": 3,
 				"__v": 0
 			}
 		],
 		"estabelecimentos": [
-			"5dfd8fe238a30a3280869f41"
+			"5dfd935556c804383ced4cce"
 		],
-		"_id": "5dfd8fe238a30a3280869f43",
+		"_id": "5dfd935556c804383ced4cd0",
 		"__v": 0
 	},
 	"novoCardapio": {
 		"nome_cardapio": "Cardapio de sabado",
 		"items": [],
 		"estabelecimentos": [
-			"5dfd8fe238a30a3280869f41"
+			"5dfd935556c804383ced4cce"
 		],
-		"_id": "5dfd8fe438a30a3280869f50",
+		"_id": "5dfd935856c804383ced4cdd",
 		"__v": 0
 	},
 	"contas": [
 		{
-			"dt_criacao": "2019-12-21T03:22:09.016Z",
-			"dt_pagamento": "2019-12-21T03:22:13.000Z",
-			"total_conta": 40,
-			"valor_pago": 40,
+			"dt_criacao": "2019-12-21T03:36:52.679Z",
+			"dt_pagamento": "2019-12-21T03:36:57.000Z",
+			"total_conta": 18,
+			"valor_pago": 18,
 			"pago": true,
 			"desconto": false,
 			"listItems": [
@@ -294,35 +326,39 @@
 						{
 							"status": "entregue",
 							"observacao_do_cliente": null,
-							"dataCriacao": "2019-12-21T03:22:09.014Z",
-							"_id": "5dfd8fe538a30a3280869f57",
-							"quantidade": 4,
-							"id_usuario": "5dfd8fe238a30a3280869f42",
+							"dataCriacao": "2019-12-21T03:36:52.676Z",
+							"_id": "5dfd935856c804383ced4ce3",
+							"quantidade": 3,
+							"id_usuario": "5dfd935556c804383ced4ccf",
 							"__v": 0
 						}
 					],
-					"dataCriacao": "2019-12-21T03:22:09.015Z",
-					"_id": "5dfd8fe538a30a3280869f5b",
+					"dataCriacao": "2019-12-21T03:36:52.677Z",
+					"_id": "5dfd935856c804383ced4ce7",
 					"id_item": {
-						"_id": "5dfd8fe438a30a3280869f4d",
-						"nome_item": "Itaipava litrão",
-						"preco": 10,
+						"tipo": "produto",
+						"com_preparo": false,
+						"departamento": "praca",
+						"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+						"_id": "5dfd935756c804383ced4cdb",
+						"nome_item": "Dose de vodka",
+						"preco": 6,
 						"__v": 0
 					},
-					"quantidadeTotal": 4,
-					"subTotal": 40,
+					"quantidadeTotal": 3,
+					"subTotal": 18,
 					"__v": 0
 				}
 			],
-			"_id": "5dfd8fe538a30a3280869f51",
+			"_id": "5dfd935856c804383ced4cde",
 			"nome_cliente": "jaqueline",
 			"__v": 0
 		},
 		{
-			"dt_criacao": "2019-12-21T03:22:09.016Z",
-			"dt_pagamento": "2019-12-21T03:22:13.000Z",
-			"total_conta": 62.5,
-			"valor_pago": 52.5,
+			"dt_criacao": "2019-12-21T03:36:52.679Z",
+			"dt_pagamento": "2019-12-21T03:36:57.000Z",
+			"total_conta": 78,
+			"valor_pago": 68,
 			"pago": true,
 			"desconto": true,
 			"listItems": [
@@ -331,32 +367,36 @@
 						{
 							"status": "entregue",
 							"observacao_do_cliente": null,
-							"dataCriacao": "2019-12-21T03:22:09.014Z",
-							"_id": "5dfd8fe538a30a3280869f58",
-							"quantidade": 3,
-							"id_usuario": "5dfd8fe238a30a3280869f42",
+							"dataCriacao": "2019-12-21T03:36:52.676Z",
+							"_id": "5dfd935856c804383ced4ce4",
+							"quantidade": 4,
+							"id_usuario": "5dfd935556c804383ced4ccf",
 							"__v": 0
 						},
 						{
 							"status": "entregue",
 							"observacao_do_cliente": "Traga um copo limpo",
-							"dataCriacao": "2019-12-21T03:22:09.014Z",
-							"_id": "5dfd8fe538a30a3280869f5e",
+							"dataCriacao": "2019-12-21T03:36:52.676Z",
+							"_id": "5dfd935856c804383ced4ceb",
 							"quantidade": 6,
-							"id_usuario": "5dfd8fe238a30a3280869f42",
+							"id_usuario": "5dfd935556c804383ced4ccf",
 							"__v": 0
 						}
 					],
-					"dataCriacao": "2019-12-21T03:22:09.015Z",
-					"_id": "5dfd8fe538a30a3280869f5c",
+					"dataCriacao": "2019-12-21T03:36:52.677Z",
+					"_id": "5dfd935856c804383ced4ce8",
 					"id_item": {
-						"_id": "5dfd8fe438a30a3280869f4c",
-						"nome_item": "Itaipava lata 350ml",
-						"preco": 2.5,
+						"tipo": "produto",
+						"com_preparo": false,
+						"departamento": "praca",
+						"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+						"_id": "5dfd935756c804383ced4cd9",
+						"nome_item": "Itaipava litrão",
+						"preco": 10,
 						"__v": 0
 					},
-					"quantidadeTotal": 9,
-					"subTotal": 22.5,
+					"quantidadeTotal": 10,
+					"subTotal": 60,
 					"__v": 0
 				},
 				{
@@ -364,59 +404,63 @@
 						{
 							"status": "entregue",
 							"observacao_do_cliente": null,
-							"dataCriacao": "2019-12-21T03:22:09.014Z",
-							"_id": "5dfd8fe538a30a3280869f59",
-							"quantidade": 4,
-							"id_usuario": "5dfd8fe238a30a3280869f42",
+							"dataCriacao": "2019-12-21T03:36:52.676Z",
+							"_id": "5dfd935856c804383ced4ce6",
+							"quantidade": 3,
+							"id_usuario": "5dfd935556c804383ced4ccf",
 							"__v": 0
 						}
 					],
-					"dataCriacao": "2019-12-21T03:22:09.015Z",
-					"_id": "5dfd8fe538a30a3280869f5d",
+					"dataCriacao": "2019-12-21T03:36:52.677Z",
+					"_id": "5dfd935856c804383ced4cea",
 					"id_item": {
-						"_id": "5dfd8fe438a30a3280869f4d",
-						"nome_item": "Itaipava litrão",
-						"preco": 10,
+						"tipo": "produto",
+						"com_preparo": false,
+						"departamento": "praca",
+						"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+						"_id": "5dfd935756c804383ced4cdb",
+						"nome_item": "Dose de vodka",
+						"preco": 6,
 						"__v": 0
 					},
-					"quantidadeTotal": 4,
-					"subTotal": 40,
+					"quantidadeTotal": 3,
+					"subTotal": 18,
 					"__v": 0
 				}
 			],
-			"_id": "5dfd8fe538a30a3280869f52",
+			"_id": "5dfd935856c804383ced4cdf",
 			"nome_cliente": "Piria Moura da Silva",
 			"__v": 0
 		},
 		{
-			"dt_criacao": "2019-12-21T03:22:09.016Z",
+			"dt_criacao": "2019-12-21T03:36:52.679Z",
 			"dt_pagamento": null,
 			"total_conta": 0,
 			"valor_pago": 0,
 			"pago": false,
 			"desconto": false,
 			"listItems": [],
-			"_id": "5dfd8fe538a30a3280869f54",
+			"_id": "5dfd935856c804383ced4ce1",
 			"nome_cliente": "Nina Moura da Silva",
 			"__v": 0
 		},
 		{
-			"dt_criacao": "2019-12-21T03:22:09.016Z",
+			"dt_criacao": "2019-12-21T03:36:52.679Z",
 			"dt_pagamento": null,
 			"total_conta": 0,
 			"valor_pago": 0,
 			"pago": false,
 			"desconto": false,
 			"listItems": [],
-			"_id": "5dfd8fe538a30a3280869f55",
+			"_id": "5dfd935856c804383ced4ce2",
 			"nome_cliente": "Frafra Moura da Silva",
 			"__v": 0
 		}
 	],
 	"contaConsultada": {
-		"dt_criacao": "2019-12-21T03:22:09.016Z",
+		"dt_criacao": "2019-12-21T03:36:52.679Z",
 		"dt_pagamento": null,
-		"total_conta": 40,
+		"total_conta": 18,
 		"valor_pago": 0,
 		"pago": false,
 		"desconto": false,
@@ -426,27 +470,31 @@
 					{
 						"status": "entregue",
 						"observacao_do_cliente": null,
-						"dataCriacao": "2019-12-21T03:22:09.014Z",
-						"_id": "5dfd8fe538a30a3280869f57",
-						"quantidade": 4,
-						"id_usuario": "5dfd8fe238a30a3280869f42",
+						"dataCriacao": "2019-12-21T03:36:52.676Z",
+						"_id": "5dfd935856c804383ced4ce3",
+						"quantidade": 3,
+						"id_usuario": "5dfd935556c804383ced4ccf",
 						"__v": 0
 					}
 				],
-				"dataCriacao": "2019-12-21T03:22:09.015Z",
-				"_id": "5dfd8fe538a30a3280869f5b",
+				"dataCriacao": "2019-12-21T03:36:52.677Z",
+				"_id": "5dfd935856c804383ced4ce7",
 				"id_item": {
-					"_id": "5dfd8fe438a30a3280869f4d",
-					"nome_item": "Itaipava litrão",
-					"preco": 10,
+					"tipo": "produto",
+					"com_preparo": false,
+					"departamento": "praca",
+					"ex_dicas": "ex. \"Sem cebola\", \"Copos limpos\", \"Mande guardanapos\", \"Capricha no álcool\", \"etc..\"",
+					"_id": "5dfd935756c804383ced4cdb",
+					"nome_item": "Dose de vodka",
+					"preco": 6,
 					"__v": 0
 				},
-				"quantidadeTotal": 4,
-				"subTotal": 40,
+				"quantidadeTotal": 3,
+				"subTotal": 18,
 				"__v": 0
 			}
 		],
-		"_id": "5dfd8fe538a30a3280869f51",
+		"_id": "5dfd935856c804383ced4cde",
 		"nome_cliente": "Rodrigo Moura da Silva",
 		"__v": 0
 	}
