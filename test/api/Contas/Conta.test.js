@@ -198,6 +198,7 @@ module.exports = function Conta(){
             })
             it('Deve remover 1 listIitem de uma conta',(done)=>{
                 let id_listitem_remover = dadosCompartilhados.contas[0].listItems[0]
+                
                 request(app)
                     .delete(`/removerListItem/${id_listitem_remover}`)
                     .set('id_usuario', registroCriado.id_usuario)
@@ -205,8 +206,14 @@ module.exports = function Conta(){
                     .set('autorizacao', registroCriado.tokenDeAutenticacao)
                     .then((res)=>{
                         let body = res.body
-                        console.log("res.removerListItem",res.body);
                         
+                        expect(body).to.have.own.property("ids_lancamentoListItem")
+                        expect(body).to.have.own.property("dataCriacao")
+                        expect(body).to.have.own.property("_id")
+                        expect(body).to.have.own.property("id_item")
+                        expect(body).to.have.own.property("quantidadeTotal")
+                        expect(body).to.have.own.property("subTotal")
+                        expect(body._id).to.equal(id_listitem_remover)
                         done()
                     })
                     .catch(err=>done(err))
