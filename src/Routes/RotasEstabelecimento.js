@@ -11,7 +11,7 @@ const EstabelecimentoController = require('../Controllers/Estabelecimento/Estabe
     // DELETE
     RotasEstabelecimento.delete('/removerEstabelecimento', isAdministradorMiddleware, EstabelecimentoController.destroy)
     // GET
-    RotasEstabelecimento.get('/burcarEstabelecimentosDoUsuario', isFuncionarioMiddleware, EstabelecimentoController.show)
+    RotasEstabelecimento.get('/burcarEstabelecimentosDoUsuario', EstabelecimentoController.show)
     RotasEstabelecimento.get('/burcarEstabelecimento', isFuncionarioMiddleware, EstabelecimentoController.index)
 
 module.exports = RotasEstabelecimento

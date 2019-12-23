@@ -15,7 +15,7 @@ module.exports = {
     },
     async update(req, res){
         let { id_estabelecimento, id_usuario } = req.headers,
-            estabelecimentoParaAtualizar = { nome, telefone, endereco, contas, usuarios, cardapio } = req.body,
+            estabelecimentoParaAtualizar = { nome, telefone, fechado, endereco, contas, usuarios, cardapio } = req.body,
             response = null
                 
         response = await Estabelecimento.findOneAndUpdate({_id: id_estabelecimento}, estabelecimentoParaAtualizar, {new:true})
@@ -29,11 +29,13 @@ module.exports = {
     },
     async show(req, res){
         let { id_usuario } = req.headers,
-            { estabelecimentos } = await Usuario.findOne({_id: id_usuario}, {_id: 0, estabelecimentos: 1}),
+            usuario = await Usuario.findOne({_id: id_usuario}, {_id: 0, estabelecimentos: 1, autenticacao: 1}).populate("autenticacao"),
             response  = null
-            
-        // buscar os estabelecimentos do usuario corrente
-        response = await Estabelecimento.find({_id: estabelecimentos})
+        
+        let query = usuario.autenticacao.role == 2 ? {fechado: false} : {}
+
+        // buscar os estabelecimentos do usuario corrente        
+        response = await Estabelecimento.find({_id: usuario.estabelecimentos},query)
         .populate('endereco')
         .populate({
             path: "contas",
@@ -56,6 +58,7 @@ module.exports = {
             model: "Cardapio",
             populate: {path: "items", model: "Item"}
         })
+        
         return res.json(response)
     },
     async index(req, res){

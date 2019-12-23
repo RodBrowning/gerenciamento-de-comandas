@@ -6,6 +6,7 @@ const Items = require('./Items/Items.test')
 const Cardapio = require('./Items/Cardapio.test')
 const Conta = require('./Contas/Conta.test')
 const AlterarNivelAcesso = require('./Autenticacao/AlterarNivelAcesso.test')
+const Estabelecimento = require('./Estabelecimento/Estabelecimento.test')
 
 const conexaoComMongoDB = require('../../src/conexaoComMongoDB')
 
@@ -53,3 +54,4 @@ Items()
 Cardapio()
 Conta()
 AlterarNivelAcesso()
+Estabelecimento()

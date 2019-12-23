@@ -8,6 +8,7 @@ const Cardapio = require('./Cardapio')
 const EstabelecimentoSchema = new mongoose.Schema({
     nome: String,
     telefone: {type: [Number], default: []},
+    fechado: {type: Boolean, default: false},
     endereco: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Endereco'
