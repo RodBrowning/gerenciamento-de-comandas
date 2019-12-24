@@ -23,7 +23,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Itaipava lata 350ml",
                         preco: 2.50,
-                        tipo: "bebida",
+                        categoria: "bebida",
                         com_preparo: false,
                         departamento: "bar",
                         ex_dicas: 'ex. "Copos limpos"'
@@ -31,7 +31,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Itaipava litrão",
                         preco: 10,
-                        tipo: "bebida",
+                        categoria: "bebida",
                         com_preparo: false,
                         departamento: "bar",
                         ex_dicas: 'ex. "Traz a camisinha"'
@@ -39,7 +39,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Porção de batata",
                         preco: 5,
-                        tipo: "alimento",
+                        categoria: "alimento",
                         com_preparo: false,
                         departamento: "cozinha",
                         ex_dicas: 'ex. "Bem fritas"'
@@ -47,7 +47,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Dose de vodka",
                         preco: 6,
-                        tipo: "bebida",
+                        categoria: "bebida",
                         com_preparo: false,
                         departamento: "bar",
                         ex_dicas: 'ex. "Com gelo"'
@@ -55,7 +55,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Dose de vodka pequena",
                         preco: 3,
-                        tipo: "bebida",
+                        categoria: "bebida",
                         com_preparo: false,
                         departamento: "bar",
                         ex_dicas: 'ex. "Com uma banda de limão separado"'
@@ -77,7 +77,7 @@ module.exports = function Items(){
                             expect(res.statusCode).to.equal(200)
                             expect(res.body).to.have.own.property('nome_item')
                             expect(res.body).to.have.own.property('preco')
-                            expect(res.body).to.have.own.property('tipo')
+                            expect(res.body).to.have.own.property('categoria')
                             expect(res.body).to.have.own.property('com_preparo')
                             expect(res.body).to.have.own.property('departamento')
                             expect(res.body).to.have.own.property('ex_dicas')
@@ -130,7 +130,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Skol lata 350ml",
                         preco: 3,
-                        tipo: "bebida",
+                        categoria: "bebida",
                         com_preparo: false,
                         departamento: "bar"
                     }
@@ -155,7 +155,7 @@ module.exports = function Items(){
                     {
                         nome_item: "Itaipava lata 350ml",
                         preco: 2.50,
-                        tipo: "bebida",
+                        categoria: "bebida",
                         com_preparo: false,
                         departamento: "bar",
                         ex_dicas: 'ex. "Copos limpos"'
