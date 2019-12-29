@@ -40,7 +40,8 @@ module.exports = function Items(){
                         nome_item: "Porção de batata",
                         preco: 5,
                         categoria: "alimento",
-                        com_preparo: false,
+                        com_preparo: true,
+                        tipo: "porção",
                         departamento: "cozinha",
                         ex_dicas: 'ex. "Bem fritas"'
                     },

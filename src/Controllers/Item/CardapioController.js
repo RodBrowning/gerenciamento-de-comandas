@@ -3,7 +3,7 @@ const Cardapio = require("../../Models/Cardapio")
 
 module.exports = {
     async store(req, res){
-        let novoCardapio = { nome_cardapio, listItems, estabelecimentos } = req.body,
+        let novoCardapio = { nome_cardapio, items, acompanhamentos, estabelecimentos } = req.body,
             { id_estabelecimento } = req.headers,
             response = null,
             statusCode = 200,
@@ -23,7 +23,7 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let cardapioAtualizar = { nome_cardapio, listItems, estabelecimentos } = req.body,
+        let cardapioAtualizar = { nome_cardapio, items, acompanhamentos, estabelecimentos } = req.body,
             { id_cardapio_editar } = req.params,
             response = null
         
@@ -51,21 +51,16 @@ module.exports = {
             response = {Error: "Não é possivel remover um cardapio ativo"}
             statusCode = 400
         } else if(algumEstabelecimentoDependeDesseCardapio){
-                let indexDoEstabelecimento = cardapio.estabelecimentos.indexOf(id_estabelecimento),
-                    novaListaDeEstabelecimentos =  null
-
-                cardapio.estabelecimentos.splice(indexDoEstabelecimento,1)
-                novaListaDeEstabelecimentos =  cardapio.estabelecimentos
-                response  = await Cardapio.findByIdAndUpdate({_id: id_cardapio_remover}, {estabelecimentos:novaListaDeEstabelecimentos},{new:true})
+                response  = await Cardapio.findByIdAndUpdate({_id: id_cardapio_remover}, {$pull: {estabelecimentos: id_estabelecimento}},{new:true})
         } else {
             response = await Cardapio.findByIdAndDelete({_id: id_cardapio_remover})
         }
-    
 
         return res.status(statusCode).json(response)
     },
     async index(req, res){
         let response = null,
+            statusCode = 200,
             {id_cardapio} = req.params
         
         response  = await Cardapio.findById({_id: id_cardapio})
@@ -73,10 +68,15 @@ module.exports = {
             path:"items",
             model: "Item"
         })
-        return res.json(response)
+        .populate({
+            path:"acompanhamentos",
+            model: "Acompanhamento"
+        })
+        return res.status(statusCode).json(response)
     },
     async show(req, res){
         let response = null,
+            statusCode = 200,
             {id_estabelecimento} =req.headers
         
         response = await Cardapio.find({estabelecimentos: id_estabelecimento})
@@ -84,7 +84,11 @@ module.exports = {
             path:"items",
             model:"Item"
         })
+        .populate({
+            path:"acompanhamentos",
+            model: "Acompanhamento"
+        })
         
-        return res.json(response)
+        return res.status(statusCode).json(response)
     }
 }
