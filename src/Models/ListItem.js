@@ -10,6 +10,10 @@ const ListItemSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'LancamentoListItem'
     }],
+    ids_acompanhamento: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Acompanhamento'
+    }],
     dataCriacao: {type: Date, default: Date.now()},
     quantidadeTotal: {type: Number, defaut: 0 },
     subTotal: {type: Number, defaut: 0 }

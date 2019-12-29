@@ -6,6 +6,10 @@ const CardapioSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     }],
+    acompanhamentos: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Acompanhamento'
+    }],
     estabelecimentos: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Estabelecimento'
