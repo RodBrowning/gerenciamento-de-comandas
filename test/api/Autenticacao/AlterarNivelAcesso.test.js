@@ -39,11 +39,11 @@ module.exports = function AlterarNivelAcesso(){
                     expect(body).to.have.own.property('pacote')
                     expect(body).to.have.own.property('pacoteAtivo')
                     expect(body).to.have.own.property('assinaturaAtiva')
-                    expect(body).to.have.own.property('dono')
+                    expect(body).to.have.own.property('gestor')
                     expect(body.pacote).to.equal("premium")
                     expect(body.pacoteAtivo).to.equal("premium")
                     expect(body.assinaturaAtiva).to.be.true
-                    expect(body.dono).to.be.true
+                    expect(body.gestor).to.be.true
                         registroCriado.dt_ultimo_pagamento = body.dt_ultimo_pagamento
                         registroCriado.pacote = body.pacote
                         registroCriado.pacoteAtivo = body.pacoteAtivo
@@ -72,11 +72,11 @@ module.exports = function AlterarNivelAcesso(){
                     expect(body).to.have.own.property('pacote')
                     expect(body).to.have.own.property('pacoteAtivo')
                     expect(body).to.have.own.property('assinaturaAtiva')
-                    expect(body).to.have.own.property('dono')
+                    expect(body).to.have.own.property('gestor')
                     expect(body.pacote).to.equal("pro")
                     expect(body.pacoteAtivo).to.equal("pro")
                     expect(body.assinaturaAtiva).to.be.true
-                    expect(body.dono).to.be.true
+                    expect(body.gestor).to.be.true
                         registroCriado.dt_ultimo_pagamento = body.dt_ultimo_pagamento
                         registroCriado.pacote = body.pacote
                         registroCriado.pacoteAtivo = body.pacoteAtivo

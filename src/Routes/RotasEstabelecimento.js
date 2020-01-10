@@ -1,15 +1,15 @@
 const express = require('express')
 const RotasEstabelecimento = express.Router()
-const { isAdministradorMiddleware, isFuncionarioMiddleware } = require('../Services/Middlewares')
+const { isGestorMiddleware, isFuncionarioMiddleware } = require('../Services/Middlewares')
 
 // Rotas de estabelecimento
 const EstabelecimentoController = require('../Controllers/Estabelecimento/EstabelecimentoController')
     // POSTS
     RotasEstabelecimento.post('/novoEstabelecimento', EstabelecimentoController.store)
     // UPDATE
-    RotasEstabelecimento.put('/editarEstabelecimento', isAdministradorMiddleware, EstabelecimentoController.update)
+    RotasEstabelecimento.put('/editarEstabelecimento', isGestorMiddleware, EstabelecimentoController.update)
     // DELETE
-    RotasEstabelecimento.delete('/removerEstabelecimento', isAdministradorMiddleware, EstabelecimentoController.destroy)
+    RotasEstabelecimento.delete('/removerEstabelecimento', isGestorMiddleware, EstabelecimentoController.destroy)
     // GET
     RotasEstabelecimento.get('/burcarEstabelecimentosDoUsuario', EstabelecimentoController.show)
     RotasEstabelecimento.get('/burcarEstabelecimento', isFuncionarioMiddleware, EstabelecimentoController.index)

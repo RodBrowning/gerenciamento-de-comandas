@@ -18,9 +18,7 @@ module.exports = function Estabelecimento(){
             fs.writeFileSync(path.resolve(__dirname,'..','dadosGeradosECompartilhadosEntreArquivosDeTeste.json'),JSON.stringify(dadosCompartilhados,null, '\t'))
         })
         describe('Processo de consulta de contas',()=>{
-            
             it('Deve retornar todas os estabelecimentos do usuário',(done)=>{
-                
                 request(app)
                 .get('/burcarEstabelecimentosDoUsuario')
                 .set('id_usuario', usuarioCriado.usuario._id)

@@ -11,7 +11,7 @@ module.exports = {
             statusCode = 200,
             saltRounds = 10,
             { email, role } = req.body,
-            novoUsuario = { nome, dt_nascimento, telefones, estabelecimentos } = req.body,
+            novoUsuario = { nome, dt_nascimento, telefones, departamentos, estabelecimentos } = req.body,
             usuarioEncontrado = await Autenticacao.findOne({email})
             
 
@@ -68,7 +68,7 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let usuarioParaAtualizar = { nome, dt_nascimento, telefones, estabelecimentos, departamento } = req.body,
+        let usuarioParaAtualizar = { nome, dt_nascimento, telefones, estabelecimentos, departamentos } = req.body,
             dadosDeAutenticacaoParaAtualizar = { email, password } = req.body,
             { id_usuario_editar } = req.params,
             response = null,

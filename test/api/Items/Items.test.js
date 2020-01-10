@@ -25,7 +25,7 @@ module.exports = function Items(){
                         preco: 2.50,
                         categoria: "bebida",
                         com_preparo: false,
-                        departamento: "bar",
+                        departamentos: "bar",
                         ex_dicas: 'ex. "Copos limpos"'
                     },
                     {
@@ -33,7 +33,7 @@ module.exports = function Items(){
                         preco: 10,
                         categoria: "bebida",
                         com_preparo: false,
-                        departamento: "bar",
+                        departamentos: "bar",
                         ex_dicas: 'ex. "Traz a camisinha"'
                     },
                     {
@@ -42,7 +42,7 @@ module.exports = function Items(){
                         categoria: "alimento",
                         com_preparo: true,
                         tipo: "porção",
-                        departamento: "cozinha",
+                        departamentos: "cozinha",
                         ex_dicas: 'ex. "Bem fritas"'
                     },
                     {
@@ -50,7 +50,7 @@ module.exports = function Items(){
                         preco: 6,
                         categoria: "bebida",
                         com_preparo: false,
-                        departamento: "bar",
+                        departamentos: "bar",
                         ex_dicas: 'ex. "Com gelo"'
                     },
                     {
@@ -58,7 +58,7 @@ module.exports = function Items(){
                         preco: 3,
                         categoria: "bebida",
                         com_preparo: false,
-                        departamento: "bar",
+                        departamentos: "bar",
                         ex_dicas: 'ex. "Com uma banda de limão separado"'
                     }
                 ]
@@ -80,7 +80,7 @@ module.exports = function Items(){
                             expect(res.body).to.have.own.property('preco')
                             expect(res.body).to.have.own.property('categoria')
                             expect(res.body).to.have.own.property('com_preparo')
-                            expect(res.body).to.have.own.property('departamento')
+                            expect(res.body).to.have.own.property('departamentos')
                             expect(res.body).to.have.own.property('ex_dicas')
                             expect(res.body.nome_item).to.equal(item.nome_item)
                             expect(res.body.preco).to.equal(item.preco)
@@ -133,7 +133,7 @@ module.exports = function Items(){
                         preco: 3,
                         categoria: "bebida",
                         com_preparo: false,
-                        departamento: "bar"
+                        departamentos: "bar"
                     }
                 request(app)
                 .post('/novoItem')
@@ -158,7 +158,7 @@ module.exports = function Items(){
                         preco: 2.50,
                         categoria: "bebida",
                         com_preparo: false,
-                        departamento: "bar",
+                        departamentos: "bar",
                         ex_dicas: 'ex. "Copos limpos"'
                     }
                     request(app)

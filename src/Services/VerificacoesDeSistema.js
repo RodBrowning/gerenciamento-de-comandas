@@ -29,9 +29,9 @@ module.exports = {
         })
         return funcionarioDoEstabelecimento
     },
-    async isDono(id_usuario){
+    async isGestor(id_usuario){
         let usuario = await Usuario.findById({_id: id_usuario}).populate("autenticacao")
-        return usuario.autenticacao.dono
+        return usuario.autenticacao.gestor
     },
     async verificarEstabelecimentoNoModel(Model, id_estabelecimento, id_model){
         let EstabelecimentoPertenceAoModel = false,

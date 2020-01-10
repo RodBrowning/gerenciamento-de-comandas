@@ -112,6 +112,7 @@ module.exports = function Cardapio(){
                 .send({ 
                     nome_cardapio: "Cardapio de sabado",
                     listItems: [],
+                    acompanhamentos: [],
                     estabelecimentos: [registroCriado.id_estabelecimento]
                 })
                 .then((res)=>{

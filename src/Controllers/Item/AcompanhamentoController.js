@@ -35,7 +35,7 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let acompanhamentoAtualizado  = { nome_acompanhamento, preco, categoria, tipo, com_preparo, departamento, ex_dicas } = req.body,
+        let acompanhamentoAtualizado  = { nome_acompanhamento, preco, categoria, tipo, com_preparo, departamentos, ex_dicas } = req.body,
             { id_acompanhamento_editar } = req.params,
             statusCode = 200,
             response = null

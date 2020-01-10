@@ -5,7 +5,7 @@ const Cardapio = require("../../Models/Cardapio")
 
 module.exports = {
     async store(req, res) {
-        let novoItem  = { nome_item, preco, categoria, tipo, com_preparo, departamento, ex_dicas } = req.body,
+        let novoItem  = { nome_item, preco, categoria, tipo, com_preparo, departamentos, ex_dicas } = req.body,
             { id_estabelecimento } = req.headers,
             response = null,
             estabelecimento = null,
@@ -35,7 +35,7 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let itemAtualizado  = { nome_item, preco, categoria, tipo, com_preparo, departamento, ex_dicas } = req.body,
+        let itemAtualizado  = { nome_item, preco, categoria, tipo, com_preparo, departamentos, ex_dicas } = req.body,
             { id_item_editar } = req.params,
             statusCode = 200,
             response = null

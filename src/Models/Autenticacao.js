@@ -14,7 +14,7 @@ const AutenticacaoSchema = new mongoose.Schema({
     numero_desativacoes: {type: Number, default: 0},
     dt_ultima_desativacao: {type: Date, default: null},
     dias_tolerancia_premium: {type: Number, default: 30},
-    dono: {type: Boolean, default: false},
+    gestor: {type: Boolean, default: false},
     validado: {type: Boolean, default: false},
     bloqueado: {type: Boolean, default: false},
     logado: {type: Boolean, default: false},

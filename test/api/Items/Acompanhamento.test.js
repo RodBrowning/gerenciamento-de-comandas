@@ -53,7 +53,7 @@ module.exports = function Acompanhamento() {
           
         ];
         let novosAcompanhamentosPromises = [];
-
+        
         acompanhamentos.map(acompanhamento => {
           let promise = new Promise((resolve, reject) => {
             request(app)
@@ -66,6 +66,7 @@ module.exports = function Acompanhamento() {
               .send(acompanhamento)
               .then(res => {
                   let body = res.body
+                
                 expect(res.statusCode).to.equal(200);
                 expect(body).to.have.own.property("nome_acompanhamento");
                 expect(body).to.have.own.property("preco");
@@ -123,7 +124,7 @@ module.exports = function Acompanhamento() {
     //       preco: 3,
     //       categoria: "bebida",
     //       com_preparo: false,
-    //       departamento: "bar"
+    //       departamentos: "bar"
     //     };
     //     request(app)
     //       .post("/novoItem")
@@ -147,7 +148,7 @@ module.exports = function Acompanhamento() {
     //       preco: 2.5,
     //       categoria: "bebida",
     //       com_preparo: false,
-    //       departamento: "bar",
+    //       departamentos: "bar",
     //       ex_dicas: 'ex. "Copos limpos"'
     //     };
     //     request(app)
