@@ -105,11 +105,11 @@ module.exports = function Conta(){
             it('Deve incluir 2 ListItem em 2 contas',(done)=>{
                 let novosListItem = [
                     {
-                        id_item: dadosCompartilhados.cardapio.items[0]._id,
+                        id_item: dadosCompartilhados.cardapios[0].items[0],
                         quantidade: 3
                     },
                     {
-                        id_item: dadosCompartilhados.cardapio.items[1]._id,
+                        id_item: dadosCompartilhados.cardapios[0].items[1],
                         quantidade: 4
                     }
                 ]
@@ -149,7 +149,7 @@ module.exports = function Conta(){
             })
             it('Deve incluir 6 unidades em um ListItem',(done)=>{
                 let novoListItem = {
-                        id_item: dadosCompartilhados.cardapio.items[0]._id,
+                        id_item: dadosCompartilhados.cardapio.items[0],
                         quantidade: 6,
 					    observacao_do_cliente: "Traga um copo limpo"
                     }

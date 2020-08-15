@@ -112,7 +112,7 @@ module.exports = function Items(){
             })
             it('Deve retornar um item pesquisado como usuario NÃO administrador',(done)=>{
                 request(app)
-                .get(`/buscarItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento.cardapio}`)
+                .get(`/buscarItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento._id}`)
                 .set('id_usuario', usuarioCriado.usuario._id)
                 .set('id_estabelecimento', usuarioCriado.estabelecimento._id)
                 .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)
@@ -184,7 +184,7 @@ module.exports = function Items(){
                     preco: 9
                 }
                 request(app)
-                    .put(`/editarItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento.cardapio}`)
+                    .put(`/editarItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento._id}`)
                     .type('json')
                     .set('Context-type', 'Application/json')
                     .set('id_usuario', registroCriado.id_usuario)
@@ -207,7 +207,7 @@ module.exports = function Items(){
                     preco: 9
                 }
                 request(app)
-                .put(`/editarItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento.cardapio}`)
+                .put(`/editarItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento._id}`)
                 .type('json')
                 .set('Context-type', 'Application/json')
                 .set('id_usuario', usuarioCriado.usuario._id)
@@ -223,18 +223,17 @@ module.exports = function Items(){
                 .catch(err=>done(err))
             })
             it('Deve REMOVER um item com sucesso',(done)=>{
-                
                 request(app)
-                .delete(`/removerItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento.cardapio}`)
+                .delete(`/removerItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento._id}`)
                 .set('id_usuario', registroCriado.id_usuario)
                 .set('id_estabelecimento', registroCriado.id_estabelecimento)
                 .set('autorizacao', registroCriado.tokenDeAutenticacao)
                 .then((res)=>{
-                    dadosCompartilhados.cardapio = res.body
+                    dadosCompartilhados.itemsDoEstabelecimento = res.body.items
                     expect(res.statusCode).to.equal(200)
                     expect(res.body).to.have.own.property('_id')
                     expect(res.body).to.have.own.property('items')
-                    expect(res.body._id).to.equal(dadosCompartilhados.usuarioCriado.estabelecimento.cardapio)
+                    expect(res.body._id).to.equal(dadosCompartilhados.usuarioCriado.estabelecimento._id)
                     expect(res.body.items).to.not.include(dadosCompartilhados.items[0]._id)
                     done()
                 })
@@ -242,7 +241,7 @@ module.exports = function Items(){
             })
             it('NÃO deve REMOVER um item com um usuario NÃO administrador',(done)=>{
                 request(app)
-                .delete(`/removerItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento.cardapio}`)
+                .delete(`/removerItem/${dadosCompartilhados.items[0]._id}/${dadosCompartilhados.usuarioCriado.estabelecimento._id}`)
                 .set('id_usuario', usuarioCriado.usuario._id)
                 .set('id_estabelecimento', usuarioCriado.estabelecimento._id)
                 .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)

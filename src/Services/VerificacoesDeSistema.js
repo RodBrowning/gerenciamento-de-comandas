@@ -65,13 +65,13 @@ module.exports = {
 
         return ContaPertenceAoEstabelecimento
     },
-    async verificarItemNoCardapio(id_cardapio, id_item){
+    async verificarItemNoEstabelecimento(id_estabelecimento, id_item){
         let itemEncontrado = false,
-            cardapio = null
+            estabelecimento = null
 
-        cardapio = await Cardapio.findOne({_id:id_cardapio})
+        estabelecimento = await Estabelecimento.findOne({_id:id_estabelecimento})
         
-        cardapio.items.find(item=>{
+        estabelecimento.items.find(item=>{
             if(item._id.equals(id_item)){
                 itemEncontrado = true
             }

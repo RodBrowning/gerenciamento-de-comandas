@@ -1,10 +1,11 @@
-const { isAdministrador, isFuncionario, isGestor, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoCardapio } = require('./VerificacoesDeSistema')
+const { isAdministrador, isFuncionario, isGestor, verificarEstabelecimentoNoModel, verificarContaNoEstabelecimento, verificarItemNoEstabelecimento } = require('./VerificacoesDeSistema')
 // const Cardapio = require('../Models/Cardapio')
 // const Estabelecimento = require('../Models/Estabelecimento')
 
 
 module.exports = {
     async isAdministradorMiddleware(req, res, next){
+        
         let response = null,
             statusCode = 500,
             administrador = await isAdministrador(req.headers.id_estabelecimento, req.headers.id_usuario)
@@ -64,14 +65,14 @@ module.exports = {
             return res.json({Error: "Conta não pertence a este estabelecimento"})
         }
     },
-    async isItemNoCardapio(req, res, next){
+    async isItemNoEstabelecimento(req, res, next){
         let id_item = req.params[Object.keys(req.params)[0]],
-            {id_cardapio} = req.params,
+            {id_estabelecimento} = req.params,
             response = null,
             statusCode = null,
             itemEncontrado = false
         
-        itemEncontrado = await verificarItemNoCardapio(id_cardapio, id_item)
+        itemEncontrado = await verificarItemNoEstabelecimento(id_estabelecimento, id_item)
                         
         if(itemEncontrado){
             next()

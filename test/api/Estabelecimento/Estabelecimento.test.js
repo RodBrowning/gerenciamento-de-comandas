@@ -24,7 +24,7 @@ module.exports = function Estabelecimento(){
                 .set('id_usuario', usuarioCriado.usuario._id)
                 .set('autorizacao', usuarioCriado.autenticacao.tokenDeAutenticacao)
                 .then((res) =>{
-                    console.log('res.body',res.body);
+                    // console.log('res.body',res.body);
                     
                     done()
                 })

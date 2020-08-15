@@ -12,26 +12,20 @@ module.exports = {
             itemEncontrado = false,
             statusCode = 200
 
-        estabelecimento = await Estabelecimento.findOne({_id:id_estabelecimento})
-        .populate({path: 'cardapio', model: 'Cardapio', populate: {path: 'items', model: 'Item'}})
+        estabelecimento = await Estabelecimento.findOne({_id: id_estabelecimento})
+        .populate({path: 'items', model: 'Item'})
+
+        itemEncontrado = estabelecimento.items.some(item=> item.nome_item === nome_item)
         
-        itemEncontrado = estabelecimento.cardapio.items.find(item=> item.nome_item === nome_item)
+        // itemEncontrado = estabelecimento.cardapio.items.find(item=> item.nome_item === nome_item)
         if(itemEncontrado){
             response = { Error: "O item já existe" }
             statusCode = 400
         } else {
             response = await Item.create(novoItem)
-            await Cardapio.findByIdAndUpdate({_id: estabelecimento.cardapio._id},{$push: {items: response._id}},{new:true})
+            await Estabelecimento.findByIdAndUpdate({_id: estabelecimento._id},{$push: {items: response._id}},{new:true})
         }
-        return res.status(statusCode).json(response)
-    },
-    async destroy(req, res){
-        let response = null,
-            { id_item_remover, id_cardapio } = req.params,
-            statusCode = 200
-            cardapios = null
         
-        response = await Cardapio.findByIdAndUpdate({_id: id_cardapio}, {$pull: {items: id_item_remover}}, {new:true})
         return res.status(statusCode).json(response)
     },
     async update(req, res){
@@ -43,15 +37,31 @@ module.exports = {
         response = await Item.findByIdAndUpdate({_id: id_item_editar}, itemAtualizado, {new:true})
         return res.status(statusCode).json(response)
     },
+    async destroy(req, res){
+        let response = null,
+            { id_item_remover } = req.params,
+            { id_estabelecimento } = req.headers,
+            statusCode = 200
+            cardapios = null
+            id_cardapio = null
+        
+        response = await Estabelecimento.findByIdAndUpdate({_id: id_estabelecimento}, {$pull: {items: id_item_remover}}, {new:true})
+        
+        response.cardapios.forEach(async cardapio_id =>{
+            return await Cardapio.findByIdAndUpdate({_id: cardapio_id}, {$pull: {items: id_item_remover}}, {new:true})
+        })
+        
+        return res.status(statusCode).json(response)
+    },
     async show(req, res){
         let response = null,
             { id_estabelecimento } = req.headers,
             statusCode = 200
         
         estabelecimento = await Estabelecimento.findOne({_id:id_estabelecimento})
-        .populate({path: 'cardapio', model: 'Cardapio', populate: {path: 'items', model: 'Item'}})
+        .populate({path: 'items', model: 'Item'})
 
-        response = estabelecimento.cardapio.items
+        response = estabelecimento.items
         return res.status(statusCode).json(response)
     },
     async index(req, res){
@@ -61,9 +71,9 @@ module.exports = {
             itemBuscado = null
 
         estabelecimento = await Estabelecimento.findOne({_id:id_estabelecimento})
-        .populate({path: 'cardapio', model: 'Cardapio', populate: {path: 'items', model: 'Item'}})
+        .populate({path: 'items', model: 'Item'})
         
-        estabelecimento.cardapio.items.map(item=>{
+        estabelecimento.items.map(item=>{
             if(item._id.equals(id_item_buscar)){
                 itemBuscado = item
             }

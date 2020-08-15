@@ -3,6 +3,8 @@ const Endereco = require('./Endereco')
 const Usuario = require('./Usuario')
 const Conta = require('./Conta')
 const Cardapio = require('./Cardapio')
+const Item = require('./Item')
+const Acompanhamento = require('./Acompanhamento')
     
 
 const EstabelecimentoSchema = new mongoose.Schema({
@@ -15,16 +17,33 @@ const EstabelecimentoSchema = new mongoose.Schema({
     },
     contas: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Conta'
+        ref: 'Conta',
+        default: null
     }],
     usuarios: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'
     }],
-    cardapio: {
+    cardapios: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cardapio'
-    }
+        ref: 'Cardapio',
+        default: null
+    }],
+    id_cardapio_ativo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cardapio',
+        default: null
+    },
+    items: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Item',
+        default: null
+    }],
+    acompanhamentos: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Acompanhamento',
+        default: null
+    }]
 })
 
 EstabelecimentoSchema.post('findOneAndDelete', async estabelecimentoRemovido => {
@@ -32,7 +51,7 @@ EstabelecimentoSchema.post('findOneAndDelete', async estabelecimentoRemovido => 
         id_endereco = estabelecimentoRemovido.endereco,
         usuariosDoEstabelecimento = estabelecimentoRemovido.usuarios,
         contasDoEstabelecimento = estabelecimentoRemovido.contas,
-        id_cardapio = estabelecimentoRemovido.cardapio
+        id_cardapios = estabelecimentoRemovido.cardapios
     
     await removerEndereco(id_endereco)
 
@@ -43,8 +62,9 @@ EstabelecimentoSchema.post('findOneAndDelete', async estabelecimentoRemovido => 
     contasDoEstabelecimento.map(async conta => {
         await removerContaRelacionadaAoEstabelecimento(conta._id)
     })
-    
-    await removerReferenciaNoModel(Cardapio, id_cardapio, id_estabelecimentoRemovido)
+    id_cardapios.forEach(async id_cardapio => {
+        return await removerReferenciaNoModel(Cardapio, id_cardapio, id_estabelecimentoRemovido)
+    })
 })
 
 async function removerEndereco(id_endereco){

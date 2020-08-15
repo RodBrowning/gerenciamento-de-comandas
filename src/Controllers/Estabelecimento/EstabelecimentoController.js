@@ -5,7 +5,7 @@ const { isAdministrador, isFuncionario } = require('../../Services/VerificacoesD
 
 module.exports = {
     async store(req, res){
-        let novoEstabelecimento = { nome, telefone, endereco, contas, usuarios, cardapio } = req.body
+        let novoEstabelecimento = { nome, telefone, endereco, contas, usuarios, cardapios } = req.body
         let estabelecimento = await Estabelecimento.findOne({ nome: novoEstabelecimento.nome })
         
         if (!estabelecimento) {
@@ -15,10 +15,11 @@ module.exports = {
     },
     async update(req, res){
         let { id_estabelecimento, id_usuario } = req.headers,
-            estabelecimentoParaAtualizar = { nome, telefone, fechado, endereco, contas, usuarios, cardapio } = req.body,
+            estabelecimentoParaAtualizar = { nome, telefone, fechado, endereco, contas, usuarios, cardapios, id_cardapio_ativo, items, acompanhamentos } = req.body,
             response = null
-                
+
         response = await Estabelecimento.findOneAndUpdate({_id: id_estabelecimento}, estabelecimentoParaAtualizar, {new:true})
+        
         return res.json(response)
     },
     async destroy(req, res){
@@ -54,9 +55,10 @@ module.exports = {
             }
         })
         .populate({
-            path:"cardapio", 
+            path:"cardapios", 
             model: "Cardapio",
-            populate: {path: "items", model: "Item"}
+            populate: {path: "items", model: "Item"},
+            populate: {path: "acompanhamentos", model: "Acompanhamento"}
         })
         
         return res.json(response)
@@ -84,9 +86,10 @@ module.exports = {
             }
         })
         .populate({
-            path:"cardapio", 
+            path:"cardapios", 
             model: "Cardapio",
-            populate: {path: "items", model: "Item"}
+            populate: {path: "items", model: "Item"},
+            populate: {path: "acompanhamentos", model: "Acompanhamento"}
         })
             
         return res.json(response)
