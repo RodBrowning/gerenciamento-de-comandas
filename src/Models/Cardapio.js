@@ -6,6 +6,7 @@ const CardapioSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'
     }],
+    dias: {type: [String], default: "all"},
     acompanhamentos: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Acompanhamento'

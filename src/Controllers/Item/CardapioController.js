@@ -3,7 +3,7 @@ const Cardapio = require("../../Models/Cardapio")
 
 module.exports = {
     async store(req, res){
-        let novoCardapio = { nome_cardapio, items, acompanhamentos, estabelecimentos } = req.body,
+        let novoCardapio = { nome_cardapio, items, dias, acompanhamentos, estabelecimentos } = req.body,
             { id_estabelecimento } = req.headers,
             response = null,
             statusCode = 200,
@@ -24,7 +24,7 @@ module.exports = {
         return res.status(statusCode).json(response)
     },
     async update(req, res){
-        let cardapioAtualizar = { nome_cardapio, items, acompanhamentos, estabelecimentos } = req.body,
+        let cardapioAtualizar = { nome_cardapio, items, dias, acompanhamentos, estabelecimentos } = req.body,
             { id_cardapio_editar } = req.params,
             response = null
         
