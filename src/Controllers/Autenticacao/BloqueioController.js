@@ -7,6 +7,7 @@ module.exports = {
             statusCode = 200,
             usuario_para_bloquear = null,
             { id_usuario_bloquear } = req.params
+            
         usuario_para_bloquear = await Usuario.findOne({_id: id_usuario_bloquear})
         if(id_usuario_bloquear === req.headers.id_usuario){
             response = { Error: "Não é permitido auto bloqueio" }

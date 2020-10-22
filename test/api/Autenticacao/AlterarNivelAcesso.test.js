@@ -106,24 +106,84 @@ module.exports = function AlterarNivelAcesso(){
                 })
                 .catch(err=>done(err))
             })
-            it('Deve retornar a lista de TODOS os usuarios',(done)=>{
+            it('Deve rebaixar a assinatura pro para premium de usuarios que não pagaram mas não estão com mais de 30 dias de atraso',(done)=>{
+                let dadosDaAssinatura = {
+                    pacoteAtivo: 'premium',
+                    assinaturaAtiva: false
+                }
                 request(app)
-                .get('/buscarUsuarios')
+                .put('/auth/atualizarAssinatura')
+                .set('Content-Type','application/json')
                 .set('id_usuario', registroCriado.id_usuario)
-                .set('id_estabelecimento',registroCriado.id_estabelecimento)
-                .set('autorizacao',registroCriado.tokenDeAutenticacao)
+                .set('id_estabelecimento', registroCriado.id_estabelecimento)
+                .set('autorizacao', registroCriado.tokenDeAutenticacao)
+                .send(dadosDaAssinatura)
                 .then((res)=>{
-                    dadosCompartilhados.usuariosCriados = {...res.body}
-                    expect(res.statusCode).to.equal(200)
-                    expect(res.body).to.be.an('array')
-                    expect(res.body).to.have.lengthOf(3)
+                    let body = res.body
+                    expect(body).to.have.own.property('dt_ultimo_pagamento')
+                    expect(body).to.have.own.property('pacote')
+                    expect(body).to.have.own.property('pacoteAtivo')
+                    expect(body).to.have.own.property('assinaturaAtiva')
+                    expect(body).to.have.own.property('gestor')
+                    expect(body.pacote).to.equal("pro")
+                    expect(body.pacoteAtivo).to.equal("premium")
+                    expect(body.assinaturaAtiva).to.be.false
+                    expect(body.gestor).to.be.true
+                        registroCriado.dt_ultimo_pagamento = body.dt_ultimo_pagamento
+                        registroCriado.pacote = body.pacote
+                        registroCriado.pacoteAtivo = body.pacoteAtivo
+                        registroCriado.assinaturaAtiva = body.assinaturaAtiva
                     done()
-                    
                 })
                 .catch(err=>done(err))
             })
-            
-           
+            it('Deve rebaixar a assinatura pro para free de usuarios que não pagaram e estão com mais de 30 dias de atraso',(done)=>{
+                let dadosDaAssinatura = {
+                    pacoteAtivo: 'free',
+                    assinaturaAtiva: false
+                }
+                request(app)
+                .put('/auth/atualizarAssinatura')
+                .set('Content-Type','application/json')
+                .set('id_usuario', registroCriado.id_usuario)
+                .set('id_estabelecimento', registroCriado.id_estabelecimento)
+                .set('autorizacao', registroCriado.tokenDeAutenticacao)
+                .send(dadosDaAssinatura)
+                .then((res)=>{
+                    let body = res.body
+                    expect(body).to.have.own.property('dt_ultimo_pagamento')
+                    expect(body).to.have.own.property('pacote')
+                    expect(body).to.have.own.property('pacoteAtivo')
+                    expect(body).to.have.own.property('assinaturaAtiva')
+                    expect(body).to.have.own.property('gestor')
+                    expect(body.pacote).to.equal("pro")
+                    expect(body.pacoteAtivo).to.equal("free")
+                    expect(body.assinaturaAtiva).to.be.false
+                    expect(body.gestor).to.be.true
+                        registroCriado.dt_ultimo_pagamento = body.dt_ultimo_pagamento
+                        registroCriado.pacote = body.pacote
+                        registroCriado.pacoteAtivo = body.pacoteAtivo
+                        registroCriado.assinaturaAtiva = body.assinaturaAtiva
+                    done()
+                })
+                .catch(err=>done(err))
+            })
+            // it('Deve retornar a lista de TODOS os usuarios',(done)=>{
+            //     request(app)
+            //     .get('/buscarUsuarios')
+            //     .set('id_usuario', registroCriado.id_usuario)
+            //     .set('id_estabelecimento',registroCriado.id_estabelecimento)
+            //     .set('autorizacao',registroCriado.tokenDeAutenticacao)
+            //     .then((res)=>{
+            //         dadosCompartilhados.usuariosCriados = {...res.body}
+            //         expect(res.statusCode).to.equal(200)
+            //         expect(res.body).to.be.an('array')
+            //         expect(res.body).to.have.lengthOf(3)
+            //         done()
+                    
+            //     })
+            //     .catch(err=>done(err))
+            // })
         })
     })
 }

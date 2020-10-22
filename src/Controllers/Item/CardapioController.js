@@ -115,6 +115,7 @@ module.exports = {
             }
         })
         
-        return res.status(statusCode).json(response.cardapios)
+        response = response.cardapios
+        return res.status(statusCode).json(response)
     }
 }
