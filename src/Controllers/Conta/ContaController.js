@@ -13,8 +13,8 @@ module.exports = {
         } = req.body,
             {id_estabelecimento} = req.headers,
             response = null,
-            statusCode = 200
-        let conta = await Conta.findOne({nome_cliente, numero_comanda})
+            statusCode = 200,
+            conta = await Conta.findOne({nome_cliente, numero_comanda})
         
         if(conta){
             response  = { Error: "Conta já existe" }

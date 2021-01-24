@@ -17,7 +17,6 @@ before((done)=>{
         novoRegistro: {
             email: "d90121@urhen.com",
             password: "12345",
-            telefones: [1525635],
             estabelecimento: {
                 nome: "FestFestFesta",
                 telefone: [
