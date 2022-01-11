@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>210</y>
+      <w>360</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>Conta
+--
+-id_conta: Number
+-numero_comanda: Number
+-nome_cliente: String
+-dt_criacao: Date
+-dt_pagamento: Date
+-valor_pago: Number
+-pago: Boolean
+-desconto: Boolean
+-total_conta: Number
+-listItems: [ListItem]
+--
+#criarConta(nome_cliente:String, itens:[Number]): Conta
+#removerConta(id_conta: Number): Conta
+#editarConta(id_conta: Number, conta:Conta): Conta
+#buscaConta(id_conta: Number): Conta
+#buscaContasEmAberto(): [Conta]
+#buscaTodasAsContas(): [Conta]
+#buscaTodasAsContasPagas(): [Conta]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>230</y>
+      <w>350</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>ListItem
+--
+-id_list_item: Number
+-id_item: Number
+-ids_lancamentoListItem: [LancamentoListItem]
+-ids_acompanhamento: [Acompanhamento]
+-dataCriacao: Date
+-quantidadeTotal: Number
+-subTotal: Number
+--
+#criarListItem(id_item:Number): ListItem
+#removerListItem(id_list_item: Number): ListItem
+#buscaItem(id_item: Number): ListItem
+#buscaListItems(id_list_item: [Number]): [ListItem]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>560</y>
+      <w>820</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>Estabelecimento
+--
+-id_estabelecimento: Number
+-nome: String
+-fechado: Boolean
+-endereco: Endereco
+-telefone: [Number]
+-usuarios: [Usuario]
+-contas: [Conta]
+-cardapios: [Cardapio]
+-id_cardapio_ativo: Cardapio
+-items: [Item]
+-acompanhamentos: [Acompanhamento]
+--
+#criarEstabelecimento(nome_estabelecimento:String, endereco: String,telefone: [Number], user: [Number]): Estabelecimento
+#removerEstabelecimento(id_estabelecimento: Number): Estabelecimento
+#editarEstabelecimento(id_estabelecimento: Number, estabelecimento: Estabelecimento): Estabelecimento
+#buscaEstabelecimento(id_estabelecimento: Number): Estabelecimento
+#buscaEstabelecimentos(): [Estabelecimentos]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>330</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=1..n
+Contém &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>390</y>
+      <w>150</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1..1
+
+
+
+
+
+
+
+
+
+
+   Pertence &gt;</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0;10.0;240.0;130.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>1150</y>
+      <w>470</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Usuario
+--
+-id_usuario: Number
+-nome: String
+-dt_nascimento: Date
+-telefones: [Number]
+-estabelecimentos: [Estabelecimento]
+-autenticacao: Autenticacao
+--
+#criarUsuario(nome:String, dt_nascimento: Date,email: String): Usuario
+#removerUsuario(id_usuario: Number): Usuario
+#editarUsuario(id_usuario: Number, usuario: Usuario): Usuario
+#buscaUsuario(id_usuario: Number): Usuario
+#buscaUsuarios(): Usuarios</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>70</x>
+      <y>680</y>
+      <w>200</w>
+      <h>600</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1..n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   Tem &gt;</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0;10.0;570.0;180.0;570.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>1150</y>
+      <w>470</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>Autenticacao
+--
+-id_usuario: Usuario
+-email: String
+-password: String
+-validado: Boolean
+-bloqueado: Boolean
+-pacote: String
+-pacoteAtivo: String
+-assinaturaAtiva: Boolean
+-dt_ultimo_pagamento: Date
+-numero_desativacoes: Number
+-dt_ultima_desativacao: Date
+-dias_tolerancia_premium: Number
+-dono: Boolean
+-logado: Boolean
+-role: Number
+-dt_criacao: Date
+--
+#criarAuth(email:String, password: String): Auth
+#removerAuth(id_usuario: Number): Auth
+#editarAuth(id_usuario: Number, auth: Auth): Auth
+#buscaAuth(email:String, password: String): Auth</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>1210</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=1..1
+Tem &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>880</y>
+      <w>450</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Endereco
+--
+-id_endereco: Number
+-rua: String
+-numero: Number
+-bairro: String
+-CEP: Number
+-estado: String
+-uf: String
+-cidade: String
+-pais: String
+--
+#criarEndereco(endereco: Endereco): Endereco
+#editarEndereco(id_usuario: Number, endereco: Endereco): Endereco</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1140</x>
+      <y>450</y>
+      <w>360</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>Item
+--
+-id_item: Number
+-nome_item: String
+-preco: Number
+-categoria: String
+-tipo: String
+-com_preparo: Boolean
+-departamento: String
+-ex_dicas: String
+--
+#criarItem(nome_item:String,preco: Number): item
+#removerItem(id_item: Number): item
+#editarItem(id_item: Number, item:Item): item
+#buscaItem(id_item: Number): item
+#buscaItems(): [item]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>430</y>
+      <w>270</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=1..1
+
+                                   Contém &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;250.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>100</y>
+      <w>510</w>
+      <h>1220</h>
+    </coordinates>
+    <panel_attributes>                                                                                             Tem &gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+lt=-
+m1=0..n
+m2=1..1
+</panel_attributes>
+    <additional_attributes>490.0;10.0;10.0;10.0;10.0;1190.0;250.0;1190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>730</y>
+      <w>130</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=1..1
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Localiza-se &gt;</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0;10.0;320.0;110.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1190</x>
+      <y>750</y>
+      <w>440</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Cardapio
+--
+-id_cardapio: Number
+-nome_cardapio: String
+-items: [Item]
+-dias: [String]
+-acompanhamentos: [Acompanhamento]
+-estabelecimentos: [Estabelecimento]
+--
+#criarCardapio(nome_cardapio: String): Cardapio
+#removerCardapio(id_cardapio: Number): Cardapio
+#editarCardapio(id_cardapio: Number, cardapio:Cardapio): Cardapio
+#buscaCardapio(id_cardapio: Number): Cardapio
+#buscaCardapios(): [Cardapio]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>830</y>
+      <w>310</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1..n
+
+
+
+
+
+                        Tem &gt;</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;70.0;290.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>570</y>
+      <w>130</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1..1
+
+
+
+
+
+
+
+
+
+
+
+   Pertence &gt;</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0;10.0;250.0;110.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>0</y>
+      <w>770</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>LancamentoListItem
+--
+-quantidade: Number
+-id_usuario: Number
+-dataCriacao: Date
+-status: String
+-observacao_do_cliente: String
+--
+#criarLancamentosListItem(id_usuario: Number:Number,quantidade: Number, id_usuario: Number): LancamentosListItem
+#buscaLancamentosListItems(id_lancamentosListItem: Number): LancamentosListItem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>140</y>
+      <w>100</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1..1
+Pertence &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1280</x>
+      <y>170</y>
+      <w>720</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Acompanhamento
+--
+-id_acompanhamento: Number
+-nome_acompanhamento: String
+-preco: Number
+-tipo_acompanhamento: String
+--
+#criarAcompanhamento(nome_acompanhamento:String,preco: Number): Acompanhamento
+#removerAacompanhamento(id_acompanhamento: Number): Acompanhamento
+#editarAcompanhamento(id_acompanhamento: Number, acompanhamento:Acompanhamento): Acompanhamento
+#buscaAcompanhamento(id_acompanhamento: Number): acompanhamento
+#buscaAcompanhamentos(): [acompanhamento]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1050</x>
+      <y>230</y>
+      <w>250</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1..1
+Pertence &gt;</panel_attributes>
+    <additional_attributes>230.0;10.0;80.0;10.0;80.0;120.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1620</x>
+      <y>340</y>
+      <w>190</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1..1
+   Pertence &gt;</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;510.0;10.0;510.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>510</y>
+      <w>380</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=     1..n
+&lt; Pertence</panel_attributes>
+    <additional_attributes>360.0;20.0;10.0;20.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>340</y>
+      <w>1100</w>
+      <h>670</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1..n
+&lt; Pertence</panel_attributes>
+    <additional_attributes>1060.0;10.0;1060.0;650.0;10.0;650.0;10.0;520.0</additional_attributes>
+  </element>
+</diagram>

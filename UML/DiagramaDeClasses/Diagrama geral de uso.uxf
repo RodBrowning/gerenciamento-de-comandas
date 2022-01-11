@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>248</x>
+      <y>208</y>
+      <w>80</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Administrador</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>264</x>
+      <y>40</y>
+      <w>48</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Gestor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>248</x>
+      <y>376</y>
+      <w>80</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Funcionário</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>264</x>
+      <y>536</y>
+      <w>48</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Caixa</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>264</x>
+      <y>720</y>
+      <w>48</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>Praparo</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>392</x>
+      <y>0</y>
+      <w>216</w>
+      <h>808</h>
+    </coordinates>
+    <panel_attributes>Diagrama geral de uso
+halign=left</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>432</x>
+      <y>216</y>
+      <w>152</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>DCU - Administrador
+--
+Permisões 
+de administrador
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>440</x>
+      <y>40</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>DCU - Gestor
+--
+Permisões 
+de gestor
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>440</x>
+      <y>368</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>DCU - Funcionário
+--
+Permisões 
+de funcionário
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>440</x>
+      <y>528</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>DCU - Caixa
+--
+Permisões 
+de caixa
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>440</x>
+      <y>712</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>DCU - Praparo
+--
+Permisões 
+de praparo
+valign=top</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>232</y>
+      <w>144</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>384</y>
+      <w>152</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>56</y>
+      <w>152</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>544</y>
+      <w>152</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>728</y>
+      <w>152</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>112</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>280</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>448</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>448</y>
+      <w>64</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;50.0;10.0;290.0;60.0;330.0</additional_attributes>
+  </element>
+</diagram>
